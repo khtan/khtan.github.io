@@ -1,0 +1,499 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<!-- $Id $ -->
+<head><title>CIS233S Demo Web Site for Kwee Tan</title></head>
+   <!-- add content for spiders -->
+      <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+      <meta name="keywords" content="student"/>
+      <meta name="description" content="student"/>
+   <link rel="stylesheet" href="defaultcss.css" type="text/css">
+   <link id="debug" rel="alternate stylesheet" href="debugcss.css" type="text/css" title="debugtitle">
+   <script type="text/javascript" src="javascript/default.js"></script>
+   <script type="text/javascript" src="javascript/cookie.js"></script>
+   <script type="text/javascript" language="Javascript"><!--
+       function togglePicture(img,blogid) {
+       /* Toggle visibility and icon of blog unit
+             img : image object, switch between open.gif and close.gif
+             blogid : string with id of div holding blog contents
+          Notes:
+             - Use of regexp to parse path in src may be expensive
+             - If this becomes a performance problem, use a global variable
+       */
+          var closeRegexp=/close.gif/;
+          var path=img.src;
+          var matchClosed=path.match(closeRegexp);
+          var divEle = document.getElementById(blogid);
+          if(matchClosed!=null){ // if img is .../close.gif
+             img.src="images/open.gif";
+             divEle.style.display="block";             
+          }else{
+             img.src="images/close.gif";
+             divEle.style.display="none";
+          }
+       }//togglePicture
+       function allToggle(){
+          var imgs=document.getElementsByName("image1");
+          var closeRegexp=/close.gif/;
+          var path=imgs[0].src;
+          var matchClosed=path.match(closeRegexp);
+          var divs=document.getElementsByTagName("div");
+          var blogDivRegexp=/blogtoggle/;
+          if(matchClosed!=null){
+             for(var i=0;i<imgs.length;i++){
+                imgs[i].src="images/open.gif";
+             }
+             for(var i=0;i<divs.length;i++){
+                if (divs[i].id.match(blogDivRegexp)!=null){
+                   divs[i].style.display="block";
+                }
+             }
+          }else{
+             for(var i=0;i<imgs.length;i++){
+                imgs[i].src="images/close.gif";
+             }
+             for(var i=0;i<divs.length;i++){
+                if (divs[i].id.match(blogDivRegexp)!=null){
+                   divs[i].style.display="none";
+                }
+             }
+          }
+       }//allToggle
+      function initPage(cssFile){
+         // loginDeflect();
+         var browserValue=getBrowserAndVersion();
+         if(-1!=browserValue.indexOf("Opera")){ // bug in Opera, must switch one time
+            changeStyle(cssFile);
+         }
+      }
+   //-->
+   </script>
+<body onload="initPage('debugcss.css')">
+<div id="wrapperId">
+   <div id="headerId"></div><!--headerId-->
+   <div id="innerWrapperId">
+      <div id="leftNavId">
+                  <!-- start of left pane -->
+                  <dl>
+                     <dd><strong>Goto:</strong></dd>
+                     <dd><a href="default.htm">Home</a></dd>
+                     <dd><a href="homework.htm">Homework</a></dd>
+                     <dd><a href="reference.htm">Reference</a></dd>
+                  </dl>
+                  <dl>
+                     <dd><strong>Developer modes</strong></dd>
+                     <dd><a href="#" onclick="changeStyle('debugcss.css')">Show/hide layout</a></dd>
+                  </dl>
+                  <!-- end of left pane -->
+      </div><!--leftNavId-->
+      <div id="centerContentId">
+                     <!-- start of middle pane -->
+                     <h1>Blog</h1>
+                     <p>This page archives all my the previous blogs written. Click on the 
+                        <img name="image1" src="images/close.gif"  height="16" width="16" alt="close.gif"/> icon to open/collapse the entries.
+                     </p>
+                     <h2><img name="image1" src="images/close.gif"  height="16" width="16" alt="{open,close}.gif" onclick="allToggle();"/> Show/hide all weeks</h2>
+                     <!-- Blogs -->
+                     <h2><img name="image1" src="images/close.gif"  height="16" width="16" alt="{open,close}.gif" onclick="togglePicture(this,'blogtoggle10');"/> Week 10</h2>
+                        <div class="blogtoggle" id="blogtoggle10">
+                        <h3>Week 26Nov-2Dec</h3>
+                           <p>
+                           This week's assignment required creating list of spam windows
+                           that would not be repeated for at least 7 days.
+                           </p><p>
+                           Internally, I used a multidimensional array to keep track
+                           of the whether to popup or pushback the window, the name
+                           of the cookie associated and the URL of the spam window.
+                           </p><p>                           
+                           For testing purposes, I set the lifetime to 5 minutes,
+                           then reset it to 60*24*7 for 7 days.
+                           </p><p>                           
+                           I also took some time to add a favicon to my home page.
+                           I used www.favicon.co.uk to create a simple icon, which they
+                           mailed to me for free. After adding the required html code
+                           in default.htm, Opera showed the icons immediately. For IE6,
+                           I had to remove previous favorites and empty my cache, then
+                           add the page as a favorite, quit and reinvoke before the .icon
+                           would show up. 
+                           </p>
+                        </div><!--blogtoggle-->
+                     <h2><img name="image1" src="images/close.gif"  height="16" width="16" alt="{open,close}.gif" onclick="togglePicture(this,'blogtoggle9');"/> Week 9</h2>
+                        <div class="blogtoggle" id="blogtoggle9">
+                        <h2>Week 9</h2>
+                        <h3>Week 19Nov-25Nov</h3>
+                           <p>
+                           This week's assignment consists of 2 new homework pages - factorial.htm
+                           and pizza.htm.
+                           </p><p>
+                           For the factorial page, I implemented the function in both forms - standard
+                           and recursive. I also added numeralsOnly check on the input text form
+                           so as to only accept numbers.
+                           </p><p>
+                           For the pizza page, I used css divs to create a grid to place the checkboxes
+                           neatly. In addition, the order list automatically resizes to fit the number
+                           of toppings selected.
+                           </p><p>
+                           In both pages, the Open Debug window can be used to trace/debug the javascript
+                           code.
+                           </p>
+                        </div><!--blogtoggle-->
+                     <h2><img name="image1" src="images/close.gif"  height="16" width="16" alt="{open,close}.gif" onclick="togglePicture(this,'blogtoggle8');"/> Week 8</h2>
+                        <div class="blogtoggle" id="blogtoggle8">
+                        <h3>Week 12Nov-18Nov</h3>
+                           <p>
+                            Earlier this week, I've finished a side project of mine : 
+                            to converted my web pages from table-based layout to css-based layout.
+                           </p><p>
+                           I left one table-based layout as default-table.htm. If you click 
+                           on the "Show/hide layout" in default.htm and default-table.htm, you can 
+                           compare the div outlines with the table outlines.
+                           </p><p>
+                           If you look at the source, you can see the reduced complexity in the .htm,
+                           since the layout functionality is pushed to the .css file.
+                           </p><p>
+                           I've added "Show/hide layout" to {blog,reference,homework}.htm pages as well,
+                           so you can watch the div outlines as you expand/collapse the blogs.
+                           </p><p>
+                           Much of the inspiration came from our lectures, and a book I borrowed from 
+                           the library - Web Designer's Reference : an integrated approach to web design 
+                           with xhtml and css by Craig Grannell.
+                           </p><p>
+                           Before I could finish it, the book was recalled so I don't have it now. However,
+                           it gave me enough information to create a pure CSS, liquid, 3 column layout template
+                           that I've put to work here.
+                           </p><p>
+                           For this week's assignment, I've added a debugging aid for the formEg.htm page. If you click on it,
+                           a Debug window appears in which the output of my javascript functions are sent to,
+                           as you click the different states. It shows when the Options objects get created and when
+                           they are just switched around.
+                           </p>
+                        </div><!--blogtoggle-->
+                     <h2><img name="image1" src="images/close.gif"  height="16" width="16" alt="{open,close}.gif" onclick="togglePicture(this,'blogtoggle7');"/> Week 7</h2>
+                        <div class="blogtoggle" id="blogtoggle7">
+                        <h3>Week 5Nov-11Nov</h3>
+                           <blockquote><em>
+                           What would I do differently if designing UNIX today?  I'd spell creat() with an e.
+                           </em>-- Source : Ken Thompson, approximate wording
+                           </blockquote>
+                           <p>
+                           This week has a piece of functionality that I implement as deflectLogin.
+                           It will check for a KHT_IsLoggedIn cookie and deflects the user back to
+                           default.htm if the cookie is not detected. This cookie is alive only for
+                           the browsing session.
+                           </p><p>
+                           What is interesting is if the user is not logged in, during first load, 
+                           the other pages will first display, and then get deflected. Subsequent loads
+                           for IE6 is very fast, so the user typically will not see the original page.
+                           Opera8 seems to have a different algorithm - it consistently shows the original
+                           page, then deflect to "default.htm".
+                           </p><p>
+                           I tried changing the deflectLogin() from body's onLoad, directly
+                           to the javascript when the link is, but it did not help.
+                           </p><p>
+                           For the purpose of this assignment, I implemented a cookieExists that only
+                           checks for existence. I wrote 2 versions - one with debugging output and
+                           one for release. I'll describe my debugging technique more in a later blog.
+                           More sophisticated cookie code in other books show how to encode property-value 
+                           parts when creating and split/extracting them when reading. I decided not to
+                           implement this for the time being.
+                           </p><p>
+                           To ease testing of the cookies, I made createCookie take the expiration
+                           duration in minutes. For release, the value is then changed to :
+                           createCookie(cookieName,"empty",60*24*7);
+                           </p><p>
+                           You'll notice the bane of software developers - consistent naming. I wrote
+                           cookieExists but later on, had createCookie and deleteCookie. A simple answer
+                           would be to write a function existsCookie that calls cookieExists but I've
+                           decided to live with the inconsistency for now. Hence Ken Thomspon's quote
+                           at the beginning of the blog.
+                           </p><p>
+                           Another browser difference comes from trying to create a window in the center of the user
+                           screen. IE6 being single windowed works correctly, but Opera8 can work in tabbed
+                           mode or not. For tabbed mode, the height/width values are relative to the Opera8 application
+                           window. Another area for further investigation, if I want to fix this.
+                           </p><p>
+                           SSI is a very useful feature. However, to use it for my everyday development,
+                           I would have to set up a server. On the other hand, since that is how web
+                           sites are delivered, it might make sense to invest the time and learning.
+                           </p>
+                        </div><!--blogtoggle-->
+                     <h2><img name="image1" src="images/close.gif"  height="16" width="16" alt="{open,close}.gif" onclick="togglePicture(this,'blogtoggle6');"/> Week 6</h2>
+                        <div class="blogtoggle" id="blogtoggle6">
+                        <h3>Week 29Oct-4Nov</h3>
+                           <p>
+                           This week's assignment is mainly seen in the default.htm page.
+                           We want to write 3 status strings.
+                              <ol>
+                                 <li>browser and version</li>
+                                 <li>date and time</li>
+                                 <li>cookie status</li>
+                              </ol>
+                           </p><p>
+                           Since all 3 status strings are to be placed at the top of the
+                           page, I decided to keep them in a form, and use readonly textboxes.
+                           </p><p>   
+                           In order to align the textboxes, I used the CSS float to make
+                           the browser status align to the left, while the date and cookie
+                           status are aligned to the right. The float does not have a center
+                           setting, so if I wanted to put "date and time" in the center, I
+                           would have to add more divs, etc.
+                           </p><p>
+                           An interesting bug/feature arose when attempting to fit the length
+                           of the text to the length of the textbox, by setting the textbox
+                           size to the text's length. Opera8 seems to do this fine
+                           but IE6 will overcalculate and leave some spaces at the end of
+                           the textbox. Our DHTML book pp761 mentions that some browser can
+                           get this wrong. To compensate for this, I wrote a getAdjustedLength
+                           that will exclude all the "thin" characters like "i", "1" and "l",
+                           so that IE has a better chance of sizing the textbox correctly.
+                           </p><p>
+                           Since the time is set on page load, I've provided a menu click
+                           to refresh the date and time. This is less compute intensive than
+                           continually updating the date time display. For the adventurous,
+                           you can enter "javascript:updateDateTime();" in the URL to do the
+                           same thing.
+                           </p><p>                           
+                           So far, I have stayed away from CSS skins because changing how something looks
+                           seemed trivial in application and not very useful. However, I have
+                           found a non trivial CSS usage that necessitates enabling and disabling a css page.In the
+                           left navigation panel, there is a new menu called "Developer Modes".
+                           The first one done is called "Show/hide tables". Click on it to
+                           show/hide the table outline of the default page.
+                           <p></p>
+                           Internally, default.htm links in common.css, enabled and debug.css, disabled
+                           on page load. I want to be able to enable and disable debug.css, by
+                           toggling its disabled property.
+                           <p></p>
+                           To implement this, I first had to find out how to
+                           use document.styleSheets in Opera8 and IE6. IE6 worked right away,
+                           but Opera8 kept showing null object errors. After some searches,
+                           this <a href="http://www.quirksmode.org/dom/changess.html">Change Style Sheet</a> page
+                           showed that Opera7 does not implement document.styleSheets and I
+                           surmised that Opera8 is no different.
+                           <p></p>
+                           I then found a web page that showed an 
+                           <a href="http://www.howtocreate.co.uk/jslibs/htmlhigh/swapstyle.html">
+                           implementation of a css switcher.</a> Although I did not want to switch
+                           css files, just enable or disable one, I decided to take a closer look.
+                           Upon studying its implementation, I was able to simplify it somewhat
+                           for my purpose. The crux of the implementation is that if the document.styleSheets
+                           is not supported, an array that mimics this is created by looking
+                           for all linked stylesheets. Another simplification was that the original
+                           code did not use document.styleSheets for IE6 because of an obsolete check.
+                           </p><p>
+                           A bug in Opera8 requires a first changeStyle toggle when the page
+                           loads. This is because although debug.css is set to "alternate stylesheet",
+                           Opera8 enables it, unlike IE6. The first changeStyle toggle disables
+                           it. It was therefore fortuitous that I had to write getBrowserAndVersion for
+                           the assignment, and was able to plug it for fixing this workaround.
+                           </p>
+                        </div><!--blogtoggle-->
+                     <h2><img name="image1" src="images/close.gif"  height="16" width="16" alt="{open,close}.gif" onclick="togglePicture(this,'blogtoggle5');"/> Week 5</h2>
+                        <div class="blogtoggle" id="blogtoggle5">
+                           <h3>Week 22Oct-28Oct</h3>
+                           <p>This week's blog archive page has a new feature : an item to show/hide all
+                              the blog items. This is a convenience feature, especially once a few items are
+                              opened, the toggle hide will collapse all the blog entries so that the entire
+                              listing is more obvious.
+                           </p><p>The login form was originally created as a submission form, with alerts to confirm
+                              success and failure. Then, the code was switched to show/hide the div blocks called loginPass
+                              and loginFail. The text would show for a few seconds and then go away. After much experimentation,
+                              it seems to me that the page was getting reset for some reason. When I consulted the book, I
+                              was surprised that in Ch9 : Document Object Model Reference, input(type="submit") page 756, it
+                              documents that a submit will cause the page to reload, thereby resetting its display. 
+                              <i>"If you require a button to perform a script action but not an actual form submission, use the button."</i>
+                              The mystery solved, I added a commented out section for the Submission scenario vs the current Execution
+                              scenario. I anticipate switching the login back to submission, when the system goes live.
+                           </p><p>The homework page now contains some functional javascript pages. Navigation in the homework pages
+                              are presented using the guidepost analogy. In this model, in that for every page in the homework section,
+                              there is an "official" path or way you got there. The guidepost at the top of the page says 
+                              "You are here : Home &gt;&gt; Page 1 &gt;&gt; Page 2."
+                              It allows you to go back to Home, and see how the pages are linked.
+                           </p><p>The reason I call this the guidepost model is because there is another common terminology called "breadcrumbs".
+                              This analogy of bread crumbs is like the trail left by Hansel and Gretel so they can find their way back. 
+                              However, the crumbs mark every page they visited regardless of how many times they have been to the same
+                              page, and therefore the bread crumb path always gets longer and longer.
+                           </p>
+                           <hr align="left" noshade="noshade" size="2" width="70%"/>
+                        </div><!--blogtoggle-->
+                     <h2><img name="image1" src="images/close.gif"  height="16" width="16" alt="{open,close}.gif" onclick="togglePicture(this,'blogtoggle4');"/> Week 4</h2>
+                        <div class="blogtoggle" id="blogtoggle4">
+                           <h3>Week 15Oct-21Oct</h3>
+                           <blockquote><em>
+                           An person died and went to Heaven. He is greeted by God and after some
+                           preliminaries, the man complained about his strange malady. God took
+                           a look. "That's strange. You should not have died from this. Don't you
+                           eat apples?" "All the time, sir. I eat fuji, red delicious, braeburn
+                           and other kinds as well. My wife dutifully peels the skin for me!", the
+                           man exclaimed. "You DON'T eat the skin? ...".
+                           </em>-- Source : I made it up
+                           </blockquote>
+                           <p>Having implemented the left navigation pages, I now had time to look at
+                              Greg's suggestion about show/hiding the blog pages.
+                           </p><p>There are 2 components to show/hiding blog entries in outline form.
+                           <ol>
+                             <li>The icon for Open/Close state has to be switched between open.gif and close.gif</li>
+                             <li>The display of the blog items have to be switched between block or none.</li>
+                           </ol>
+                           </p><p>The icon for Open/Close state is placed in the H2 header just
+                           above each blog entry. The onclick event fires the togglePicture function
+                           </p><p>Each blog is placed in its own div block, with class=blogtoggle, and
+                           and specific id assigned, id=bloggtoggle{n}. This class allows all blogs to be hidden/show
+                           as a group. This is used in common.css. The blogid is used by togglePicture when the icon is clicked.
+                           </p><p>After implementing this, I realised that the functionality
+                           is split between two files - common.css and blog.htm. This is inevitable because CSS separates structure and style, 
+                           now I am using style to perform some functionality on the structure.
+                           </p><p>As the 2 components, icon image and blog divs are not contained or
+                           related in a simple structural way, it is difficult ( for me now ) to write
+                           togglePicture to accept on containing object, instead of the two.
+                           </p>
+                           <hr align="left" noshade="noshade" size="2" width="70%"/>
+                        </div><!--blogtoggle-->
+                     <h2><img name="image1" src="images/close.gif"  height="16" width="16" alt="{open,close}.gif" onclick="togglePicture(this,'blogtoggle3');"/> Week 3</h2>
+                        <div class="blogtoggle" id="blogtoggle3">
+                           <h3>Week 8Oct-14Oct</h3>
+                           <blockquote><em>
+                           An AIDS afflicted man died and went to Heaven. He is greeted by God and after some
+                           preliminaries, the man complained that the AIDS scrouge is causing a lot of
+                           problems to people and countries. "Don't worry! The best doctor yet is just about to be born", God replied.
+                           "When she grows up, she'll make some remarkable breakthroughs and humankind will conquer this virus".
+                           The man cheered up immediately, asking "Hey, That's great news! Where is she now?"
+                           "Actually, she chose to be born in a small town in Darfur, Sudan ..."
+                           </em>-- Source : I made it up
+                           </blockquote>
+                           <p>Decided to remove the "New" image and stick to a simpler principle, ie keep the home page
+                              small and lightweight. So to retain the spirit of the assignment, I found a worthy cause
+                              and linked to their icon.
+                           </p><p>
+                              Also posted a tip on CSS table borders that chewed up an evening of my time.
+                              When debugging HTML tables, one good way is to use &lt;table border="1"&gt; to look at
+                              the placements, and then turn it off in production. When I switched to CSS, the
+                              equivalent would be border-width:[{1px, thin , etc}], right? 
+                              No. You have to include border-style:[{solid,dotted,etc}] so that it will appear,
+                              the default being "none".
+                           </p><p>
+                              The plus side is you can distinguish between table and cell borders, which
+                              BORDER="1" does not.
+                           </p><p>
+                              Good news! All the pages in this site were put through the W3C Markup Validator.
+                              I had to add charset, fixed unsupported use of ul, forgotten alt values and
+                              some tags that needed closing. It is best to catch these practices early, so that
+                              future pages are better compliant.
+                           </p><p>
+                              Similarly I ran the CSS Validator on my common.css. The only warning was that anywhere color is set,
+                              it advises to set the background-color as well. My usage however is to set the default color and 
+                              background-color in "body", and then override color in any element I want. This way, every entry
+                              in the CSS has a purpose and not added for redundancy. I don't want to have to change many settings
+                              for background-color in different selectors when one in "body" will do. On the other hand, emacs search
+                              and replace is handy for such worst-case scenarios.
+                           </p>
+                           <hr align="left" noshade="noshade" size="2" width="70%"/>
+                        </div><!-- blogtoggle-->
+                     <h2><img name="image1" src="images/close.gif"  height="16" width="16" alt="{open,close}.gif" onclick="togglePicture(this,'blogtoggle2');"/> Week 2</h2>
+                        <div class="blogtoggle" id="blogtoggle2">
+                              <h3>Week 1Oct-7Oct</h3>
+                              <blockquote><em>
+                              A military man died and went to Heaven. He is greeted by God and after some
+                              preliminaries, the man asked "Who is the greatest general in the world?".
+                              "Oh! He is actually here in heaven. Let me show you", said God, on his high
+                              definition screen.
+                              The man exclaimed "Hey! I've never see him before. Who's he?"
+                              His name is "Zu abagi zi - he was a Zulu general in great plains of South Africa".
+                              "I've never heard of him".
+                              After some thought, God asked "Don't you know your 
+                               <a href="http://www.warthog.co.za/dedt/tourism/culture/history/menu.htm">Zulu history</a>?"
+                              </em>-- Source : I made it up
+                              </blockquote>
+                              <p>
+                                 Our instructor has clearly stated "I AM NOT concerned about bells and whistles or about "PRETTY" pages."
+                                 For this week's assignment, to try to keep with the spirit of of the above, I did not want to use trivial but large images
+                                 of house or family. It struck me that small lightweight images are very useful for providing
+                                 visual clues. So, I wanted to add a "New" graphical icon to help readers see what's new in my
+                                 web page.
+                              </p>
+                              <p>
+                                 I could not find a decent static gif for this "New" image. To cut my losses, I decided
+                                 to use good old Paintbrush and made one up. Here's a question that one of
+                                 you readers might know. My Windows 2K machine has Paintbrush but cannot export to .gif
+                                 format. But my son's old PC, also running Windows 2K can. There must be some support software that 
+                                 I forgot to install but how do I fix this?
+                              </p>
+                              <p>
+                                 The lab instruction to create an images folder came in handy for testing whether I
+                                 forgot my ALT image values. By renaming the folder, I can make sure that each empty
+                                 image has a useful text behind it. This leads to my discovering that IE6 and Opera8
+                                 shows the ALT text differently. The actual ALT text is "New item here!". The two images
+                                 below shows ... 
+                              </p>
+                              <p><img align="left" src="images/ie-noimage1.bmp" width="300" height="100" border="1" alt="IE No Image"/>
+                                 ... that IE6 will show the whole ALT text in small font ... 
+                              </p>
+                              <br clear="all"/>
+                              <p><img align="left" src="images/opera-noimage1.bmp" width="300" height="100" border="1" alt="Opera No Image"/>
+                                 ... but Opera8 truncates the ALT text to just "New item" and uses bold font.
+                              </p>
+                              <br clear="all"/>
+                              <br/>
+                              <p>The assignment for this week also asks to create a link that opens in its separate browser. 
+                                 This is just ideal for the last section called <a href="reference.htm">References</a>.
+                              </p>
+                              <p>Following a discussion regarding specifying colors in triplets or names, I learned enough css to create
+                               a common.css to control the colors of hr and blockquote.
+                              </p>
+                            <hr align="left" noshade="noshade" size="2" width="70%"/>
+                        </div><!-- blogtoggle-->
+                     <h2><img name="image1" src="images/close.gif"  height="16" width="16" alt="{open,close}.gif" onclick="togglePicture(this,'blogtoggle1');"/> Week 1</h2>
+                        <div class="blogtoggle" id="blogtoggle1">
+                           <h3>Week 24Sep-30Sep</h3>
+                           <blockquote><em>
+                              A military man died and went to Heaven. He is greeted by God and after some
+                              preliminaries, the man asked "Who is the greatest general in the world?".
+                              "Oh! He is actually here in heaven. Let me show you", said God, on his high
+                              definition screen.
+                              The man exclaimed "Hey! I know that man. He's Jack and was my barber for years.
+                              He's not a general".
+                              "Yes, but if he had been a general, ...".
+                              </em>-- Source : unknown
+                           </blockquote>
+                           <p>
+                           Following the advice of our instructor in yesterday's physical class, I decided
+                           to put my work site on version control. I used 
+                           <a href="http://subversion.tigris.org">Subversion</a> rather than CVS, because 
+                           it is able to version directories.
+                           For my own reference, here are the commands I used:
+                           </p>
+                           <pre>
+o:\svnroot>svnadmin create o:/svnroot/website233.repos \
+           --fs-type fsfs
+
+o:\svnroot>svn import h:/tmp/website \
+           file:///o:/svnroot/website233.repos \
+           -m "initial import of empty site"
+
+Adding         H:\tmp\website\trunk
+Adding         H:\tmp\website\branches
+Adding         H:\tmp\website\tags
+
+Committed revision 1.
+H:\>cd h:\vault\learn\pcc\cis233s
+
+H:\vault\learn\pcc\cis233s>svn checkout \
+          file:///o:/svnroot/website233.repos website
+A    website\trunk
+A    website\branches
+A    website\tags
+Checked out revision 1.
+                           </pre>
+                        </div><!-- blogtoggle-->
+                     <!-- end of middle pane -->
+      </div><!--centerContentId-->
+      <div id="rightPicId">
+                  <blockquote><em>
+                  You cannot open a book without learning something. -- Confucius
+                  </em></blockquote>
+      </div><!--rightPicId-->
+      <div class="separatorInvisibleClass"><!-- x --></div>
+   </div>
+   <div id="footerId"></div><!--footerId-->
+</div>
+</body>
+</html>

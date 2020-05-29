@@ -1,0 +1,219 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<!-- index.htm -->
+<head><title>Graph-based Software Production Automation</title>
+   <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+   <style type="text/css"><!--
+      @import url("../style/common.css");
+      @import url("override.css");
+      div.linkred a:link {color:darkred}
+   --></style>
+</head>
+   <script type="text/javascript" src="javascript/debug.js"></script>
+<script type="text/javascript" src="javascript/graph.js"></script>
+<script type="text/javascript" language="Javascript"><!--
+      var graphWin;
+      var debugWin;
+      function openDebugWindow(){
+         debugWin=openDebug("default.htm");
+      }//openDebugWindow
+//-->
+</script>
+<body>
+<table>
+   <tr>
+      <td>
+         <table>
+            <tr>
+               <td class="nav">
+               <!-- This is the left nav pane : use text only for resizability -->
+                  <!-- start of left pane -->
+                  <dl>
+                     <dd><strong>Goto:</strong></dd>
+                     <dd><a href="../index.htm">Top</a></dd>
+                  </dl><dl>
+                     <dd><strong>Document:</strong></dd>
+                     <dd><a href="#intro">1.Introduction</a></dd>
+                     <dd><a href="#features">2.Features</a></dd>
+                     <dd><a href="#illgraph">3.Illustrative Graph</a></dd>
+                     <dd><a href="#statediagram">4.State Transition ..</a></dd>
+                     <dd><a href="#support">5.Supporting Practices</a></dd>
+                     <dd><a href="#implement">6.Implement..</a></dd>
+                  </dl>
+                  <!-- end of left pane -->
+               </td>
+               <td class="main">
+               <!-- This is the middle pane : use text only for resizability -->
+                     <!-- start of middle pane -->
+                     <map name="graphmap">
+                        <area shape=rect coords="82,75,330,177" onclick="graphWin=scrollGW(graphWin,'sampleA.htm','syncbuildp2','640','576')" onmouseover="sampleA2.style.cursor='crosshair'">
+                        <area shape=rect coords="82,412,326,486" onclick="graphWin=scrollGW(graphWin,'sampleA.htm','syncbuildp1','640','3186')" onmouseover="sampleA2.style.cursor='crosshair'">
+                        <area shape=rect coords="276,188,514,251" onclick="graphWin=scrollGW(graphWin,'sampleA.htm','releasep2','2150','1452')" onmouseover="sampleA2.style.cursor='crosshair'">
+                        <area shape=rect coords="95,490,180,513" onclick="graphWin=scrollGW(graphWin,'sampleA.htm','testlab','743','3791')" onmouseover="sampleA2.style.cursor='crosshair'">
+                        <area shape=rect coords="340,8,518,108" onclick="graphWin=scrollGW(graphWin,'sampleA.htm','stagep2','2662','48')" onmouseover="sampleA2.style.cursor='crosshair'">
+                        <area shape=rect coords="340,114,408,181" onclick="graphWin=scrollGW(graphWin,'sampleA.htm','unittestp2','2658','848')" onmouseover="sampleA2.style.cursor='crosshair'">
+                        <area shape=rect coords="276,188,514,251" onclick="graphWin=scrollGW(graphWin,'sampleA.htm','releasep2','2150','1452')" onmouseover="sampleA2.style.cursor='crosshair'">
+                        <area shape=rect coords="264,320,337,368" onclick="graphWin=scrollGW(graphWin,'sampleA.htm','unittestp1','2062','2472')" onmouseover="sampleA2.style.cursor='crosshair'">
+                        <area shape=rect coords="275,371,514,408" onclick="graphWin=scrollGW(graphWin,'sampleA.htm','releasep1','2149','2881')" onmouseover="sampleA2.style.cursor='crosshair'">
+                        <area shape=rect coords="340,412,479,486" onclick="graphWin=scrollGW(graphWin,'sampleA.htm','stagep1','2662','3188')" onmouseover="sampleA2.style.cursor='crosshair'">
+                        <area shape=rect coords="481,264,621,363" onclick="graphWin=scrollGW(graphWin,'sampleA.htm','install','3767','2045')" onmouseover="sampleA2.style.cursor='crosshair'">
+                        <area shape=rect coords="642,18,895,80" onclick="graphWin=scrollGW(graphWin,'sampleA.htm','purify','5010','136')" onmouseover="sampleA2.style.cursor='crosshair'">
+                        <area shape=rect coords="533,84,697,120" onclick="graphWin=scrollGW(graphWin,'sampleA.htm','coverity','4160','638')" onmouseover="sampleA2.style.cursor='crosshair'">
+                        <area shape=rect coords="589,121,895,163" onclick="graphWin=scrollGW(graphWin,'sampleA.htm','purecov','4607','949')" onmouseover="sampleA2.style.cursor='crosshair'">
+                        <area shape=rect coords="636,173,762,272" onclick="graphWin=scrollGW(graphWin,'sampleA.htm','regressionp1','4965','1343')" onmouseover="sampleA2.style.cursor='crosshair'">
+                        <area shape=rect coords="636,274,904,429" onclick="graphWin=scrollGW(graphWin,'sampleA.htm','regressionp2','4974','2144')" onmouseover="sampleA2.style.cursor='crosshair'">
+                        <area shape=rect coords="906,131,959,247" onclick="graphWin=scrollGW(graphWin,'sampleA.htm','report','7075','1012')" onmouseover="sampleA2.style.cursor='crosshair'">
+                        <area shape=rect coords="0,0,960,540" onmouseover="sampleA2.style.cursor='default'">
+                     </map>
+                     <h2>Graph-based Software Production Automation</h2>
+                     <h3 id="intro">Introduction</h3>
+<p>
+A basic high level goal of Software Production Automation is to have
+a single point of control to perform all the tasks necessary for production.
+Typically, these include the steps to :
+<ul style="margin-top:0px">
+   <li>synch the source code from repository to build tree</li>
+   <li>build the product and related subproducts</li>
+   <li>run unit tests in the build environment</li>
+   <li>release the build results</li>
+   <li>install the product</li>
+   <li>create image</li>
+   <li>deliver image online</li>
+   <li>run regression tests in the installed environment</li>
+   <li>rerun failed tests</li>
+</ul>
+Other support tasks needed would be like :
+<ul style="margin-top:0px">
+   <li>stage the build artifacts so that developers can access them without having</li>
+     to build themselves ( especially if the build results take a lot of resources )</li>
+   <li>build debug versions, ready for developers' use when needed</li>
+   <li>build the product for specific metrics such as PureCoverage and Coverity</li>
+   <li>run regression tests for metric builds</li>
+</ul>
+</p><p>
+Each of these steps may be in a different state of automation.
+Some are purely manual, others are automated with scripts but assume manual prechecking of
+their dependencies, etc. Many scripts may not verify their output, even if strung
+along with other tools. These steps may be developed by different engineers,
+and in different states of readiness. Some steps have been performed by
+one engineer for so long that they don't work when performed using another
+account.
+</p><p>
+The build steps have to be repeated across the required range of build platforms.
+Since one build platform, say Windows XP has to be tested against several test
+platforms, eg Windows 2000, Windows XP and Windows Vista, the test steps are
+similarly scaled.
+</p><p>
+Theoretically, all the build and test platforms can be parallelized. However, depending
+on circumstances, adjustments may have to be made. Examples include :
+<ul style="margin-top:0px">
+  <li>Some tests require vendor licenses that may be limited.</li>
+  <li>There may be a limited number ( or just one ) of machines with an older platform
+    version. Any testing requiring the older platform will have to be serialized 
+    to the limited number.</li>
+  <li>Debug and metrics builds may have to be sequenced after the product builds.</li>
+</ul></p><p>
+In summary, the complexity of such a system comes from the need to 
+<ul style="margin-top:0px">
+   <li>integrate existing scripts and tools that implement parts of the process, ie reuse what works</li>
+   <li>implement new steps for other parts of the process</li>
+   <li>make explicit the dependencies of each step, ie eliminate unnecessary waits and delays</li>
+   <li>maximize use of parallelism</li>
+   <li>support incremental and parallel development since each subgraph may be at a different level of readiness</li>
+   <li>reuse of subgraphs for different purposes</li>
+   <li>consistent collection of runtime information for later process analysis and trending</li>
+</ul></p>
+                     <h3 id="features">Features</h3>
+<p>
+This showcase paper describes a graph-based software automation system that
+encapsulates disparate process steps using a consistent "step" methodology.
+Each "step" allows for pre and post work, and allows hooks for executing scripts 
+or Perl functions. The step methodology is intended as a guideline, ie existing 
+scripts that do not have post operations for example, can be integrated first, and
+the post operations added later.
+</p></p>
+These process steps can be flexibly assembled into subgraphs and graphs, thereby
+making their run dependencies explicit. Process activity can be developed piecemeal 
+as subgraphs and then assembled into a large graph. The final graph then provides
+the single point of view and control. Other graphs can be tailored for other
+purposes - eg a purely debugged build and test, etc.
+</p><p>
+The automation system provides capabilities to run/stop/bypass arbitary points in any graph
+or subgraph, and to debug and restart failed steps.
+</p><p>
+Execution of each step is implemented for rsh and the Sun Grid Engine (SGE). For Unix
+platforms, both rsh and SGE modes are available. For Windows, only rsh mode is
+available.
+</p><p>
+During execution, the steps will be colored to show their state - notStarted, Done, Failed, etc.
+For more details, see the <a href="#statediagram">State Transition Diagram for Graph Nodes.</a>
+As each step is executed, process metrics such as runtime and disk used are collected
+in a consistent manner. This allows the process itself to be analyzed and trends identified.
+</p><p>
+Thus, the graph is not only used for visualization of the process, its dependencies
+and run status, but is also the input for the automation system itself.
+                     <h3 id="illgraph">Illustrative Graph</h3>
+                     <p>
+                        Below is a sanitized, yet illustrative sample Production graph. Each of the subgraphs
+                        such as "Sync and Build" was developed and tested individually and then assembled.
+                     </p>
+                     <div class="linkred">
+                     <p>Click on each subgraph to bring up a more detailed window of the graph. If your browser is not IE7,
+there may be some <a href="content/browserdiff.htm">reduced functionality</a>.</p>
+                     </div>
+                     <img id="sampleA2" src="images/sampleA2.jpg" usemap="#graphmap"></img>
+                     <h3 id="statediagram">State Transition Diagram for Graph Nodes</h3>
+<p>
+This diagram shows the state transitions for a "step" in the graph. Overlayed on
+top are colors used to show the states for easy visual feedback.
+</p>
+                     <img src="images/explainColors.jpg"></img>
+<h3 id="support">Supporting Practices</h3>
+</p><p>
+A fully working Software Production system cannot just rely on technology.
+Other supporting practices need to be brought to bear so as to keep the inputs
+and environments of the automated system consistent and reliable. Some of these
+supporting practices include :
+<ul style="margin-top:0px">
+   <li>single point of configuration</li>
+   <li>reliable way to manage licenses needed for testing and metrics</li>
+   <li>consistent build methodology, regardless of whether operating from the automated system</li>
+  or outside it</li>
+   <li>consistent way to document and use environment variables</li>
+</ul>
+</p>
+                     <h3 id="implement">Implementation</h3>
+<p>
+The open-source <a href="http://www.graphviz.org">Graphviz</a> project provides a standard format for describing
+graphs, and some basic tools to view and manipulate them. For
+very large graphs, more advanced viewers such as <a href="http://zvtm.sourceforge.net/zgrviewer.html">ZGRViewer</a> are also available.
+</p><p>
+The process graphs are described in the Graphviz .dot format.
+</p><p>
+The software automation system is implemented with Perl. The .dot graphs are manipulated
+with the Graph package.
+</p><p>
+The single point of configuration is enabled using the Perl Config:Scoped package.
+The format of the configuration files is simple enough for non Perl tools, yet flexible 
+for internal Perl usage.
+</p>
+                     <!-- end of middle pane -->
+               </td>
+            </tr>
+         </table>
+      </td>
+       <td class="pic">
+         <table>
+           <tr>
+               <td>
+               <!-- This is the right pic pane : absolute sized to prevent squishing -->
+                  <!-- start of right pane -->
+                  <!-- <a href="behind.htm">?Behind the Scenes?</a> -->
+                  <!-- end of right pane -->
+               </td>
+           </tr>
+        </table>
+      </td>
+   </tr>
+</table>
+</body></html>

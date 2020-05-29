@@ -1,0 +1,21 @@
+Microsoft Visual Studio Solution File, Format Version 7.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DailyRate", "DailyRate.csproj", "{DA0BF738-0F06-4DD3-BA78-7889A7A81FC6}"
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		ConfigName.0 = Debug
+		ConfigName.1 = Release
+	EndGlobalSection
+	GlobalSection(ProjectDependencies) = postSolution
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{DA0BF738-0F06-4DD3-BA78-7889A7A81FC6}.Debug.ActiveCfg = Debug|.NET
+		{DA0BF738-0F06-4DD3-BA78-7889A7A81FC6}.Debug.Build.0 = Debug|.NET
+		{DA0BF738-0F06-4DD3-BA78-7889A7A81FC6}.Release.ActiveCfg = Release|.NET
+		{DA0BF738-0F06-4DD3-BA78-7889A7A81FC6}.Release.Build.0 = Release|.NET
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

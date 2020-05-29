@@ -1,0 +1,1912 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN">
+<html dir="ltr">
+<META HTTP-EQUIV="expires" CONTENT="0">
+
+<title>WebCT Quiz</title>
+<head>
+<link rel="STYLESHEET" href="/web-ct/en/style/styles_all4x.css" type="text/css">
+<style type="text/css">
+<!--
+@import "/web-ct/en/style/styles_nonn4.css";
+A.action IMG { vertical-align:0% !important; }
+-->
+</style>
+<script language="JavaScript">
+var confirm_str = 'Submit Quiz for Grading?';
+function dofinish(){
+ var changed = '';
+ for (i = 0; i < parent.answered.length; i++) {
+   if (parent.answered[i] == 3) {
+     if (changed == '') {
+       changed = i;
+     }
+     else {
+       changed = changed + ',' + i;
+     }
+   }
+ }
+ if (changed != '' && parent.bottom.toanswer != "0") {
+   if (!confirm("Some answers have been changed but not saved: " + changed + " \nSome questions have not been answered: " + parent.bottom.toanswer + " \n\nDo you want to proceed?")){ 
+       return false; 
+    } else if (confirm(confirm_str)){
+     document.finish.submit()
+   }
+ } else if(changed != ''){
+       if (!confirm("Some answers have been changed but not saved: " + changed + " \n\nDo you want to proceed?")) {
+     return false; 
+   } else if (confirm(confirm_str)) {
+        document.finish.submit()
+   }
+ } else if (parent.bottom.toanswer != "0"){
+   if (confirm("Some questions have not been answered: " + parent.bottom.toanswer  + " \n\nDo you want to proceed?")){
+          if (confirm(confirm_str)){
+             document.finish.submit()
+          }
+       }
+ } else {
+   if (confirm("All questions have been answered and all answers have been saved. \n\nDo you want to proceed?")) { 
+      if (confirm(confirm_str)){
+         document.finish.submit()
+      }
+   }
+ }
+}
+unsaved_image = new Image();
+unsaved_image.src = '/web-ct/en/img/notSaved.gif';
+function register_change(q_num) {
+  if (!parent.answered
+      || (parent.answered[q_num] != 2
+          && parent.answered[q_num] != 3))
+  {
+    parent.answered[q_num] = 1;
+  }
+  else if (parent.answered[q_num] == 3)
+  {
+    return;
+  }
+  else
+  {
+    parent.answered[q_num] = 3;
+  }
+  var imgfrm = parent.bottom.document;
+  var findname = 'img_' + q_num;
+  for (i = 0; i < imgfrm.images.length; i++) {
+    if (imgfrm.images[i].name == findname) {
+      imgfrm.images[i].src = unsaved_image.src
+      return;
+    }
+  }
+}
+function dosave(form, q_num) {
+  var curr_change = "";
+  var i;
+  if (!parent.answered
+      || (parent.answered[q_num] != 1
+          && parent.answered[q_num] != 2
+          && parent.answered[q_num] != 3))
+  {
+    alert("Error: The question has not been answered yet.");
+    return;
+  }
+  parent.answered[q_num] = 2;
+  if (form.token_values != null) {token_values_string(); }
+  form.submit();
+}
+function doHelp(){
+  window.open('/web-ct/help/en/student/quiz/s_take_quiz_helpI.html','help_frame','width=730,height=414,menubar=1,toolbar=1,scrollbars=1,status=1,location=1,resizable=1');
+}
+</script>
+</head>
+<body >
+<table width="100%" class="quizframe" cellpadding="3" cellspacing="0" border="0">
+<tr class="quizhead">
+<td><span class="pageheader">FinalExam</span>
+<br>
+</td></tr>
+<tr class="quizsub">
+<td>Name: <span class="fieldvalue">Kwee Tan</span><img src="/web-ct/en/img/shim.gif" width="1" height="18" alt="" border="0" class="alignMiddle"><br>
+Start time: <span class="fieldvalue">December 12, 2005 9:57am</span><img src="/web-ct/en/img/shim.gif" width="1" height="18" alt="" border="0" class="alignMiddle"><br>Time allowed: <span class="fieldvalue">120 minutes</span><img src="/web-ct/en/img/shim.gif" width="1" height="18" alt="" border="0" class="alignMiddle"><br>Number of questions: <span class="fieldvalue">40</span><img src="/web-ct/en/img/shim.gif" width="1" height="18" alt="" border="0" class="alignMiddle"></td></tr>
+</table>
+<form name="finish" method=post action="/SCRIPT/d_cis234ntf/scripts/student/serve_new_quiz?DOFINISH+1528509843+" target="_parent">
+<table cellpadding="3" cellspacing="0" border="0" width="100%">
+<tr class="divider"><td>
+<input type="hidden" name="sub" value="Finish">
+<img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+<a href="#"    class="action" onmouseover="window.status='Finish'; return true;" onmouseout="window.status=''; return true;" onclick="void(dofinish()); return false;" title="Finish">Finish</a>&nbsp;
+<a href="#"    class="action" onmouseover="window.status='Help'; return true;" onmouseout="window.status=''; return true;" onclick="void(doHelp()); return false;" title="Help">Help</a>
+<img src="/web-ct/en/img/shim.gif" width="1" height="24" alt="" border="0" class="alignMiddle"><br>
+<img src="/web-ct/en/img/shim.gif" width="1" height="5" alt="" border="0"><br>
+</td></tr>
+<input type="hidden" name="path" value="0">
+</form>
+<tr>
+<td><a name="1"></a>
+<b>Question 1</b>&nbsp;<img src="/web-ct/en/img/dot_divide.gif" alt="" border="0" class="alignMiddle" />&nbsp;(1 point)</td></tr>
+<tr>
+<td><form name="show_question_form_36" method="post" action="/SCRIPT/d_cis234ntf/scripts/student/serve_new_quiz?ACTION=DO_QUIZ&ARG1=1528509843&ARG2=&ARG3=0" target="bottom">
+<input type="hidden" name="quesno" value="0">
+<input type="hidden" name="rec" value="36">
+<input type="hidden" name="36.type" value="MC">
+<input type="hidden" name="36.mode" VALUE="1">
+<input type="hidden" name="36.numchoices" value="5">
+<pre>What is the equality operator?</pre><br>
+<img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+<table cellpadding="3" cellspacing="0">
+<tr><td valign="top" class="opposite"><input type="RADIO" name="36.res" id="webct1_891512669" onclick="register_change('1');" value="1">
+</td>
+<td valign="top"><label for='webct1_891512669'>a.</label></td>
+<td valign=top><label for='webct1_891512669'>!= &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="36.res" id="webct2_891512669" onclick="register_change('1');" value="2">
+</td>
+<td valign="top"><label for='webct2_891512669'>b.</label></td>
+<td valign=top><label for='webct2_891512669'>= &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="36.res" id="webct3_891512669" onclick="register_change('1');" value="3">
+</td>
+<td valign="top"><label for='webct3_891512669'>c.</label></td>
+<td valign=top><label for='webct3_891512669'>== &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="36.res" id="webct4_891512669" onclick="register_change('1');" value="4">
+</td>
+<td valign="top"><label for='webct4_891512669'>d.</label></td>
+<td valign=top><label for='webct4_891512669'>& &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="36.res" id="webct5_891512669" onclick="register_change('1');" value="5">
+</td>
+<td valign="top"><label for='webct5_891512669'>e.</label></td>
+<td valign=top><label for='webct5_891512669'>+
+ &nbsp; </label>
+</td></tr>
+</table>
+<img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+<a href="#"    class="action" onmouseover="window.status='Save answer'; return true;" onmouseout="window.status=''; return true;" onclick="void(dosave(show_question_form_36, 1)); return false;" title="Save answer">Save answer</a><img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+</td></tr>
+</form>
+<tr class="divider2"><td>
+<img src="/web-ct/en/img/shim.gif" width="1" height="1" alt="" border="0"></td></tr>
+<tr>
+<td><a name="2"></a>
+<b>Question 2</b>&nbsp;<img src="/web-ct/en/img/dot_divide.gif" alt="" border="0" class="alignMiddle" />&nbsp;(1 point)</td></tr>
+<tr>
+<td><form name="show_question_form_83" method="post" action="/SCRIPT/d_cis234ntf/scripts/student/serve_new_quiz?ACTION=DO_QUIZ&ARG1=1528509843&ARG2=&ARG3=0" target="bottom">
+<input type="hidden" name="quesno" value="1">
+<input type="hidden" name="rec" value="83">
+<input type="hidden" name="83.type" value="MC">
+<input type="hidden" name="83.mode" VALUE="1">
+<input type="hidden" name="83.numchoices" value="5">
+Which method is used to find the occurence of a string in a regular expression?<br>
+<img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+<table cellpadding="3" cellspacing="0">
+<tr><td valign="top" class="opposite"><input type="RADIO" name="83.res" id="webct6_891512669" onclick="register_change('2');" value="1">
+</td>
+<td valign="top"><label for='webct6_891512669'>a.</label></td>
+<td valign=top><label for='webct6_891512669'>Finds &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="83.res" id="webct7_891512669" onclick="register_change('2');" value="2">
+</td>
+<td valign="top"><label for='webct7_891512669'>b.</label></td>
+<td valign=top><label for='webct7_891512669'>Occurence &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="83.res" id="webct8_891512669" onclick="register_change('2');" value="3">
+</td>
+<td valign="top"><label for='webct8_891512669'>c.</label></td>
+<td valign=top><label for='webct8_891512669'>Matches &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="83.res" id="webct9_891512669" onclick="register_change('2');" value="4">
+</td>
+<td valign="top"><label for='webct9_891512669'>d.</label></td>
+<td valign=top><label for='webct9_891512669'>Regex &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="83.res" id="webct10_891512669" onclick="register_change('2');" value="5">
+</td>
+<td valign="top"><label for='webct10_891512669'>e.</label></td>
+<td valign=top><label for='webct10_891512669'>Expression
+ &nbsp; </label>
+</td></tr>
+</table>
+<img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+<a href="#"    class="action" onmouseover="window.status='Save answer'; return true;" onmouseout="window.status=''; return true;" onclick="void(dosave(show_question_form_83, 2)); return false;" title="Save answer">Save answer</a><img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+</td></tr>
+</form>
+<tr class="divider2"><td>
+<img src="/web-ct/en/img/shim.gif" width="1" height="1" alt="" border="0"></td></tr>
+<tr>
+<td><a name="3"></a>
+<b>Question 3</b>&nbsp;<img src="/web-ct/en/img/dot_divide.gif" alt="" border="0" class="alignMiddle" />&nbsp;(1 point)</td></tr>
+<tr>
+<td><form name="show_question_form_41" method="post" action="/SCRIPT/d_cis234ntf/scripts/student/serve_new_quiz?ACTION=DO_QUIZ&ARG1=1528509843&ARG2=&ARG3=0" target="bottom">
+<input type="hidden" name="quesno" value="2">
+<input type="hidden" name="rec" value="41">
+<input type="hidden" name="41.type" value="MC">
+<input type="hidden" name="41.mode" VALUE="1">
+<input type="hidden" name="41.numchoices" value="5">
+mscorlib is:<br>
+<img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+<table cellpadding="3" cellspacing="0">
+<tr><td valign="top" class="opposite"><input type="RADIO" name="41.res" id="webct11_891512669" onclick="register_change('3');" value="1">
+</td>
+<td valign="top"><label for='webct11_891512669'>a.</label></td>
+<td valign=top><label for='webct11_891512669'>a class &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="41.res" id="webct12_891512669" onclick="register_change('3');" value="2">
+</td>
+<td valign="top"><label for='webct12_891512669'>b.</label></td>
+<td valign=top><label for='webct12_891512669'>a package &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="41.res" id="webct13_891512669" onclick="register_change('3');" value="3">
+</td>
+<td valign="top"><label for='webct13_891512669'>c.</label></td>
+<td valign=top><label for='webct13_891512669'>an assembly &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="41.res" id="webct14_891512669" onclick="register_change('3');" value="4">
+</td>
+<td valign="top"><label for='webct14_891512669'>d.</label></td>
+<td valign=top><label for='webct14_891512669'>a namespace &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="41.res" id="webct15_891512669" onclick="register_change('3');" value="5">
+</td>
+<td valign="top"><label for='webct15_891512669'>e.</label></td>
+<td valign=top><label for='webct15_891512669'>a method
+ &nbsp; </label>
+</td></tr>
+</table>
+<img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+<a href="#"    class="action" onmouseover="window.status='Save answer'; return true;" onmouseout="window.status=''; return true;" onclick="void(dosave(show_question_form_41, 3)); return false;" title="Save answer">Save answer</a><img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+</td></tr>
+</form>
+<tr class="divider2"><td>
+<img src="/web-ct/en/img/shim.gif" width="1" height="1" alt="" border="0"></td></tr>
+<tr>
+<td><a name="4"></a>
+<b>Question 4</b>&nbsp;<img src="/web-ct/en/img/dot_divide.gif" alt="" border="0" class="alignMiddle" />&nbsp;(1 point)</td></tr>
+<tr>
+<td><form name="show_question_form_70" method="post" action="/SCRIPT/d_cis234ntf/scripts/student/serve_new_quiz?ACTION=DO_QUIZ&ARG1=1528509843&ARG2=&ARG3=0" target="bottom">
+<input type="hidden" name="quesno" value="3">
+<input type="hidden" name="rec" value="70">
+<input type="hidden" name="70.type" value="MC">
+<input type="hidden" name="70.mode" VALUE="1">
+<input type="hidden" name="70.numchoices" value="5">
+Which statement correctly sets up a foreach loop to be used with a SortedList?<br>
+<img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+<table cellpadding="3" cellspacing="0">
+<tr><td valign="top" class="opposite"><input type="RADIO" name="70.res" id="webct16_891512669" onclick="register_change('4');" value="1">
+</td>
+<td valign="top"><label for='webct16_891512669'>a.</label></td>
+<td valign=top><label for='webct16_891512669'>foreach (SortedList sl in mySortedList) &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="70.res" id="webct17_891512669" onclick="register_change('4');" value="2">
+</td>
+<td valign="top"><label for='webct17_891512669'>b.</label></td>
+<td valign=top><label for='webct17_891512669'>foreach (List li in mySortedList) &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="70.res" id="webct18_891512669" onclick="register_change('4');" value="3">
+</td>
+<td valign="top"><label for='webct18_891512669'>c.</label></td>
+<td valign=top><label for='webct18_891512669'>foreach (Entry en in mySortedList) &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="70.res" id="webct19_891512669" onclick="register_change('4');" value="4">
+</td>
+<td valign="top"><label for='webct19_891512669'>d.</label></td>
+<td valign=top><label for='webct19_891512669'>foreach (Object o in mySortedList) &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="70.res" id="webct20_891512669" onclick="register_change('4');" value="5">
+</td>
+<td valign="top"><label for='webct20_891512669'>e.</label></td>
+<td valign=top><label for='webct20_891512669'>foreach (DictionaryEntry de in mySortedList)
+ &nbsp; </label>
+</td></tr>
+</table>
+<img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+<a href="#"    class="action" onmouseover="window.status='Save answer'; return true;" onmouseout="window.status=''; return true;" onclick="void(dosave(show_question_form_70, 4)); return false;" title="Save answer">Save answer</a><img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+</td></tr>
+</form>
+<tr class="divider2"><td>
+<img src="/web-ct/en/img/shim.gif" width="1" height="1" alt="" border="0"></td></tr>
+<tr>
+<td><a name="5"></a>
+<b>Question 5</b>&nbsp;<img src="/web-ct/en/img/dot_divide.gif" alt="" border="0" class="alignMiddle" />&nbsp;(1 point)</td></tr>
+<tr>
+<td><form name="show_question_form_38" method="post" action="/SCRIPT/d_cis234ntf/scripts/student/serve_new_quiz?ACTION=DO_QUIZ&ARG1=1528509843&ARG2=&ARG3=0" target="bottom">
+<input type="hidden" name="quesno" value="4">
+<input type="hidden" name="rec" value="38">
+<input type="hidden" name="38.type" value="MC">
+<input type="hidden" name="38.mode" VALUE="1">
+<input type="hidden" name="38.numchoices" value="5">
+A switch statement can be used to test which of these variable types? <br>
+<img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+<table cellpadding="3" cellspacing="0">
+<tr><td valign="top" class="opposite"><input type="RADIO" name="38.res" id="webct21_891512669" onclick="register_change('5');" value="1">
+</td>
+<td valign="top"><label for='webct21_891512669'>a.</label></td>
+<td valign=top><label for='webct21_891512669'>int &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="38.res" id="webct22_891512669" onclick="register_change('5');" value="2">
+</td>
+<td valign="top"><label for='webct22_891512669'>b.</label></td>
+<td valign=top><label for='webct22_891512669'>char &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="38.res" id="webct23_891512669" onclick="register_change('5');" value="3">
+</td>
+<td valign="top"><label for='webct23_891512669'>c.</label></td>
+<td valign=top><label for='webct23_891512669'>string &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="38.res" id="webct24_891512669" onclick="register_change('5');" value="4">
+</td>
+<td valign="top"><label for='webct24_891512669'>d.</label></td>
+<td valign=top><label for='webct24_891512669'>only a and b &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="38.res" id="webct25_891512669" onclick="register_change('5');" value="5">
+</td>
+<td valign="top"><label for='webct25_891512669'>e.</label></td>
+<td valign=top><label for='webct25_891512669'>a, b, and c are correct
+ &nbsp; </label>
+</td></tr>
+</table>
+<img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+<a href="#"    class="action" onmouseover="window.status='Save answer'; return true;" onmouseout="window.status=''; return true;" onclick="void(dosave(show_question_form_38, 5)); return false;" title="Save answer">Save answer</a><img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+</td></tr>
+</form>
+<tr class="divider2"><td>
+<img src="/web-ct/en/img/shim.gif" width="1" height="1" alt="" border="0"></td></tr>
+<tr>
+<td><a name="6"></a>
+<b>Question 6</b>&nbsp;<img src="/web-ct/en/img/dot_divide.gif" alt="" border="0" class="alignMiddle" />&nbsp;(1 point)</td></tr>
+<tr>
+<td><form name="show_question_form_71" method="post" action="/SCRIPT/d_cis234ntf/scripts/student/serve_new_quiz?ACTION=DO_QUIZ&ARG1=1528509843&ARG2=&ARG3=0" target="bottom">
+<input type="hidden" name="quesno" value="5">
+<input type="hidden" name="rec" value="71">
+<input type="hidden" name="71.type" value="MC">
+<input type="hidden" name="71.mode" VALUE="1">
+<input type="hidden" name="71.numchoices" value="5">
+Which class would you use to find out the path name or directory name of a file?<br>
+<img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+<table cellpadding="3" cellspacing="0">
+<tr><td valign="top" class="opposite"><input type="RADIO" name="71.res" id="webct26_891512669" onclick="register_change('6');" value="1">
+</td>
+<td valign="top"><label for='webct26_891512669'>a.</label></td>
+<td valign=top><label for='webct26_891512669'>Path class &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="71.res" id="webct27_891512669" onclick="register_change('6');" value="2">
+</td>
+<td valign="top"><label for='webct27_891512669'>b.</label></td>
+<td valign=top><label for='webct27_891512669'>FileInfo class &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="71.res" id="webct28_891512669" onclick="register_change('6');" value="3">
+</td>
+<td valign="top"><label for='webct28_891512669'>c.</label></td>
+<td valign=top><label for='webct28_891512669'>SystemInfo class &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="71.res" id="webct29_891512669" onclick="register_change('6');" value="4">
+</td>
+<td valign="top"><label for='webct29_891512669'>d.</label></td>
+<td valign=top><label for='webct29_891512669'>PathInfo class &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="71.res" id="webct30_891512669" onclick="register_change('6');" value="5">
+</td>
+<td valign="top"><label for='webct30_891512669'>e.</label></td>
+<td valign=top><label for='webct30_891512669'>DirctoryInfo class
+ &nbsp; </label>
+</td></tr>
+</table>
+<img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+<a href="#"    class="action" onmouseover="window.status='Save answer'; return true;" onmouseout="window.status=''; return true;" onclick="void(dosave(show_question_form_71, 6)); return false;" title="Save answer">Save answer</a><img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+</td></tr>
+</form>
+<tr class="divider2"><td>
+<img src="/web-ct/en/img/shim.gif" width="1" height="1" alt="" border="0"></td></tr>
+<tr>
+<td><a name="7"></a>
+<b>Question 7</b>&nbsp;<img src="/web-ct/en/img/dot_divide.gif" alt="" border="0" class="alignMiddle" />&nbsp;(1 point)</td></tr>
+<tr>
+<td><form name="show_question_form_39" method="post" action="/SCRIPT/d_cis234ntf/scripts/student/serve_new_quiz?ACTION=DO_QUIZ&ARG1=1528509843&ARG2=&ARG3=0" target="bottom">
+<input type="hidden" name="quesno" value="6">
+<input type="hidden" name="rec" value="39">
+<input type="hidden" name="39.type" value="MC">
+<input type="hidden" name="39.mode" VALUE="1">
+<input type="hidden" name="39.numchoices" value="5">
+<pre>int x; 
+switch (x)
+{
+    
+}
+
+If x were 3, which statement would you place in the switch to find a match for 3?</pre><br>
+<img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+<table cellpadding="3" cellspacing="0">
+<tr><td valign="top" class="opposite"><input type="RADIO" name="39.res" id="webct31_891512669" onclick="register_change('7');" value="1">
+</td>
+<td valign="top"><label for='webct31_891512669'>a.</label></td>
+<td valign=top><label for='webct31_891512669'> 3: &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="39.res" id="webct32_891512669" onclick="register_change('7');" value="2">
+</td>
+<td valign="top"><label for='webct32_891512669'>b.</label></td>
+<td valign=top><label for='webct32_891512669'>case 3: &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="39.res" id="webct33_891512669" onclick="register_change('7');" value="3">
+</td>
+<td valign="top"><label for='webct33_891512669'>c.</label></td>
+<td valign=top><label for='webct33_891512669'>case "3": &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="39.res" id="webct34_891512669" onclick="register_change('7');" value="4">
+</td>
+<td valign="top"><label for='webct34_891512669'>d.</label></td>
+<td valign=top><label for='webct34_891512669'>case '3': &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="39.res" id="webct35_891512669" onclick="register_change('7');" value="5">
+</td>
+<td valign="top"><label for='webct35_891512669'>e.</label></td>
+<td valign=top><label for='webct35_891512669'>case 3;
+ &nbsp; </label>
+</td></tr>
+</table>
+<img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+<a href="#"    class="action" onmouseover="window.status='Save answer'; return true;" onmouseout="window.status=''; return true;" onclick="void(dosave(show_question_form_39, 7)); return false;" title="Save answer">Save answer</a><img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+</td></tr>
+</form>
+<tr class="divider2"><td>
+<img src="/web-ct/en/img/shim.gif" width="1" height="1" alt="" border="0"></td></tr>
+<tr>
+<td><a name="8"></a>
+<b>Question 8</b>&nbsp;<img src="/web-ct/en/img/dot_divide.gif" alt="" border="0" class="alignMiddle" />&nbsp;(1 point)</td></tr>
+<tr>
+<td><form name="show_question_form_59" method="post" action="/SCRIPT/d_cis234ntf/scripts/student/serve_new_quiz?ACTION=DO_QUIZ&ARG1=1528509843&ARG2=&ARG3=0" target="bottom">
+<input type="hidden" name="quesno" value="7">
+<input type="hidden" name="rec" value="59">
+<input type="hidden" name="59.type" value="MC">
+<input type="hidden" name="59.mode" VALUE="1">
+<input type="hidden" name="59.numchoices" value="5">
+Which statement about enums is true?<br>
+<img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+<table cellpadding="3" cellspacing="0">
+<tr><td valign="top" class="opposite"><input type="RADIO" name="59.res" id="webct36_891512669" onclick="register_change('8');" value="1">
+</td>
+<td valign="top"><label for='webct36_891512669'>a.</label></td>
+<td valign=top><label for='webct36_891512669'>Double is the default datatype.
+ &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="59.res" id="webct37_891512669" onclick="register_change('8');" value="2">
+</td>
+<td valign="top"><label for='webct37_891512669'>b.</label></td>
+<td valign=top><label for='webct37_891512669'>The datatype must be float or double. &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="59.res" id="webct38_891512669" onclick="register_change('8');" value="3">
+</td>
+<td valign="top"><label for='webct38_891512669'>c.</label></td>
+<td valign=top><label for='webct38_891512669'>The datatype must be integral (int or long). &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="59.res" id="webct39_891512669" onclick="register_change('8');" value="4">
+</td>
+<td valign="top"><label for='webct39_891512669'>d.</label></td>
+<td valign=top><label for='webct39_891512669'>Enums have string as the default datatype. &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="59.res" id="webct40_891512669" onclick="register_change('8');" value="5">
+</td>
+<td valign="top"><label for='webct40_891512669'>e.</label></td>
+<td valign=top><label for='webct40_891512669'>Enums are not supported in C#.
+ &nbsp; </label>
+</td></tr>
+</table>
+<img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+<a href="#"    class="action" onmouseover="window.status='Save answer'; return true;" onmouseout="window.status=''; return true;" onclick="void(dosave(show_question_form_59, 8)); return false;" title="Save answer">Save answer</a><img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+</td></tr>
+</form>
+<tr class="divider2"><td>
+<img src="/web-ct/en/img/shim.gif" width="1" height="1" alt="" border="0"></td></tr>
+<tr>
+<td><a name="9"></a>
+<b>Question 9</b>&nbsp;<img src="/web-ct/en/img/dot_divide.gif" alt="" border="0" class="alignMiddle" />&nbsp;(1 point)</td></tr>
+<tr>
+<td><form name="show_question_form_92" method="post" action="/SCRIPT/d_cis234ntf/scripts/student/serve_new_quiz?ACTION=DO_QUIZ&ARG1=1528509843&ARG2=&ARG3=0" target="bottom">
+<input type="hidden" name="quesno" value="8">
+<input type="hidden" name="rec" value="92">
+<input type="hidden" name="92.type" value="MC">
+<input type="hidden" name="92.mode" VALUE="1">
+<input type="hidden" name="92.numchoices" value="2">
+.NET is supported on non-Windows platforms. (True/ False)<br>
+<img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+<table cellpadding="3" cellspacing="0">
+<tr><td valign="top" class="opposite"><input type="RADIO" name="92.res" id="webct41_891512669" onclick="register_change('9');" value="1">
+</td>
+<td valign="top"><label for='webct41_891512669'>a.</label></td>
+<td valign=top><label for='webct41_891512669'>True &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="92.res" id="webct42_891512669" onclick="register_change('9');" value="2">
+</td>
+<td valign="top"><label for='webct42_891512669'>b.</label></td>
+<td valign=top><label for='webct42_891512669'>False
+ &nbsp; </label>
+</td></tr>
+</table>
+<img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+<a href="#"    class="action" onmouseover="window.status='Save answer'; return true;" onmouseout="window.status=''; return true;" onclick="void(dosave(show_question_form_92, 9)); return false;" title="Save answer">Save answer</a><img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+</td></tr>
+</form>
+<tr class="divider2"><td>
+<img src="/web-ct/en/img/shim.gif" width="1" height="1" alt="" border="0"></td></tr>
+<tr>
+<td><a name="10"></a>
+<b>Question 10</b>&nbsp;<img src="/web-ct/en/img/dot_divide.gif" alt="" border="0" class="alignMiddle" />&nbsp;(1 point)</td></tr>
+<tr>
+<td><form name="show_question_form_45" method="post" action="/SCRIPT/d_cis234ntf/scripts/student/serve_new_quiz?ACTION=DO_QUIZ&ARG1=1528509843&ARG2=&ARG3=0" target="bottom">
+<input type="hidden" name="quesno" value="9">
+<input type="hidden" name="rec" value="45">
+<input type="hidden" name="45.type" value="MC">
+<input type="hidden" name="45.mode" VALUE="1">
+<input type="hidden" name="45.numchoices" value="5">
+<pre>class Customer
+{
+      public int acctNumber;
+      public string firstName;
+      public string lastName;
+
+}
+
+lastName is ________________.</pre><br>
+<img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+<table cellpadding="3" cellspacing="0">
+<tr><td valign="top" class="opposite"><input type="RADIO" name="45.res" id="webct43_891512669" onclick="register_change('10');" value="1">
+</td>
+<td valign="top"><label for='webct43_891512669'>a.</label></td>
+<td valign=top><label for='webct43_891512669'>a class variable &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="45.res" id="webct44_891512669" onclick="register_change('10');" value="2">
+</td>
+<td valign="top"><label for='webct44_891512669'>b.</label></td>
+<td valign=top><label for='webct44_891512669'>an instance variable &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="45.res" id="webct45_891512669" onclick="register_change('10');" value="3">
+</td>
+<td valign="top"><label for='webct45_891512669'>c.</label></td>
+<td valign=top><label for='webct45_891512669'>a constant &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="45.res" id="webct46_891512669" onclick="register_change('10');" value="4">
+</td>
+<td valign="top"><label for='webct46_891512669'>d.</label></td>
+<td valign=top><label for='webct46_891512669'>a method &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="45.res" id="webct47_891512669" onclick="register_change('10');" value="5">
+</td>
+<td valign="top"><label for='webct47_891512669'>e.</label></td>
+<td valign=top><label for='webct47_891512669'>an enumeration
+ &nbsp; </label>
+</td></tr>
+</table>
+<img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+<a href="#"    class="action" onmouseover="window.status='Save answer'; return true;" onmouseout="window.status=''; return true;" onclick="void(dosave(show_question_form_45, 10)); return false;" title="Save answer">Save answer</a><img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+</td></tr>
+</form>
+<tr class="divider2"><td>
+<img src="/web-ct/en/img/shim.gif" width="1" height="1" alt="" border="0"></td></tr>
+<tr>
+<td><a name="11"></a>
+<b>Question 11</b>&nbsp;<img src="/web-ct/en/img/dot_divide.gif" alt="" border="0" class="alignMiddle" />&nbsp;(1 point)</td></tr>
+<tr>
+<td><form name="show_question_form_56" method="post" action="/SCRIPT/d_cis234ntf/scripts/student/serve_new_quiz?ACTION=DO_QUIZ&ARG1=1528509843&ARG2=&ARG3=0" target="bottom">
+<input type="hidden" name="quesno" value="10">
+<input type="hidden" name="rec" value="56">
+<input type="hidden" name="56.type" value="MC">
+<input type="hidden" name="56.mode" VALUE="1">
+<input type="hidden" name="56.numchoices" value="5">
+A groupBox control named groupBox1 does not appear on the Windows form. Which statement should be added to the code so that it does appear?<br>
+<img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+<table cellpadding="3" cellspacing="0">
+<tr><td valign="top" class="opposite"><input type="RADIO" name="56.res" id="webct48_891512669" onclick="register_change('11');" value="1">
+</td>
+<td valign="top"><label for='webct48_891512669'>a.</label></td>
+<td valign=top><label for='webct48_891512669'>Controls.Add(groupBox1); &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="56.res" id="webct49_891512669" onclick="register_change('11');" value="2">
+</td>
+<td valign="top"><label for='webct49_891512669'>b.</label></td>
+<td valign=top><label for='webct49_891512669'>this.Add(groupBox1); &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="56.res" id="webct50_891512669" onclick="register_change('11');" value="3">
+</td>
+<td valign="top"><label for='webct50_891512669'>c.</label></td>
+<td valign=top><label for='webct50_891512669'>Add(groupBox1); &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="56.res" id="webct51_891512669" onclick="register_change('11');" value="4">
+</td>
+<td valign="top"><label for='webct51_891512669'>d.</label></td>
+<td valign=top><label for='webct51_891512669'>this.Controls.Add(groupBox1); &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="56.res" id="webct52_891512669" onclick="register_change('11');" value="5">
+</td>
+<td valign="top"><label for='webct52_891512669'>e.</label></td>
+<td valign=top><label for='webct52_891512669'>groupBox1.add();
+ &nbsp; </label>
+</td></tr>
+</table>
+<img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+<a href="#"    class="action" onmouseover="window.status='Save answer'; return true;" onmouseout="window.status=''; return true;" onclick="void(dosave(show_question_form_56, 11)); return false;" title="Save answer">Save answer</a><img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+</td></tr>
+</form>
+<tr class="divider2"><td>
+<img src="/web-ct/en/img/shim.gif" width="1" height="1" alt="" border="0"></td></tr>
+<tr>
+<td><a name="12"></a>
+<b>Question 12</b>&nbsp;<img src="/web-ct/en/img/dot_divide.gif" alt="" border="0" class="alignMiddle" />&nbsp;(1 point)</td></tr>
+<tr>
+<td><form name="show_question_form_75" method="post" action="/SCRIPT/d_cis234ntf/scripts/student/serve_new_quiz?ACTION=DO_QUIZ&ARG1=1528509843&ARG2=&ARG3=0" target="bottom">
+<input type="hidden" name="quesno" value="11">
+<input type="hidden" name="rec" value="75">
+<input type="hidden" name="75.type" value="MC">
+<input type="hidden" name="75.mode" VALUE="1">
+<input type="hidden" name="75.numchoices" value="5">
+In which class would you find methods to round, calculate the square root, and find the absolute value of a number?<br>
+<img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+<table cellpadding="3" cellspacing="0">
+<tr><td valign="top" class="opposite"><input type="RADIO" name="75.res" id="webct53_891512669" onclick="register_change('12');" value="1">
+</td>
+<td valign="top"><label for='webct53_891512669'>a.</label></td>
+<td valign=top><label for='webct53_891512669'>Math &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="75.res" id="webct54_891512669" onclick="register_change('12');" value="2">
+</td>
+<td valign="top"><label for='webct54_891512669'>b.</label></td>
+<td valign=top><label for='webct54_891512669'>Environment &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="75.res" id="webct55_891512669" onclick="register_change('12');" value="3">
+</td>
+<td valign="top"><label for='webct55_891512669'>c.</label></td>
+<td valign=top><label for='webct55_891512669'>Path &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="75.res" id="webct56_891512669" onclick="register_change('12');" value="4">
+</td>
+<td valign="top"><label for='webct56_891512669'>d.</label></td>
+<td valign=top><label for='webct56_891512669'>File &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="75.res" id="webct57_891512669" onclick="register_change('12');" value="5">
+</td>
+<td valign="top"><label for='webct57_891512669'>e.</label></td>
+<td valign=top><label for='webct57_891512669'>System
+ &nbsp; </label>
+</td></tr>
+</table>
+<img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+<a href="#"    class="action" onmouseover="window.status='Save answer'; return true;" onmouseout="window.status=''; return true;" onclick="void(dosave(show_question_form_75, 12)); return false;" title="Save answer">Save answer</a><img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+</td></tr>
+</form>
+<tr class="divider2"><td>
+<img src="/web-ct/en/img/shim.gif" width="1" height="1" alt="" border="0"></td></tr>
+<tr>
+<td><a name="13"></a>
+<b>Question 13</b>&nbsp;<img src="/web-ct/en/img/dot_divide.gif" alt="" border="0" class="alignMiddle" />&nbsp;(1 point)</td></tr>
+<tr>
+<td><form name="show_question_form_87" method="post" action="/SCRIPT/d_cis234ntf/scripts/student/serve_new_quiz?ACTION=DO_QUIZ&ARG1=1528509843&ARG2=&ARG3=0" target="bottom">
+<input type="hidden" name="quesno" value="12">
+<input type="hidden" name="rec" value="87">
+<input type="hidden" name="87.type" value="MC">
+<input type="hidden" name="87.mode" VALUE="1">
+<input type="hidden" name="87.numchoices" value="5">
+To get the name of a file from the user, you can use which class?  <br>
+<img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+<table cellpadding="3" cellspacing="0">
+<tr><td valign="top" class="opposite"><input type="RADIO" name="87.res" id="webct58_891512669" onclick="register_change('13');" value="1">
+</td>
+<td valign="top"><label for='webct58_891512669'>a.</label></td>
+<td valign=top><label for='webct58_891512669'>SaveFileDialog &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="87.res" id="webct59_891512669" onclick="register_change('13');" value="2">
+</td>
+<td valign="top"><label for='webct59_891512669'>b.</label></td>
+<td valign=top><label for='webct59_891512669'>NewFileDialog &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="87.res" id="webct60_891512669" onclick="register_change('13');" value="3">
+</td>
+<td valign="top"><label for='webct60_891512669'>c.</label></td>
+<td valign=top><label for='webct60_891512669'>SaveFile &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="87.res" id="webct61_891512669" onclick="register_change('13');" value="4">
+</td>
+<td valign="top"><label for='webct61_891512669'>d.</label></td>
+<td valign=top><label for='webct61_891512669'>FileDialog &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="87.res" id="webct62_891512669" onclick="register_change('13');" value="5">
+</td>
+<td valign="top"><label for='webct62_891512669'>e.</label></td>
+<td valign=top><label for='webct62_891512669'>SaveDialog
+ &nbsp; </label>
+</td></tr>
+</table>
+<img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+<a href="#"    class="action" onmouseover="window.status='Save answer'; return true;" onmouseout="window.status=''; return true;" onclick="void(dosave(show_question_form_87, 13)); return false;" title="Save answer">Save answer</a><img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+</td></tr>
+</form>
+<tr class="divider2"><td>
+<img src="/web-ct/en/img/shim.gif" width="1" height="1" alt="" border="0"></td></tr>
+<tr>
+<td><a name="14"></a>
+<b>Question 14</b>&nbsp;<img src="/web-ct/en/img/dot_divide.gif" alt="" border="0" class="alignMiddle" />&nbsp;(1 point)</td></tr>
+<tr>
+<td><form name="show_question_form_53" method="post" action="/SCRIPT/d_cis234ntf/scripts/student/serve_new_quiz?ACTION=DO_QUIZ&ARG1=1528509843&ARG2=&ARG3=0" target="bottom">
+<input type="hidden" name="quesno" value="13">
+<input type="hidden" name="rec" value="53">
+<input type="hidden" name="53.type" value="MC">
+<input type="hidden" name="53.mode" VALUE="1">
+<input type="hidden" name="53.numchoices" value="5">
+Which statement tests if a radioButton has been selected?<br>
+<img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+<table cellpadding="3" cellspacing="0">
+<tr><td valign="top" class="opposite"><input type="RADIO" name="53.res" id="webct63_891512669" onclick="register_change('14');" value="1">
+</td>
+<td valign="top"><label for='webct63_891512669'>a.</label></td>
+<td valign=top><label for='webct63_891512669'>if (radioButton1.Checked == true) &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="53.res" id="webct64_891512669" onclick="register_change('14');" value="2">
+</td>
+<td valign="top"><label for='webct64_891512669'>b.</label></td>
+<td valign=top><label for='webct64_891512669'>if (radioButton1.Item == true) &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="53.res" id="webct65_891512669" onclick="register_change('14');" value="3">
+</td>
+<td valign="top"><label for='webct65_891512669'>c.</label></td>
+<td valign=top><label for='webct65_891512669'>if (radioButton1.Value == true) &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="53.res" id="webct66_891512669" onclick="register_change('14');" value="4">
+</td>
+<td valign="top"><label for='webct66_891512669'>d.</label></td>
+<td valign=top><label for='webct66_891512669'>if (radioButton1.Selected == true) &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="53.res" id="webct67_891512669" onclick="register_change('14');" value="5">
+</td>
+<td valign="top"><label for='webct67_891512669'>e.</label></td>
+<td valign=top><label for='webct67_891512669'>if (radioButton1.Text == true)
+ &nbsp; </label>
+</td></tr>
+</table>
+<img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+<a href="#"    class="action" onmouseover="window.status='Save answer'; return true;" onmouseout="window.status=''; return true;" onclick="void(dosave(show_question_form_53, 14)); return false;" title="Save answer">Save answer</a><img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+</td></tr>
+</form>
+<tr class="divider2"><td>
+<img src="/web-ct/en/img/shim.gif" width="1" height="1" alt="" border="0"></td></tr>
+<tr>
+<td><a name="15"></a>
+<b>Question 15</b>&nbsp;<img src="/web-ct/en/img/dot_divide.gif" alt="" border="0" class="alignMiddle" />&nbsp;(1 point)</td></tr>
+<tr>
+<td><form name="show_question_form_46" method="post" action="/SCRIPT/d_cis234ntf/scripts/student/serve_new_quiz?ACTION=DO_QUIZ&ARG1=1528509843&ARG2=&ARG3=0" target="bottom">
+<input type="hidden" name="quesno" value="14">
+<input type="hidden" name="rec" value="46">
+<input type="hidden" name="46.type" value="MC">
+<input type="hidden" name="46.mode" VALUE="1">
+<input type="hidden" name="46.numchoices" value="5">
+Customer c = new Customer();
+
+The statement is an example of _________________.<br>
+<img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+<table cellpadding="3" cellspacing="0">
+<tr><td valign="top" class="opposite"><input type="RADIO" name="46.res" id="webct68_891512669" onclick="register_change('15');" value="1">
+</td>
+<td valign="top"><label for='webct68_891512669'>a.</label></td>
+<td valign=top><label for='webct68_891512669'>inheritance &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="46.res" id="webct69_891512669" onclick="register_change('15');" value="2">
+</td>
+<td valign="top"><label for='webct69_891512669'>b.</label></td>
+<td valign=top><label for='webct69_891512669'>encapsulation &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="46.res" id="webct70_891512669" onclick="register_change('15');" value="3">
+</td>
+<td valign="top"><label for='webct70_891512669'>c.</label></td>
+<td valign=top><label for='webct70_891512669'>variable declaration &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="46.res" id="webct71_891512669" onclick="register_change('15');" value="4">
+</td>
+<td valign="top"><label for='webct71_891512669'>d.</label></td>
+<td valign=top><label for='webct71_891512669'>obfuscation &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="46.res" id="webct72_891512669" onclick="register_change('15');" value="5">
+</td>
+<td valign="top"><label for='webct72_891512669'>e.</label></td>
+<td valign=top><label for='webct72_891512669'>instantiation
+ &nbsp; </label>
+</td></tr>
+</table>
+<img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+<a href="#"    class="action" onmouseover="window.status='Save answer'; return true;" onmouseout="window.status=''; return true;" onclick="void(dosave(show_question_form_46, 15)); return false;" title="Save answer">Save answer</a><img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+</td></tr>
+</form>
+<tr class="divider2"><td>
+<img src="/web-ct/en/img/shim.gif" width="1" height="1" alt="" border="0"></td></tr>
+<tr>
+<td><a name="16"></a>
+<b>Question 16</b>&nbsp;<img src="/web-ct/en/img/dot_divide.gif" alt="" border="0" class="alignMiddle" />&nbsp;(1 point)</td></tr>
+<tr>
+<td><form name="show_question_form_47" method="post" action="/SCRIPT/d_cis234ntf/scripts/student/serve_new_quiz?ACTION=DO_QUIZ&ARG1=1528509843&ARG2=&ARG3=0" target="bottom">
+<input type="hidden" name="quesno" value="15">
+<input type="hidden" name="rec" value="47">
+<input type="hidden" name="47.type" value="MC">
+<input type="hidden" name="47.mode" VALUE="1">
+<input type="hidden" name="47.numchoices" value="2">
+C# does not allow overloaded constructors. <br>
+<img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+<table cellpadding="3" cellspacing="0">
+<tr><td valign="top" class="opposite"><input type="RADIO" name="47.res" id="webct73_891512669" onclick="register_change('16');" value="1">
+</td>
+<td valign="top"><label for='webct73_891512669'>a.</label></td>
+<td valign=top><label for='webct73_891512669'>True &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="47.res" id="webct74_891512669" onclick="register_change('16');" value="2">
+</td>
+<td valign="top"><label for='webct74_891512669'>b.</label></td>
+<td valign=top><label for='webct74_891512669'>False
+ &nbsp; </label>
+</td></tr>
+</table>
+<img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+<a href="#"    class="action" onmouseover="window.status='Save answer'; return true;" onmouseout="window.status=''; return true;" onclick="void(dosave(show_question_form_47, 16)); return false;" title="Save answer">Save answer</a><img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+</td></tr>
+</form>
+<tr class="divider2"><td>
+<img src="/web-ct/en/img/shim.gif" width="1" height="1" alt="" border="0"></td></tr>
+<tr>
+<td><a name="17"></a>
+<b>Question 17</b>&nbsp;<img src="/web-ct/en/img/dot_divide.gif" alt="" border="0" class="alignMiddle" />&nbsp;(1 point)</td></tr>
+<tr>
+<td><form name="show_question_form_66" method="post" action="/SCRIPT/d_cis234ntf/scripts/student/serve_new_quiz?ACTION=DO_QUIZ&ARG1=1528509843&ARG2=&ARG3=0" target="bottom">
+<input type="hidden" name="quesno" value="16">
+<input type="hidden" name="rec" value="66">
+<input type="hidden" name="66.type" value="MC">
+<input type="hidden" name="66.mode" VALUE="1">
+<input type="hidden" name="66.numchoices" value="5">
+Which method can be used to delete a record from a database?<br>
+<img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+<table cellpadding="3" cellspacing="0">
+<tr><td valign="top" class="opposite"><input type="RADIO" name="66.res" id="webct75_891512669" onclick="register_change('17');" value="1">
+</td>
+<td valign="top"><label for='webct75_891512669'>a.</label></td>
+<td valign=top><label for='webct75_891512669'>Execute method of the Command object &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="66.res" id="webct76_891512669" onclick="register_change('17');" value="2">
+</td>
+<td valign="top"><label for='webct76_891512669'>b.</label></td>
+<td valign=top><label for='webct76_891512669'>Delete method of the DataAdapter object &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="66.res" id="webct77_891512669" onclick="register_change('17');" value="3">
+</td>
+<td valign="top"><label for='webct77_891512669'>c.</label></td>
+<td valign=top><label for='webct77_891512669'>Execute method of the DataAdapter object &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="66.res" id="webct78_891512669" onclick="register_change('17');" value="4">
+</td>
+<td valign="top"><label for='webct78_891512669'>d.</label></td>
+<td valign=top><label for='webct78_891512669'>ExecuteNonQuery method of the Command object &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="66.res" id="webct79_891512669" onclick="register_change('17');" value="5">
+</td>
+<td valign="top"><label for='webct79_891512669'>e.</label></td>
+<td valign=top><label for='webct79_891512669'>ExecuteNonQuery method of the Connection object
+ &nbsp; </label>
+</td></tr>
+</table>
+<img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+<a href="#"    class="action" onmouseover="window.status='Save answer'; return true;" onmouseout="window.status=''; return true;" onclick="void(dosave(show_question_form_66, 17)); return false;" title="Save answer">Save answer</a><img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+</td></tr>
+</form>
+<tr class="divider2"><td>
+<img src="/web-ct/en/img/shim.gif" width="1" height="1" alt="" border="0"></td></tr>
+<tr>
+<td><a name="18"></a>
+<b>Question 18</b>&nbsp;<img src="/web-ct/en/img/dot_divide.gif" alt="" border="0" class="alignMiddle" />&nbsp;(1 point)</td></tr>
+<tr>
+<td><form name="show_question_form_48" method="post" action="/SCRIPT/d_cis234ntf/scripts/student/serve_new_quiz?ACTION=DO_QUIZ&ARG1=1528509843&ARG2=&ARG3=0" target="bottom">
+<input type="hidden" name="quesno" value="17">
+<input type="hidden" name="rec" value="48">
+<input type="hidden" name="48.type" value="MC">
+<input type="hidden" name="48.mode" VALUE="1">
+<input type="hidden" name="48.numchoices" value="5">
+The params keyword _______________________.<br>
+<img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+<table cellpadding="3" cellspacing="0">
+<tr><td valign="top" class="opposite"><input type="RADIO" name="48.res" id="webct80_891512669" onclick="register_change('18');" value="1">
+</td>
+<td valign="top"><label for='webct80_891512669'>a.</label></td>
+<td valign=top><label for='webct80_891512669'>defines a method's return type. &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="48.res" id="webct81_891512669" onclick="register_change('18');" value="2">
+</td>
+<td valign="top"><label for='webct81_891512669'>b.</label></td>
+<td valign=top><label for='webct81_891512669'>lets a method pass by value. &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="48.res" id="webct82_891512669" onclick="register_change('18');" value="3">
+</td>
+<td valign="top"><label for='webct82_891512669'>c.</label></td>
+<td valign=top><label for='webct82_891512669'>overrides a method signature. &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="48.res" id="webct83_891512669" onclick="register_change('18');" value="4">
+</td>
+<td valign="top"><label for='webct83_891512669'>d.</label></td>
+<td valign=top><label for='webct83_891512669'>lets a method accept any number of arguments. &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="48.res" id="webct84_891512669" onclick="register_change('18');" value="5">
+</td>
+<td valign="top"><label for='webct84_891512669'>e.</label></td>
+<td valign=top><label for='webct84_891512669'>does not exist in C#.
+ &nbsp; </label>
+</td></tr>
+</table>
+<img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+<a href="#"    class="action" onmouseover="window.status='Save answer'; return true;" onmouseout="window.status=''; return true;" onclick="void(dosave(show_question_form_48, 18)); return false;" title="Save answer">Save answer</a><img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+</td></tr>
+</form>
+<tr class="divider2"><td>
+<img src="/web-ct/en/img/shim.gif" width="1" height="1" alt="" border="0"></td></tr>
+<tr>
+<td><a name="19"></a>
+<b>Question 19</b>&nbsp;<img src="/web-ct/en/img/dot_divide.gif" alt="" border="0" class="alignMiddle" />&nbsp;(1 point)</td></tr>
+<tr>
+<td><form name="show_question_form_76" method="post" action="/SCRIPT/d_cis234ntf/scripts/student/serve_new_quiz?ACTION=DO_QUIZ&ARG1=1528509843&ARG2=&ARG3=0" target="bottom">
+<input type="hidden" name="quesno" value="18">
+<input type="hidden" name="rec" value="76">
+<input type="hidden" name="76.type" value="MC">
+<input type="hidden" name="76.mode" VALUE="1">
+<input type="hidden" name="76.numchoices" value="5">
+Suppose you had a class named Dog. How could you compare two Dog objects to see if they were equal?<br>
+<img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+<table cellpadding="3" cellspacing="0">
+<tr><td valign="top" class="opposite"><input type="RADIO" name="76.res" id="webct85_891512669" onclick="register_change('19');" value="1">
+</td>
+<td valign="top"><label for='webct85_891512669'>a.</label></td>
+<td valign=top><label for='webct85_891512669'>implement the CompareTo method of the Object class &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="76.res" id="webct86_891512669" onclick="register_change('19');" value="2">
+</td>
+<td valign="top"><label for='webct86_891512669'>b.</label></td>
+<td valign=top><label for='webct86_891512669'>use the Equals method of the Object class &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="76.res" id="webct87_891512669" onclick="register_change('19');" value="3">
+</td>
+<td valign="top"><label for='webct87_891512669'>c.</label></td>
+<td valign=top><label for='webct87_891512669'>implement the IComparable interface in the Dog class &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="76.res" id="webct88_891512669" onclick="register_change('19');" value="4">
+</td>
+<td valign="top"><label for='webct88_891512669'>d.</label></td>
+<td valign=top><label for='webct88_891512669'>Use the = = operator to compare the objects &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="76.res" id="webct89_891512669" onclick="register_change('19');" value="5">
+</td>
+<td valign="top"><label for='webct89_891512669'>e.</label></td>
+<td valign=top><label for='webct89_891512669'>use the CompareTo method of the Object class
+ &nbsp; </label>
+</td></tr>
+</table>
+<img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+<a href="#"    class="action" onmouseover="window.status='Save answer'; return true;" onmouseout="window.status=''; return true;" onclick="void(dosave(show_question_form_76, 19)); return false;" title="Save answer">Save answer</a><img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+</td></tr>
+</form>
+<tr class="divider2"><td>
+<img src="/web-ct/en/img/shim.gif" width="1" height="1" alt="" border="0"></td></tr>
+<tr>
+<td><a name="20"></a>
+<b>Question 20</b>&nbsp;<img src="/web-ct/en/img/dot_divide.gif" alt="" border="0" class="alignMiddle" />&nbsp;(1 point)</td></tr>
+<tr>
+<td><form name="show_question_form_84" method="post" action="/SCRIPT/d_cis234ntf/scripts/student/serve_new_quiz?ACTION=DO_QUIZ&ARG1=1528509843&ARG2=&ARG3=0" target="bottom">
+<input type="hidden" name="quesno" value="19">
+<input type="hidden" name="rec" value="84">
+<input type="hidden" name="84.type" value="MC">
+<input type="hidden" name="84.mode" VALUE="1">
+<input type="hidden" name="84.numchoices" value="2">
+Serializing an object using the BinaryFormatter saves private, as well as
+public fields. (True/False)<br>
+<img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+<table cellpadding="3" cellspacing="0">
+<tr><td valign="top" class="opposite"><input type="RADIO" name="84.res" id="webct90_891512669" onclick="register_change('20');" value="1">
+</td>
+<td valign="top"><label for='webct90_891512669'>a.</label></td>
+<td valign=top><label for='webct90_891512669'>True &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="84.res" id="webct91_891512669" onclick="register_change('20');" value="2">
+</td>
+<td valign="top"><label for='webct91_891512669'>b.</label></td>
+<td valign=top><label for='webct91_891512669'>False
+ &nbsp; </label>
+</td></tr>
+</table>
+<img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+<a href="#"    class="action" onmouseover="window.status='Save answer'; return true;" onmouseout="window.status=''; return true;" onclick="void(dosave(show_question_form_84, 20)); return false;" title="Save answer">Save answer</a><img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+</td></tr>
+</form>
+<tr class="divider2"><td>
+<img src="/web-ct/en/img/shim.gif" width="1" height="1" alt="" border="0"></td></tr>
+<tr>
+<td><a name="21"></a>
+<b>Question 21</b>&nbsp;<img src="/web-ct/en/img/dot_divide.gif" alt="" border="0" class="alignMiddle" />&nbsp;(1 point)</td></tr>
+<tr>
+<td><form name="show_question_form_79" method="post" action="/SCRIPT/d_cis234ntf/scripts/student/serve_new_quiz?ACTION=DO_QUIZ&ARG1=1528509843&ARG2=&ARG3=0" target="bottom">
+<input type="hidden" name="quesno" value="20">
+<input type="hidden" name="rec" value="79">
+<input type="hidden" name="79.type" value="MC">
+<input type="hidden" name="79.mode" VALUE="1">
+<input type="hidden" name="79.numchoices" value="5">
+<pre>What is a good way to allow a program to dynamically read in values at startup, for instance, the name of a database.</pre><br>
+<img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+<table cellpadding="3" cellspacing="0">
+<tr><td valign="top" class="opposite"><input type="RADIO" name="79.res" id="webct92_891512669" onclick="register_change('21');" value="1">
+</td>
+<td valign="top"><label for='webct92_891512669'>a.</label></td>
+<td valign=top><label for='webct92_891512669'>use an Environment Variable file &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="79.res" id="webct93_891512669" onclick="register_change('21');" value="2">
+</td>
+<td valign="top"><label for='webct93_891512669'>b.</label></td>
+<td valign=top><label for='webct93_891512669'>use an Application Configuration file &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="79.res" id="webct94_891512669" onclick="register_change('21');" value="3">
+</td>
+<td valign="top"><label for='webct94_891512669'>c.</label></td>
+<td valign=top><label for='webct94_891512669'>use a Serialization file &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="79.res" id="webct95_891512669" onclick="register_change('21');" value="4">
+</td>
+<td valign="top"><label for='webct95_891512669'>d.</label></td>
+<td valign=top><label for='webct95_891512669'>use a System Thread &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="79.res" id="webct96_891512669" onclick="register_change('21');" value="5">
+</td>
+<td valign="top"><label for='webct96_891512669'>e.</label></td>
+<td valign=top><label for='webct96_891512669'>use an ArrayList 
+ &nbsp; </label>
+</td></tr>
+</table>
+<img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+<a href="#"    class="action" onmouseover="window.status='Save answer'; return true;" onmouseout="window.status=''; return true;" onclick="void(dosave(show_question_form_79, 21)); return false;" title="Save answer">Save answer</a><img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+</td></tr>
+</form>
+<tr class="divider2"><td>
+<img src="/web-ct/en/img/shim.gif" width="1" height="1" alt="" border="0"></td></tr>
+<tr>
+<td><a name="22"></a>
+<b>Question 22</b>&nbsp;<img src="/web-ct/en/img/dot_divide.gif" alt="" border="0" class="alignMiddle" />&nbsp;(1 point)</td></tr>
+<tr>
+<td><form name="show_question_form_52" method="post" action="/SCRIPT/d_cis234ntf/scripts/student/serve_new_quiz?ACTION=DO_QUIZ&ARG1=1528509843&ARG2=&ARG3=0" target="bottom">
+<input type="hidden" name="quesno" value="21">
+<input type="hidden" name="rec" value="52">
+<input type="hidden" name="52.type" value="MC">
+<input type="hidden" name="52.mode" VALUE="1">
+<input type="hidden" name="52.numchoices" value="5">
+You can define your own exception class, as long as it is derived from the ____________ class. <br>
+<img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+<table cellpadding="3" cellspacing="0">
+<tr><td valign="top" class="opposite"><input type="RADIO" name="52.res" id="webct97_891512669" onclick="register_change('22');" value="1">
+</td>
+<td valign="top"><label for='webct97_891512669'>a.</label></td>
+<td valign=top><label for='webct97_891512669'>Exception &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="52.res" id="webct98_891512669" onclick="register_change('22');" value="2">
+</td>
+<td valign="top"><label for='webct98_891512669'>b.</label></td>
+<td valign=top><label for='webct98_891512669'>RunTimeException &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="52.res" id="webct99_891512669" onclick="register_change('22');" value="3">
+</td>
+<td valign="top"><label for='webct99_891512669'>c.</label></td>
+<td valign=top><label for='webct99_891512669'>ApplicationException &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="52.res" id="webct100_891512669" onclick="register_change('22');" value="4">
+</td>
+<td valign="top"><label for='webct100_891512669'>d.</label></td>
+<td valign=top><label for='webct100_891512669'>UserDefinedException &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="52.res" id="webct101_891512669" onclick="register_change('22');" value="5">
+</td>
+<td valign="top"><label for='webct101_891512669'>e.</label></td>
+<td valign=top><label for='webct101_891512669'>SpecialException
+ &nbsp; </label>
+</td></tr>
+</table>
+<img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+<a href="#"    class="action" onmouseover="window.status='Save answer'; return true;" onmouseout="window.status=''; return true;" onclick="void(dosave(show_question_form_52, 22)); return false;" title="Save answer">Save answer</a><img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+</td></tr>
+</form>
+<tr class="divider2"><td>
+<img src="/web-ct/en/img/shim.gif" width="1" height="1" alt="" border="0"></td></tr>
+<tr>
+<td><a name="23"></a>
+<b>Question 23</b>&nbsp;<img src="/web-ct/en/img/dot_divide.gif" alt="" border="0" class="alignMiddle" />&nbsp;(1 point)</td></tr>
+<tr>
+<td><form name="show_question_form_44" method="post" action="/SCRIPT/d_cis234ntf/scripts/student/serve_new_quiz?ACTION=DO_QUIZ&ARG1=1528509843&ARG2=&ARG3=0" target="bottom">
+<input type="hidden" name="quesno" value="22">
+<input type="hidden" name="rec" value="44">
+<input type="hidden" name="44.type" value="MC">
+<input type="hidden" name="44.mode" VALUE="1">
+<input type="hidden" name="44.numchoices" value="3">
+An interface  _____________<br>
+<img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+<table cellpadding="3" cellspacing="0">
+<tr><td valign="top" class="opposite"><input type="RADIO" name="44.res" id="webct102_891512669" onclick="register_change('23');" value="1">
+</td>
+<td valign="top"><label for='webct102_891512669'>a.</label></td>
+<td valign=top><label for='webct102_891512669'>contains only abstract methods. &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="44.res" id="webct103_891512669" onclick="register_change('23');" value="2">
+</td>
+<td valign="top"><label for='webct103_891512669'>b.</label></td>
+<td valign=top><label for='webct103_891512669'>can contain abstract and concrete methods. &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="44.res" id="webct104_891512669" onclick="register_change('23');" value="3">
+</td>
+<td valign="top"><label for='webct104_891512669'>c.</label></td>
+<td valign=top><label for='webct104_891512669'>contains only concrete methods
+ &nbsp; </label>
+</td></tr>
+</table>
+<img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+<a href="#"    class="action" onmouseover="window.status='Save answer'; return true;" onmouseout="window.status=''; return true;" onclick="void(dosave(show_question_form_44, 23)); return false;" title="Save answer">Save answer</a><img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+</td></tr>
+</form>
+<tr class="divider2"><td>
+<img src="/web-ct/en/img/shim.gif" width="1" height="1" alt="" border="0"></td></tr>
+<tr>
+<td><a name="24"></a>
+<b>Question 24</b>&nbsp;<img src="/web-ct/en/img/dot_divide.gif" alt="" border="0" class="alignMiddle" />&nbsp;(1 point)</td></tr>
+<tr>
+<td><form name="show_question_form_68" method="post" action="/SCRIPT/d_cis234ntf/scripts/student/serve_new_quiz?ACTION=DO_QUIZ&ARG1=1528509843&ARG2=&ARG3=0" target="bottom">
+<input type="hidden" name="quesno" value="23">
+<input type="hidden" name="rec" value="68">
+<input type="hidden" name="68.type" value="MC">
+<input type="hidden" name="68.mode" VALUE="1">
+<input type="hidden" name="68.numchoices" value="5">
+Which class can be used to create a dyamic array?<br>
+<img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+<table cellpadding="3" cellspacing="0">
+<tr><td valign="top" class="opposite"><input type="RADIO" name="68.res" id="webct105_891512669" onclick="register_change('24');" value="1">
+</td>
+<td valign="top"><label for='webct105_891512669'>a.</label></td>
+<td valign=top><label for='webct105_891512669'>LinkedList &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="68.res" id="webct106_891512669" onclick="register_change('24');" value="2">
+</td>
+<td valign="top"><label for='webct106_891512669'>b.</label></td>
+<td valign=top><label for='webct106_891512669'>Stack &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="68.res" id="webct107_891512669" onclick="register_change('24');" value="3">
+</td>
+<td valign="top"><label for='webct107_891512669'>c.</label></td>
+<td valign=top><label for='webct107_891512669'>Queue &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="68.res" id="webct108_891512669" onclick="register_change('24');" value="4">
+</td>
+<td valign="top"><label for='webct108_891512669'>d.</label></td>
+<td valign=top><label for='webct108_891512669'>Array &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="68.res" id="webct109_891512669" onclick="register_change('24');" value="5">
+</td>
+<td valign="top"><label for='webct109_891512669'>e.</label></td>
+<td valign=top><label for='webct109_891512669'>ArrayList
+ &nbsp; </label>
+</td></tr>
+</table>
+<img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+<a href="#"    class="action" onmouseover="window.status='Save answer'; return true;" onmouseout="window.status=''; return true;" onclick="void(dosave(show_question_form_68, 24)); return false;" title="Save answer">Save answer</a><img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+</td></tr>
+</form>
+<tr class="divider2"><td>
+<img src="/web-ct/en/img/shim.gif" width="1" height="1" alt="" border="0"></td></tr>
+<tr>
+<td><a name="25"></a>
+<b>Question 25</b>&nbsp;<img src="/web-ct/en/img/dot_divide.gif" alt="" border="0" class="alignMiddle" />&nbsp;(1 point)</td></tr>
+<tr>
+<td><form name="show_question_form_57" method="post" action="/SCRIPT/d_cis234ntf/scripts/student/serve_new_quiz?ACTION=DO_QUIZ&ARG1=1528509843&ARG2=&ARG3=0" target="bottom">
+<input type="hidden" name="quesno" value="24">
+<input type="hidden" name="rec" value="57">
+<input type="hidden" name="57.type" value="MC">
+<input type="hidden" name="57.mode" VALUE="1">
+<input type="hidden" name="57.numchoices" value="5">
+Which code correctly declares an array that can hold floating point (decimal) numbers? <br>
+<img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+<table cellpadding="3" cellspacing="0">
+<tr><td valign="top" class="opposite"><input type="RADIO" name="57.res" id="webct110_891512669" onclick="register_change('25');" value="1">
+</td>
+<td valign="top"><label for='webct110_891512669'>a.</label></td>
+<td valign=top><label for='webct110_891512669'><pre>int arraySize = 10;
+double[] arrA = new double[arraySize];</pre></label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="57.res" id="webct111_891512669" onclick="register_change('25');" value="2">
+</td>
+<td valign="top"><label for='webct111_891512669'>b.</label></td>
+<td valign=top><label for='webct111_891512669'><pre>int arraySize = 10;
+int[] arrA =  double[array];</pre></label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="57.res" id="webct112_891512669" onclick="register_change('25');" value="3">
+</td>
+<td valign="top"><label for='webct112_891512669'>c.</label></td>
+<td valign=top><label for='webct112_891512669'><pre>int Size = 10;
+[double] arrA = new double[arraySize];</pre></label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="57.res" id="webct113_891512669" onclick="register_change('25');" value="4">
+</td>
+<td valign="top"><label for='webct113_891512669'>d.</label></td>
+<td valign=top><label for='webct113_891512669'><pre>int x = 10;
+double arrA = new double[arraySize];</pre></label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="57.res" id="webct114_891512669" onclick="register_change('25');" value="5">
+</td>
+<td valign="top"><label for='webct114_891512669'>e.</label></td>
+<td valign=top><label for='webct114_891512669'><pre>double arraySize = 10.0;
+double arrA = new double[arraySize];
+</pre></label>
+</td></tr>
+</table>
+<img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+<a href="#"    class="action" onmouseover="window.status='Save answer'; return true;" onmouseout="window.status=''; return true;" onclick="void(dosave(show_question_form_57, 25)); return false;" title="Save answer">Save answer</a><img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+</td></tr>
+</form>
+<tr class="divider2"><td>
+<img src="/web-ct/en/img/shim.gif" width="1" height="1" alt="" border="0"></td></tr>
+<tr>
+<td><a name="26"></a>
+<b>Question 26</b>&nbsp;<img src="/web-ct/en/img/dot_divide.gif" alt="" border="0" class="alignMiddle" />&nbsp;(1 point)</td></tr>
+<tr>
+<td><form name="show_question_form_37" method="post" action="/SCRIPT/d_cis234ntf/scripts/student/serve_new_quiz?ACTION=DO_QUIZ&ARG1=1528509843&ARG2=&ARG3=0" target="bottom">
+<input type="hidden" name="quesno" value="25">
+<input type="hidden" name="rec" value="37">
+<input type="hidden" name="37.type" value="MC">
+<input type="hidden" name="37.mode" VALUE="1">
+<input type="hidden" name="37.numchoices" value="5">
+<pre>Which is the AND operator? </pre><br>
+<img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+<table cellpadding="3" cellspacing="0">
+<tr><td valign="top" class="opposite"><input type="RADIO" name="37.res" id="webct115_891512669" onclick="register_change('26');" value="1">
+</td>
+<td valign="top"><label for='webct115_891512669'>a.</label></td>
+<td valign=top><label for='webct115_891512669'>+ &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="37.res" id="webct116_891512669" onclick="register_change('26');" value="2">
+</td>
+<td valign="top"><label for='webct116_891512669'>b.</label></td>
+<td valign=top><label for='webct116_891512669'>AND &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="37.res" id="webct117_891512669" onclick="register_change('26');" value="3">
+</td>
+<td valign="top"><label for='webct117_891512669'>c.</label></td>
+<td valign=top><label for='webct117_891512669'>|| &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="37.res" id="webct118_891512669" onclick="register_change('26');" value="4">
+</td>
+<td valign="top"><label for='webct118_891512669'>d.</label></td>
+<td valign=top><label for='webct118_891512669'>&& &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="37.res" id="webct119_891512669" onclick="register_change('26');" value="5">
+</td>
+<td valign="top"><label for='webct119_891512669'>e.</label></td>
+<td valign=top><label for='webct119_891512669'>@
+ &nbsp; </label>
+</td></tr>
+</table>
+<img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+<a href="#"    class="action" onmouseover="window.status='Save answer'; return true;" onmouseout="window.status=''; return true;" onclick="void(dosave(show_question_form_37, 26)); return false;" title="Save answer">Save answer</a><img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+</td></tr>
+</form>
+<tr class="divider2"><td>
+<img src="/web-ct/en/img/shim.gif" width="1" height="1" alt="" border="0"></td></tr>
+<tr>
+<td><a name="27"></a>
+<b>Question 27</b>&nbsp;<img src="/web-ct/en/img/dot_divide.gif" alt="" border="0" class="alignMiddle" />&nbsp;(1 point)</td></tr>
+<tr>
+<td><form name="show_question_form_77" method="post" action="/SCRIPT/d_cis234ntf/scripts/student/serve_new_quiz?ACTION=DO_QUIZ&ARG1=1528509843&ARG2=&ARG3=0" target="bottom">
+<input type="hidden" name="quesno" value="26">
+<input type="hidden" name="rec" value="77">
+<input type="hidden" name="77.type" value="MC">
+<input type="hidden" name="77.mode" VALUE="1">
+<input type="hidden" name="77.numchoices" value="5">
+Which statement is needed to use regular expressions in your program?<br>
+<img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+<table cellpadding="3" cellspacing="0">
+<tr><td valign="top" class="opposite"><input type="RADIO" name="77.res" id="webct120_891512669" onclick="register_change('27');" value="1">
+</td>
+<td valign="top"><label for='webct120_891512669'>a.</label></td>
+<td valign=top><label for='webct120_891512669'>using Text.RegularExpressions ; &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="77.res" id="webct121_891512669" onclick="register_change('27');" value="2">
+</td>
+<td valign="top"><label for='webct121_891512669'>b.</label></td>
+<td valign=top><label for='webct121_891512669'>using System.Text.RegEx ; &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="77.res" id="webct122_891512669" onclick="register_change('27');" value="3">
+</td>
+<td valign="top"><label for='webct122_891512669'>c.</label></td>
+<td valign=top><label for='webct122_891512669'>using System.RegularExpressions ; &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="77.res" id="webct123_891512669" onclick="register_change('27');" value="4">
+</td>
+<td valign="top"><label for='webct123_891512669'>d.</label></td>
+<td valign=top><label for='webct123_891512669'>using Sytem.Text; &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="77.res" id="webct124_891512669" onclick="register_change('27');" value="5">
+</td>
+<td valign="top"><label for='webct124_891512669'>e.</label></td>
+<td valign=top><label for='webct124_891512669'>using System.Text.RegularExpressions ;
+ &nbsp; </label>
+</td></tr>
+</table>
+<img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+<a href="#"    class="action" onmouseover="window.status='Save answer'; return true;" onmouseout="window.status=''; return true;" onclick="void(dosave(show_question_form_77, 27)); return false;" title="Save answer">Save answer</a><img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+</td></tr>
+</form>
+<tr class="divider2"><td>
+<img src="/web-ct/en/img/shim.gif" width="1" height="1" alt="" border="0"></td></tr>
+<tr>
+<td><a name="28"></a>
+<b>Question 28</b>&nbsp;<img src="/web-ct/en/img/dot_divide.gif" alt="" border="0" class="alignMiddle" />&nbsp;(1 point)</td></tr>
+<tr>
+<td><form name="show_question_form_69" method="post" action="/SCRIPT/d_cis234ntf/scripts/student/serve_new_quiz?ACTION=DO_QUIZ&ARG1=1528509843&ARG2=&ARG3=0" target="bottom">
+<input type="hidden" name="quesno" value="27">
+<input type="hidden" name="rec" value="69">
+<input type="hidden" name="69.type" value="MC">
+<input type="hidden" name="69.mode" VALUE="1">
+<input type="hidden" name="69.numchoices" value="5">
+Which method is used to place a node on a stack?<br>
+<img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+<table cellpadding="3" cellspacing="0">
+<tr><td valign="top" class="opposite"><input type="RADIO" name="69.res" id="webct125_891512669" onclick="register_change('28');" value="1">
+</td>
+<td valign="top"><label for='webct125_891512669'>a.</label></td>
+<td valign=top><label for='webct125_891512669'>Queue method of ArrayList class &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="69.res" id="webct126_891512669" onclick="register_change('28');" value="2">
+</td>
+<td valign="top"><label for='webct126_891512669'>b.</label></td>
+<td valign=top><label for='webct126_891512669'>Peek method of Stack class &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="69.res" id="webct127_891512669" onclick="register_change('28');" value="3">
+</td>
+<td valign="top"><label for='webct127_891512669'>c.</label></td>
+<td valign=top><label for='webct127_891512669'>Push method of Queue class &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="69.res" id="webct128_891512669" onclick="register_change('28');" value="4">
+</td>
+<td valign="top"><label for='webct128_891512669'>d.</label></td>
+<td valign=top><label for='webct128_891512669'>Push method of Stack class &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="69.res" id="webct129_891512669" onclick="register_change('28');" value="5">
+</td>
+<td valign="top"><label for='webct129_891512669'>e.</label></td>
+<td valign=top><label for='webct129_891512669'>Enqueue method of Stack class
+ &nbsp; </label>
+</td></tr>
+</table>
+<img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+<a href="#"    class="action" onmouseover="window.status='Save answer'; return true;" onmouseout="window.status=''; return true;" onclick="void(dosave(show_question_form_69, 28)); return false;" title="Save answer">Save answer</a><img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+</td></tr>
+</form>
+<tr class="divider2"><td>
+<img src="/web-ct/en/img/shim.gif" width="1" height="1" alt="" border="0"></td></tr>
+<tr>
+<td><a name="29"></a>
+<b>Question 29</b>&nbsp;<img src="/web-ct/en/img/dot_divide.gif" alt="" border="0" class="alignMiddle" />&nbsp;(1 point)</td></tr>
+<tr>
+<td><form name="show_question_form_55" method="post" action="/SCRIPT/d_cis234ntf/scripts/student/serve_new_quiz?ACTION=DO_QUIZ&ARG1=1528509843&ARG2=&ARG3=0" target="bottom">
+<input type="hidden" name="quesno" value="28">
+<input type="hidden" name="rec" value="55">
+<input type="hidden" name="55.type" value="MC">
+<input type="hidden" name="55.mode" VALUE="1">
+<input type="hidden" name="55.numchoices" value="2">
+Structures (structs) support inheritance.<br>
+<img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+<table cellpadding="3" cellspacing="0">
+<tr><td valign="top" class="opposite"><input type="RADIO" name="55.res" id="webct130_891512669" onclick="register_change('29');" value="1">
+</td>
+<td valign="top"><label for='webct130_891512669'>a.</label></td>
+<td valign=top><label for='webct130_891512669'>True &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="55.res" id="webct131_891512669" onclick="register_change('29');" value="2">
+</td>
+<td valign="top"><label for='webct131_891512669'>b.</label></td>
+<td valign=top><label for='webct131_891512669'>False
+ &nbsp; </label>
+</td></tr>
+</table>
+<img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+<a href="#"    class="action" onmouseover="window.status='Save answer'; return true;" onmouseout="window.status=''; return true;" onclick="void(dosave(show_question_form_55, 29)); return false;" title="Save answer">Save answer</a><img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+</td></tr>
+</form>
+<tr class="divider2"><td>
+<img src="/web-ct/en/img/shim.gif" width="1" height="1" alt="" border="0"></td></tr>
+<tr>
+<td><a name="30"></a>
+<b>Question 30</b>&nbsp;<img src="/web-ct/en/img/dot_divide.gif" alt="" border="0" class="alignMiddle" />&nbsp;(1 point)</td></tr>
+<tr>
+<td><form name="show_question_form_74" method="post" action="/SCRIPT/d_cis234ntf/scripts/student/serve_new_quiz?ACTION=DO_QUIZ&ARG1=1528509843&ARG2=&ARG3=0" target="bottom">
+<input type="hidden" name="quesno" value="29">
+<input type="hidden" name="rec" value="74">
+<input type="hidden" name="74.type" value="MC">
+<input type="hidden" name="74.mode" VALUE="1">
+<input type="hidden" name="74.numchoices" value="5">
+Which statement is true concerning serialization? <br>
+<img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+<table cellpadding="3" cellspacing="0">
+<tr><td valign="top" class="opposite"><input type="RADIO" name="74.res" id="webct132_891512669" onclick="register_change('30');" value="1">
+</td>
+<td valign="top"><label for='webct132_891512669'>a.</label></td>
+<td valign=top><label for='webct132_891512669'>only public methods are serializable &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="74.res" id="webct133_891512669" onclick="register_change('30');" value="2">
+</td>
+<td valign="top"><label for='webct133_891512669'>b.</label></td>
+<td valign=top><label for='webct133_891512669'>neither private nor public fields are serializable &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="74.res" id="webct134_891512669" onclick="register_change('30');" value="3">
+</td>
+<td valign="top"><label for='webct134_891512669'>c.</label></td>
+<td valign=top><label for='webct134_891512669'>private and public fields are serializable &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="74.res" id="webct135_891512669" onclick="register_change('30');" value="4">
+</td>
+<td valign="top"><label for='webct135_891512669'>d.</label></td>
+<td valign=top><label for='webct135_891512669'>only private fields are serializable &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="74.res" id="webct136_891512669" onclick="register_change('30');" value="5">
+</td>
+<td valign="top"><label for='webct136_891512669'>e.</label></td>
+<td valign=top><label for='webct136_891512669'>only public fields are serializable
+ &nbsp; </label>
+</td></tr>
+</table>
+<img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+<a href="#"    class="action" onmouseover="window.status='Save answer'; return true;" onmouseout="window.status=''; return true;" onclick="void(dosave(show_question_form_74, 30)); return false;" title="Save answer">Save answer</a><img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+</td></tr>
+</form>
+<tr class="divider2"><td>
+<img src="/web-ct/en/img/shim.gif" width="1" height="1" alt="" border="0"></td></tr>
+<tr>
+<td><a name="31"></a>
+<b>Question 31</b>&nbsp;<img src="/web-ct/en/img/dot_divide.gif" alt="" border="0" class="alignMiddle" />&nbsp;(1 point)</td></tr>
+<tr>
+<td><form name="show_question_form_61" method="post" action="/SCRIPT/d_cis234ntf/scripts/student/serve_new_quiz?ACTION=DO_QUIZ&ARG1=1528509843&ARG2=&ARG3=0" target="bottom">
+<input type="hidden" name="quesno" value="30">
+<input type="hidden" name="rec" value="61">
+<input type="hidden" name="61.type" value="MC">
+<input type="hidden" name="61.mode" VALUE="1">
+<input type="hidden" name="61.numchoices" value="5">
+ADO.NET supports which databases?  <br>
+<img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+<table cellpadding="3" cellspacing="0">
+<tr><td valign="top" class="opposite"><input type="RADIO" name="61.res" id="webct137_891512669" onclick="register_change('31');" value="1">
+</td>
+<td valign="top"><label for='webct137_891512669'>a.</label></td>
+<td valign=top><label for='webct137_891512669'>Oracle  &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="61.res" id="webct138_891512669" onclick="register_change('31');" value="2">
+</td>
+<td valign="top"><label for='webct138_891512669'>b.</label></td>
+<td valign=top><label for='webct138_891512669'>SQL Server  &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="61.res" id="webct139_891512669" onclick="register_change('31');" value="3">
+</td>
+<td valign="top"><label for='webct139_891512669'>c.</label></td>
+<td valign=top><label for='webct139_891512669'>Access  &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="61.res" id="webct140_891512669" onclick="register_change('31');" value="4">
+</td>
+<td valign="top"><label for='webct140_891512669'>d.</label></td>
+<td valign=top><label for='webct140_891512669'>only B and C are correct &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="61.res" id="webct141_891512669" onclick="register_change('31');" value="5">
+</td>
+<td valign="top"><label for='webct141_891512669'>e.</label></td>
+<td valign=top><label for='webct141_891512669'>A, B, and C are correct
+ &nbsp; </label>
+</td></tr>
+</table>
+<img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+<a href="#"    class="action" onmouseover="window.status='Save answer'; return true;" onmouseout="window.status=''; return true;" onclick="void(dosave(show_question_form_61, 31)); return false;" title="Save answer">Save answer</a><img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+</td></tr>
+</form>
+<tr class="divider2"><td>
+<img src="/web-ct/en/img/shim.gif" width="1" height="1" alt="" border="0"></td></tr>
+<tr>
+<td><a name="32"></a>
+<b>Question 32</b>&nbsp;<img src="/web-ct/en/img/dot_divide.gif" alt="" border="0" class="alignMiddle" />&nbsp;(1 point)</td></tr>
+<tr>
+<td><form name="show_question_form_88" method="post" action="/SCRIPT/d_cis234ntf/scripts/student/serve_new_quiz?ACTION=DO_QUIZ&ARG1=1528509843&ARG2=&ARG3=0" target="bottom">
+<input type="hidden" name="quesno" value="31">
+<input type="hidden" name="rec" value="88">
+<input type="hidden" name="88.type" value="MC">
+<input type="hidden" name="88.mode" VALUE="1">
+<input type="hidden" name="88.numchoices" value="5">
+Which statement correctly declares a structure? (choose one answer)<br>
+<img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+<table cellpadding="3" cellspacing="0">
+<tr><td valign="top" class="opposite"><input type="RADIO" name="88.res" id="webct142_891512669" onclick="register_change('32');" value="1">
+</td>
+<td valign="top"><label for='webct142_891512669'>a.</label></td>
+<td valign=top><label for='webct142_891512669'>public structure Person &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="88.res" id="webct143_891512669" onclick="register_change('32');" value="2">
+</td>
+<td valign="top"><label for='webct143_891512669'>b.</label></td>
+<td valign=top><label for='webct143_891512669'>public enum Person &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="88.res" id="webct144_891512669" onclick="register_change('32');" value="3">
+</td>
+<td valign="top"><label for='webct144_891512669'>c.</label></td>
+<td valign=top><label for='webct144_891512669'>public class Person &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="88.res" id="webct145_891512669" onclick="register_change('32');" value="4">
+</td>
+<td valign="top"><label for='webct145_891512669'>d.</label></td>
+<td valign=top><label for='webct145_891512669'>public interface Person &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="88.res" id="webct146_891512669" onclick="register_change('32');" value="5">
+</td>
+<td valign="top"><label for='webct146_891512669'>e.</label></td>
+<td valign=top><label for='webct146_891512669'>public struct Person
+ &nbsp; </label>
+</td></tr>
+</table>
+<img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+<a href="#"    class="action" onmouseover="window.status='Save answer'; return true;" onmouseout="window.status=''; return true;" onclick="void(dosave(show_question_form_88, 32)); return false;" title="Save answer">Save answer</a><img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+</td></tr>
+</form>
+<tr class="divider2"><td>
+<img src="/web-ct/en/img/shim.gif" width="1" height="1" alt="" border="0"></td></tr>
+<tr>
+<td><a name="33"></a>
+<b>Question 33</b>&nbsp;<img src="/web-ct/en/img/dot_divide.gif" alt="" border="0" class="alignMiddle" />&nbsp;(1 point)</td></tr>
+<tr>
+<td><form name="show_question_form_58" method="post" action="/SCRIPT/d_cis234ntf/scripts/student/serve_new_quiz?ACTION=DO_QUIZ&ARG1=1528509843&ARG2=&ARG3=0" target="bottom">
+<input type="hidden" name="quesno" value="32">
+<input type="hidden" name="rec" value="58">
+<input type="hidden" name="58.type" value="MC">
+<input type="hidden" name="58.mode" VALUE="1">
+<input type="hidden" name="58.numchoices" value="5">
+Which foreach statement is correct to loop through an array of Cartoon objects named arrayOfCartoons?<br>
+<img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+<table cellpadding="3" cellspacing="0">
+<tr><td valign="top" class="opposite"><input type="RADIO" name="58.res" id="webct147_891512669" onclick="register_change('33');" value="1">
+</td>
+<td valign="top"><label for='webct147_891512669'>a.</label></td>
+<td valign=top><label for='webct147_891512669'>foreach (arrayOfCartoons) &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="58.res" id="webct148_891512669" onclick="register_change('33');" value="2">
+</td>
+<td valign="top"><label for='webct148_891512669'>b.</label></td>
+<td valign=top><label for='webct148_891512669'>foreach (Cartoon[] cc in arrayOfCartoons[]) &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="58.res" id="webct149_891512669" onclick="register_change('33');" value="3">
+</td>
+<td valign="top"><label for='webct149_891512669'>c.</label></td>
+<td valign=top><label for='webct149_891512669'>foreach (Cartoon cc[] in arrayOfCartoons) &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="58.res" id="webct150_891512669" onclick="register_change('33');" value="4">
+</td>
+<td valign="top"><label for='webct150_891512669'>d.</label></td>
+<td valign=top><label for='webct150_891512669'>foreach (Cartoon[] cc in arrayOfCartoons) &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="58.res" id="webct151_891512669" onclick="register_change('33');" value="5">
+</td>
+<td valign="top"><label for='webct151_891512669'>e.</label></td>
+<td valign=top><label for='webct151_891512669'>foreach (Cartoon cc in arrayOfCartoons)
+ &nbsp; </label>
+</td></tr>
+</table>
+<img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+<a href="#"    class="action" onmouseover="window.status='Save answer'; return true;" onmouseout="window.status=''; return true;" onclick="void(dosave(show_question_form_58, 33)); return false;" title="Save answer">Save answer</a><img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+</td></tr>
+</form>
+<tr class="divider2"><td>
+<img src="/web-ct/en/img/shim.gif" width="1" height="1" alt="" border="0"></td></tr>
+<tr>
+<td><a name="34"></a>
+<b>Question 34</b>&nbsp;<img src="/web-ct/en/img/dot_divide.gif" alt="" border="0" class="alignMiddle" />&nbsp;(1 point)</td></tr>
+<tr>
+<td><form name="show_question_form_94" method="post" action="/SCRIPT/d_cis234ntf/scripts/student/serve_new_quiz?ACTION=DO_QUIZ&ARG1=1528509843&ARG2=&ARG3=0" target="bottom">
+<input type="hidden" name="quesno" value="33">
+<input type="hidden" name="rec" value="94">
+<input type="hidden" name="94.type" value="MC">
+<input type="hidden" name="94.mode" VALUE="1">
+<input type="hidden" name="94.numchoices" value="2">
+The DataAdapter object is read only. (True/ False)<br>
+<img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+<table cellpadding="3" cellspacing="0">
+<tr><td valign="top" class="opposite"><input type="RADIO" name="94.res" id="webct152_891512669" onclick="register_change('34');" value="1">
+</td>
+<td valign="top"><label for='webct152_891512669'>a.</label></td>
+<td valign=top><label for='webct152_891512669'>True &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="94.res" id="webct153_891512669" onclick="register_change('34');" value="2">
+</td>
+<td valign="top"><label for='webct153_891512669'>b.</label></td>
+<td valign=top><label for='webct153_891512669'>False
+ &nbsp; </label>
+</td></tr>
+</table>
+<img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+<a href="#"    class="action" onmouseover="window.status='Save answer'; return true;" onmouseout="window.status=''; return true;" onclick="void(dosave(show_question_form_94, 34)); return false;" title="Save answer">Save answer</a><img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+</td></tr>
+</form>
+<tr class="divider2"><td>
+<img src="/web-ct/en/img/shim.gif" width="1" height="1" alt="" border="0"></td></tr>
+<tr>
+<td><a name="35"></a>
+<b>Question 35</b>&nbsp;<img src="/web-ct/en/img/dot_divide.gif" alt="" border="0" class="alignMiddle" />&nbsp;(1 point)</td></tr>
+<tr>
+<td><form name="show_question_form_54" method="post" action="/SCRIPT/d_cis234ntf/scripts/student/serve_new_quiz?ACTION=DO_QUIZ&ARG1=1528509843&ARG2=&ARG3=0" target="bottom">
+<input type="hidden" name="quesno" value="34">
+<input type="hidden" name="rec" value="54">
+<input type="hidden" name="54.type" value="MC">
+<input type="hidden" name="54.mode" VALUE="1">
+<input type="hidden" name="54.numchoices" value="5">
+ _________ accepts a method name as its input parameter and invokes the method.<br>
+<img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+<table cellpadding="3" cellspacing="0">
+<tr><td valign="top" class="opposite"><input type="RADIO" name="54.res" id="webct154_891512669" onclick="register_change('35');" value="1">
+</td>
+<td valign="top"><label for='webct154_891512669'>a.</label></td>
+<td valign=top><label for='webct154_891512669'>An iterator &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="54.res" id="webct155_891512669" onclick="register_change('35');" value="2">
+</td>
+<td valign="top"><label for='webct155_891512669'>b.</label></td>
+<td valign=top><label for='webct155_891512669'>An identifier &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="54.res" id="webct156_891512669" onclick="register_change('35');" value="3">
+</td>
+<td valign="top"><label for='webct156_891512669'>c.</label></td>
+<td valign=top><label for='webct156_891512669'>A delegate &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="54.res" id="webct157_891512669" onclick="register_change('35');" value="4">
+</td>
+<td valign="top"><label for='webct157_891512669'>d.</label></td>
+<td valign=top><label for='webct157_891512669'>An interface &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="54.res" id="webct158_891512669" onclick="register_change('35');" value="5">
+</td>
+<td valign="top"><label for='webct158_891512669'>e.</label></td>
+<td valign=top><label for='webct158_891512669'>An event
+ &nbsp; </label>
+</td></tr>
+</table>
+<img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+<a href="#"    class="action" onmouseover="window.status='Save answer'; return true;" onmouseout="window.status=''; return true;" onclick="void(dosave(show_question_form_54, 35)); return false;" title="Save answer">Save answer</a><img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+</td></tr>
+</form>
+<tr class="divider2"><td>
+<img src="/web-ct/en/img/shim.gif" width="1" height="1" alt="" border="0"></td></tr>
+<tr>
+<td><a name="36"></a>
+<b>Question 36</b>&nbsp;<img src="/web-ct/en/img/dot_divide.gif" alt="" border="0" class="alignMiddle" />&nbsp;(1 point)</td></tr>
+<tr>
+<td><form name="show_question_form_51" method="post" action="/SCRIPT/d_cis234ntf/scripts/student/serve_new_quiz?ACTION=DO_QUIZ&ARG1=1528509843&ARG2=&ARG3=0" target="bottom">
+<input type="hidden" name="quesno" value="35">
+<input type="hidden" name="rec" value="51">
+<input type="hidden" name="51.type" value="MC">
+<input type="hidden" name="51.mode" VALUE="1">
+<input type="hidden" name="51.numchoices" value="5">
+Which statement correctly adds the string "Joe" to a listbox named listBox1?<br>
+<img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+<table cellpadding="3" cellspacing="0">
+<tr><td valign="top" class="opposite"><input type="RADIO" name="51.res" id="webct159_891512669" onclick="register_change('36');" value="1">
+</td>
+<td valign="top"><label for='webct159_891512669'>a.</label></td>
+<td valign=top><label for='webct159_891512669'>listBox1.Add("Joe"); &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="51.res" id="webct160_891512669" onclick="register_change('36');" value="2">
+</td>
+<td valign="top"><label for='webct160_891512669'>b.</label></td>
+<td valign=top><label for='webct160_891512669'>listBox1.AddItem("Joe"); &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="51.res" id="webct161_891512669" onclick="register_change('36');" value="3">
+</td>
+<td valign="top"><label for='webct161_891512669'>c.</label></td>
+<td valign=top><label for='webct161_891512669'>listBox1.AddString("Joe"); &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="51.res" id="webct162_891512669" onclick="register_change('36');" value="4">
+</td>
+<td valign="top"><label for='webct162_891512669'>d.</label></td>
+<td valign=top><label for='webct162_891512669'>listBox1.Items("Joe"); &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="51.res" id="webct163_891512669" onclick="register_change('36');" value="5">
+</td>
+<td valign="top"><label for='webct163_891512669'>e.</label></td>
+<td valign=top><label for='webct163_891512669'>listBox1.Items.Add("Joe");
+ &nbsp; </label>
+</td></tr>
+</table>
+<img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+<a href="#"    class="action" onmouseover="window.status='Save answer'; return true;" onmouseout="window.status=''; return true;" onclick="void(dosave(show_question_form_51, 36)); return false;" title="Save answer">Save answer</a><img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+</td></tr>
+</form>
+<tr class="divider2"><td>
+<img src="/web-ct/en/img/shim.gif" width="1" height="1" alt="" border="0"></td></tr>
+<tr>
+<td><a name="37"></a>
+<b>Question 37</b>&nbsp;<img src="/web-ct/en/img/dot_divide.gif" alt="" border="0" class="alignMiddle" />&nbsp;(1 point)</td></tr>
+<tr>
+<td><form name="show_question_form_40" method="post" action="/SCRIPT/d_cis234ntf/scripts/student/serve_new_quiz?ACTION=DO_QUIZ&ARG1=1528509843&ARG2=&ARG3=0" target="bottom">
+<input type="hidden" name="quesno" value="36">
+<input type="hidden" name="rec" value="40">
+<input type="hidden" name="40.type" value="MC">
+<input type="hidden" name="40.mode" VALUE="1">
+<input type="hidden" name="40.numchoices" value="5">
+C# supports which looping structures. <br>
+<img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+<table cellpadding="3" cellspacing="0">
+<tr><td valign="top" class="opposite"><input type="RADIO" name="40.res" id="webct164_891512669" onclick="register_change('37');" value="1">
+</td>
+<td valign="top"><label for='webct164_891512669'>a.</label></td>
+<td valign=top><label for='webct164_891512669'>for &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="40.res" id="webct165_891512669" onclick="register_change('37');" value="2">
+</td>
+<td valign="top"><label for='webct165_891512669'>b.</label></td>
+<td valign=top><label for='webct165_891512669'>do &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="40.res" id="webct166_891512669" onclick="register_change('37');" value="3">
+</td>
+<td valign="top"><label for='webct166_891512669'>c.</label></td>
+<td valign=top><label for='webct166_891512669'>while &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="40.res" id="webct167_891512669" onclick="register_change('37');" value="4">
+</td>
+<td valign="top"><label for='webct167_891512669'>d.</label></td>
+<td valign=top><label for='webct167_891512669'>only a and b &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="40.res" id="webct168_891512669" onclick="register_change('37');" value="5">
+</td>
+<td valign="top"><label for='webct168_891512669'>e.</label></td>
+<td valign=top><label for='webct168_891512669'>a, b, and c are correct
+ &nbsp; </label>
+</td></tr>
+</table>
+<img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+<a href="#"    class="action" onmouseover="window.status='Save answer'; return true;" onmouseout="window.status=''; return true;" onclick="void(dosave(show_question_form_40, 37)); return false;" title="Save answer">Save answer</a><img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+</td></tr>
+</form>
+<tr class="divider2"><td>
+<img src="/web-ct/en/img/shim.gif" width="1" height="1" alt="" border="0"></td></tr>
+<tr>
+<td><a name="38"></a>
+<b>Question 38</b>&nbsp;<img src="/web-ct/en/img/dot_divide.gif" alt="" border="0" class="alignMiddle" />&nbsp;(1 point)</td></tr>
+<tr>
+<td><form name="show_question_form_49" method="post" action="/SCRIPT/d_cis234ntf/scripts/student/serve_new_quiz?ACTION=DO_QUIZ&ARG1=1528509843&ARG2=&ARG3=0" target="bottom">
+<input type="hidden" name="quesno" value="37">
+<input type="hidden" name="rec" value="49">
+<input type="hidden" name="49.type" value="MC">
+<input type="hidden" name="49.mode" VALUE="1">
+<input type="hidden" name="49.numchoices" value="5">
+Which statement shows the correct signature for a button click event method?<br>
+<img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+<table cellpadding="3" cellspacing="0">
+<tr><td valign="top" class="opposite"><input type="RADIO" name="49.res" id="webct169_891512669" onclick="register_change('38');" value="1">
+</td>
+<td valign="top"><label for='webct169_891512669'>a.</label></td>
+<td valign=top><label for='webct169_891512669'>private void button1_Click(object sender, System.Button.EventArgs e) &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="49.res" id="webct170_891512669" onclick="register_change('38');" value="2">
+</td>
+<td valign="top"><label for='webct170_891512669'>b.</label></td>
+<td valign=top><label for='webct170_891512669'>private void button1_Click(object sender, System.MouseEventArgs e) &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="49.res" id="webct171_891512669" onclick="register_change('38');" value="3">
+</td>
+<td valign="top"><label for='webct171_891512669'>c.</label></td>
+<td valign=top><label for='webct171_891512669'>private void button1_Click(object sender) &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="49.res" id="webct172_891512669" onclick="register_change('38');" value="4">
+</td>
+<td valign="top"><label for='webct172_891512669'>d.</label></td>
+<td valign=top><label for='webct172_891512669'>private void button1_Click(object sender, System.EventArgs e) &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="49.res" id="webct173_891512669" onclick="register_change('38');" value="5">
+</td>
+<td valign="top"><label for='webct173_891512669'>e.</label></td>
+<td valign=top><label for='webct173_891512669'>private void button1_Click(System.EventArgs e)
+ &nbsp; </label>
+</td></tr>
+</table>
+<img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+<a href="#"    class="action" onmouseover="window.status='Save answer'; return true;" onmouseout="window.status=''; return true;" onclick="void(dosave(show_question_form_49, 38)); return false;" title="Save answer">Save answer</a><img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+</td></tr>
+</form>
+<tr class="divider2"><td>
+<img src="/web-ct/en/img/shim.gif" width="1" height="1" alt="" border="0"></td></tr>
+<tr>
+<td><a name="39"></a>
+<b>Question 39</b>&nbsp;<img src="/web-ct/en/img/dot_divide.gif" alt="" border="0" class="alignMiddle" />&nbsp;(1 point)</td></tr>
+<tr>
+<td><form name="show_question_form_90" method="post" action="/SCRIPT/d_cis234ntf/scripts/student/serve_new_quiz?ACTION=DO_QUIZ&ARG1=1528509843&ARG2=&ARG3=0" target="bottom">
+<input type="hidden" name="quesno" value="38">
+<input type="hidden" name="rec" value="90">
+<input type="hidden" name="90.type" value="MC">
+<input type="hidden" name="90.mode" VALUE="1">
+<input type="hidden" name="90.numchoices" value="5">
+System.Drawing is:<br>
+<img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+<table cellpadding="3" cellspacing="0">
+<tr><td valign="top" class="opposite"><input type="RADIO" name="90.res" id="webct174_891512669" onclick="register_change('39');" value="1">
+</td>
+<td valign="top"><label for='webct174_891512669'>a.</label></td>
+<td valign=top><label for='webct174_891512669'>a method &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="90.res" id="webct175_891512669" onclick="register_change('39');" value="2">
+</td>
+<td valign="top"><label for='webct175_891512669'>b.</label></td>
+<td valign=top><label for='webct175_891512669'>a class &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="90.res" id="webct176_891512669" onclick="register_change('39');" value="3">
+</td>
+<td valign="top"><label for='webct176_891512669'>c.</label></td>
+<td valign=top><label for='webct176_891512669'>a namespace &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="90.res" id="webct177_891512669" onclick="register_change('39');" value="4">
+</td>
+<td valign="top"><label for='webct177_891512669'>d.</label></td>
+<td valign=top><label for='webct177_891512669'>a structure &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="90.res" id="webct178_891512669" onclick="register_change('39');" value="5">
+</td>
+<td valign="top"><label for='webct178_891512669'>e.</label></td>
+<td valign=top><label for='webct178_891512669'>an enum
+ &nbsp; </label>
+</td></tr>
+</table>
+<img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+<a href="#"    class="action" onmouseover="window.status='Save answer'; return true;" onmouseout="window.status=''; return true;" onclick="void(dosave(show_question_form_90, 39)); return false;" title="Save answer">Save answer</a><img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+</td></tr>
+</form>
+<tr class="divider2"><td>
+<img src="/web-ct/en/img/shim.gif" width="1" height="1" alt="" border="0"></td></tr>
+<tr>
+<td><a name="40"></a>
+<b>Question 40</b>&nbsp;<img src="/web-ct/en/img/dot_divide.gif" alt="" border="0" class="alignMiddle" />&nbsp;(1 point)</td></tr>
+<tr>
+<td><form name="show_question_form_81" method="post" action="/SCRIPT/d_cis234ntf/scripts/student/serve_new_quiz?ACTION=DO_QUIZ&ARG1=1528509843&ARG2=&ARG3=0" target="bottom">
+<input type="hidden" name="quesno" value="39">
+<input type="hidden" name="rec" value="81">
+<input type="hidden" name="81.type" value="MC">
+<input type="hidden" name="81.mode" VALUE="1">
+<input type="hidden" name="81.numchoices" value="5">
+Which class provides methods to create and manipulate strings?<br>
+<img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+<table cellpadding="3" cellspacing="0">
+<tr><td valign="top" class="opposite"><input type="RADIO" name="81.res" id="webct179_891512669" onclick="register_change('40');" value="1">
+</td>
+<td valign="top"><label for='webct179_891512669'>a.</label></td>
+<td valign=top><label for='webct179_891512669'>StringTokenizer &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="81.res" id="webct180_891512669" onclick="register_change('40');" value="2">
+</td>
+<td valign="top"><label for='webct180_891512669'>b.</label></td>
+<td valign=top><label for='webct180_891512669'>StringBuilder &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="81.res" id="webct181_891512669" onclick="register_change('40');" value="3">
+</td>
+<td valign="top"><label for='webct181_891512669'>c.</label></td>
+<td valign=top><label for='webct181_891512669'>TextBuilder &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="81.res" id="webct182_891512669" onclick="register_change('40');" value="4">
+</td>
+<td valign="top"><label for='webct182_891512669'>d.</label></td>
+<td valign=top><label for='webct182_891512669'>Text &nbsp; </label>
+</td></tr>
+<tr><td valign="top" class="opposite"><input type="RADIO" name="81.res" id="webct183_891512669" onclick="register_change('40');" value="5">
+</td>
+<td valign="top"><label for='webct183_891512669'>e.</label></td>
+<td valign=top><label for='webct183_891512669'>Path
+ &nbsp; </label>
+</td></tr>
+</table>
+<img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+<a href="#"    class="action" onmouseover="window.status='Save answer'; return true;" onmouseout="window.status=''; return true;" onclick="void(dosave(show_question_form_81, 40)); return false;" title="Save answer">Save answer</a><img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+</td></tr>
+</form>
+<tr class="divider"><td>
+<img src="/web-ct/en/img/shim.gif" width="1" height="1" alt="" border="0"></td></tr>
+<tr><td>
+<form><input type="hidden" name="sub" value="Finish">
+<img src="/web-ct/en/img/shim.gif" width="1" height="8" alt="" border="0"><br>
+<a href="#"    class="action" onmouseover="window.status='Finish'; return true;" onmouseout="window.status=''; return true;" onclick="void(dofinish()); return false;" title="Finish">Finish</a>
+<img src="/web-ct/en/img/shim.gif" width="1" height="24" alt="" border="0" class="alignMiddle"></form>
+</td>
+</tr>
+</table>
+<script language="javascript">
+  window.focus();
+</script>
+</body>
+</html>

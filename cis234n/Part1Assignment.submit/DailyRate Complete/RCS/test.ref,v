@@ -1,0 +1,210 @@
+head	1.8;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.8
+date	2005.10.02.05.18.35;	author khtan;	state Exp;
+branches;
+next	1.7;
+
+1.7
+date	2005.09.30.23.51.36;	author khtan;	state Exp;
+branches;
+next	1.6;
+
+1.6
+date	2005.09.30.23.43.56;	author khtan;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	2005.09.29.23.14.20;	author khtan;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2005.09.29.23.13.20;	author khtan;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2005.09.29.22.28.29;	author khtan;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2005.09.29.19.57.27;	author khtan;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2005.09.29.16.39.44;	author khtan;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.8
+log
+@update
+@
+text
+@"Test: good.input"
+Enter your daily rate: Enter the number of days: The consultant's fee is: 247.5
+"-------------------------------------"
+"Test: badrate.input"
+Enter your daily rate: Error: Input string was not in a correct format. [Function: Double readDouble(System.String), Line: 79]
+Enter the number of days: The consultant's fee is: 0
+"-------------------------------------"
+"Test: baddays.input"
+Enter your daily rate: Enter the number of days: Error: Input string was not in a correct format. [Function: Int32 readInt(System.String), Line: 100]
+The consultant's fee is: 0
+"-------------------------------------"
+"Test: controlchars.input"
+Enter your daily rate: Error: Input string was not in a correct format. [Function: Double readDouble(System.String), Line: 79]
+Enter the number of days: Error: Input string was not in a correct format. [Function: Int32 readInt(System.String), Line: 100]
+The consultant's fee is: 0
+"-------------------------------------"
+"Test: largenum.input"
+Enter your daily rate: Enter the number of days: Error: Value was either too large or too small for an Int32. [Function: Int32 readInt(System.String), Line: 102]
+The consultant's fee is: 0
+"-------------------------------------"
+"Test: negrate.input"
+Enter your daily rate: Enter the number of days: Daily rate cannot be negative!
+"-------------------------------------"
+"Test: negday.input"
+Enter your daily rate: Enter the number of days: Number of days cannot be negative!
+@
+
+
+1.7
+log
+@update line numbers
+@
+text
+@d5 1
+a5 1
+Enter your daily rate: Error: Input string was not in a correct format. [Function: Double readDouble(System.String), Line: 74]
+d9 1
+a9 1
+Enter your daily rate: Enter the number of days: Error: Input string was not in a correct format. [Function: Int32 readInt(System.String), Line: 95]
+d13 2
+a14 2
+Enter your daily rate: Error: Input string was not in a correct format. [Function: Double readDouble(System.String), Line: 74]
+Enter the number of days: Error: Input string was not in a correct format. [Function: Int32 readInt(System.String), Line: 95]
+d18 1
+a18 1
+Enter your daily rate: Enter the number of days: Error: Value was either too large or too small for an Int32. [Function: Int32 readInt(System.String), Line: 97]
+@
+
+
+1.6
+log
+@update
+@
+text
+@d5 1
+a5 1
+Enter your daily rate: Error: Input string was not in a correct format. [Function: Double readDouble(System.String), Line: 76]
+d9 1
+a9 1
+Enter your daily rate: Enter the number of days: Error: Input string was not in a correct format. [Function: Int32 readInt(System.String), Line: 97]
+d13 2
+a14 2
+Enter your daily rate: Error: Input string was not in a correct format. [Function: Double readDouble(System.String), Line: 76]
+Enter the number of days: Error: Input string was not in a correct format. [Function: Int32 readInt(System.String), Line: 97]
+d18 1
+a18 1
+Enter your daily rate: Enter the number of days: Error: Value was either too large or too small for an Int32. [Function: Int32 readInt(System.String), Line: 99]
+@
+
+
+1.5
+log
+@update - line numbers changed
+@
+text
+@d5 1
+a5 1
+Enter your daily rate: Error: Input string was not in a correct format. [Function: Double readDouble(System.String), Line: 72]
+d9 1
+a9 1
+Enter your daily rate: Enter the number of days: Error: Input string was not in a correct format. [Function: Int32 readInt(System.String), Line: 93]
+d13 2
+a14 2
+Enter your daily rate: Error: Input string was not in a correct format. [Function: Double readDouble(System.String), Line: 72]
+Enter the number of days: Error: Input string was not in a correct format. [Function: Int32 readInt(System.String), Line: 93]
+d18 1
+a18 1
+Enter your daily rate: Enter the number of days: Error: Value was either too large or too small for an Int32. [Function: Int32 readInt(System.String), Line: 95]
+@
+
+
+1.4
+log
+@updated writeExceptionMessage
+@
+text
+@d5 1
+a5 1
+Enter your daily rate: Error: Input string was not in a correct format. [Function: Double readDouble(System.String), Line: 84]
+d9 1
+a9 1
+Enter your daily rate: Enter the number of days: Error: Input string was not in a correct format. [Function: Int32 readInt(System.String), Line: 105]
+d13 2
+a14 2
+Enter your daily rate: Error: Input string was not in a correct format. [Function: Double readDouble(System.String), Line: 84]
+Enter the number of days: Error: Input string was not in a correct format. [Function: Int32 readInt(System.String), Line: 105]
+d18 1
+a18 1
+Enter your daily rate: Enter the number of days: Error: Value was either too large or too small for an Int32. [Function: Int32 readInt(System.String), Line: 107]
+@
+
+
+1.3
+log
+@update for negrate.input, negday.input
+@
+text
+@d5 1
+a5 1
+Enter your daily rate: Input string was not in a correct format.(in function readDouble}
+d9 1
+a9 1
+Enter your daily rate: Enter the number of days: Input string was not in a correct format.(in function readInt}
+d13 2
+a14 2
+Enter your daily rate: Input string was not in a correct format.(in function readDouble}
+Enter the number of days: Input string was not in a correct format.(in function readInt}
+d18 1
+a18 1
+Enter your daily rate: Enter the number of days: Value was either too large or too small for an Int32.(in function readInt}
+@
+
+
+1.2
+log
+@update for largenum.input
+@
+text
+@d21 5
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d1 3
+d17 3
+a19 2
+"Test: good.input"
+Enter your daily rate: Enter the number of days: The consultant's fee is: 247.5
+@

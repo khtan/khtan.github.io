@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<!-- index.htm -->
+<head><title>Coloring the Coverage Call Tree</title>
+   <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+   <style type="text/css"><!--
+      @import url("../style/common.css");
+   --></style>
+</head>
+<body>
+<table>
+   <tr>
+      <td>
+         <table>
+            <tr>
+               <td class="nav">
+               <!-- This is the left nav pane : use text only for resizability -->
+                  <!-- start of left pane -->
+                  <dl>
+                     <dd><strong>Goto:</strong></dd>
+                     <dd><a href="../index.htm">Top</a></dd>
+                  </dl>
+                  <dl>
+                     <dd><strong>Document:</strong></dd>
+                     <dd><a href="#problem">1. Problem</a></dd>
+                     <dd><a href="#soln">2. Solution</a></dd>
+                     <dd><a href="#eg">3. Example</a></dd>
+                     <ul>
+                        <li><a href="#3d">3D view</a></li>
+                        <li><a href="#2d">2D view</a></li>
+                        <li><a href="#fileview">File view</a></li>
+                     </ul>
+                  </dl>
+                  <!-- end of left pane -->
+               </td>
+               <td class="main">
+               <!-- This is the middle pane : use text only for resizability -->
+                     <!-- start of middle pane -->
+<h2>Coloring the Coverage Call Tree</h2>
+<h3 id="problem">Problem:</h3>
+<p>For those who have done code coverage for their products, this will be a common
+problem. You have a thick report of coverage data, listing every function and whether
+it is hit as well as cumulative results by directories and modules.
+What is missing is an objective way to prioritize which functions should be covered for
+the next set of testcases to be developed.
+</p>
+<h3 id="soln">Solution:</h3>
+<p>
+What is missing is a way to view the coverage results in the context of the call
+tree, so that we can identify the "tops" of the uncovered forest of functions.
+</p>
+<p>
+In the illustrative example below, the coverage tool used is <a href="http://www.ibm.com/software/awdtools/purifyplus">PureCoverage</a> for Windows, 
+and the call tree tool used is <a href="www.imagix.com">Imagix</a>. Imagix worked with me to provide a script to read the Purecov
+report and color the Imagix call tree - nodes that are hit green and the unhit ones red.
+</p>
+<h3 id="eg">Example:</h3>
+<p id="3d">
+This picture shows the 3-D view of the entire call tree.
+</p>
+<p>
+   <img src="images/imagix3d.jpg" alt="3-D flat view of colored call tree"></img>
+</p><p id="2d">
+Imagix allows an alternative 2-D view as well. In this view, the leftmost red nodes
+are the "tops" of the uncovered forest of functions.
+</p><p>
+   <img src="images/imagix2d.jpg" alt="2-D flat view of colored call tree"></img>
+</p><p id="fileview">
+Once identified, other views of the call trees such as this one, based on a given file
+can be used to provide information for the developer to write the testcase
+needed to hit the specific function.
+</p><p>
+   <img src="images/imagix-simple-small.jpg" alt="Simple zoomed view"></img>
+</p>
+                     <!-- start of middle pane -->
+               </td>
+            </tr>
+         </table>
+       </td>
+       <td class="pic">
+         <table>
+           <tr>
+               <td>
+               <!-- This is the right pic pane : absolute sized to prevent squishing -->
+                  <!-- start of right pane -->
+                  <!-- end of right pane -->
+               </td>
+           </tr>
+        </table>
+      </td>
+   </tr>
+</table>
+</body>
+</html>

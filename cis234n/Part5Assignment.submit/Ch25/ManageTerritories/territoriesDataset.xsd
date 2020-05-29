@@ -1,0 +1,22 @@
+<?xml version="1.0" standalone="yes"?>
+<xs:schema id="territoriesDataset" targetNamespace="http://www.tempuri.org/territoriesDataset.xsd" xmlns:mstns="http://www.tempuri.org/territoriesDataset.xsd" xmlns="http://www.tempuri.org/territoriesDataset.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:element name="territoriesDataset" msdata:IsDataSet="true">
+    <xs:complexType>
+      <xs:choice maxOccurs="unbounded">
+        <xs:element name="Territories">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="TerritoryID" type="xs:string" />
+              <xs:element name="TerritoryDescription" type="xs:string" />
+              <xs:element name="RegionID" type="xs:int" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:Territories" />
+      <xs:field xpath="mstns:TerritoryID" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>

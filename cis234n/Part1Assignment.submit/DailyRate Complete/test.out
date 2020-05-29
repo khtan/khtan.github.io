@@ -1,0 +1,25 @@
+"Test: good.input"
+Enter your daily rate: Enter the number of days: The consultant's fee is: 247.5
+"-------------------------------------"
+"Test: badrate.input"
+Enter your daily rate: Error: Input string was not in a correct format. [Function: Double readDouble(System.String), Line: 79]
+Enter the number of days: The consultant's fee is: 0
+"-------------------------------------"
+"Test: baddays.input"
+Enter your daily rate: Enter the number of days: Error: Input string was not in a correct format. [Function: Int32 readInt(System.String), Line: 100]
+The consultant's fee is: 0
+"-------------------------------------"
+"Test: controlchars.input"
+Enter your daily rate: Error: Input string was not in a correct format. [Function: Double readDouble(System.String), Line: 79]
+Enter the number of days: Error: Input string was not in a correct format. [Function: Int32 readInt(System.String), Line: 100]
+The consultant's fee is: 0
+"-------------------------------------"
+"Test: largenum.input"
+Enter your daily rate: Enter the number of days: Error: Value was either too large or too small for an Int32. [Function: Int32 readInt(System.String), Line: 102]
+The consultant's fee is: 0
+"-------------------------------------"
+"Test: negrate.input"
+Enter your daily rate: Enter the number of days: Daily rate cannot be negative!
+"-------------------------------------"
+"Test: negday.input"
+Enter your daily rate: Enter the number of days: Number of days cannot be negative!

@@ -1,0 +1,9 @@
+/* $Id$ */
+#wrapperId{border-style:solid;border-color:pink;}
+#innerWrapperId{border-style:dotted;border-color:black;}
+#headerId{border-style:dotted;border-color:magenta;}
+#footerId{border-style:dotted;border-color:magenta;}
+#leftNavId{border-style:dashed;border-color:lime;}
+#centerContentId{border-style:dashed;border-color:red;}
+#rightPicId{border-style:dashed;border-color:teal;}
+.separatorInvisibleClass{border-style:solid gray thin;}

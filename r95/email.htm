@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<!-- $Id: email.htm 84 2005-11-19 01:17:22Z khtan $ -->
+<head><title>Email Validation</title>
+   <style type="text/css"><!--
+      @import url("defaultcss.css");
+   --></style>
+</head>
+   <script type="text/javascript" language="Javascript"><!--
+   /* The function names are quite self explanatory. The following diagram
+      provides a calling tree showing how they are used.
+
+      validateEmail ---+---> validateName ---------> validChars
+                       |
+                       |---> validateAddress----+--> validChars
+                                                +--> validIP
+                                                +--> validateDomain
+
+      Caveat! This implementation is not fool proof yet.
+   */
+   function validChars(str){
+       // check that str does not have characters outside ascii range
+       for(var i=0;i<str.length;++i){
+          if(str.charCodeAt(i)>127){
+             return false;
+          }
+       }
+       return true;
+   }
+   function validIP(str){
+      // check for [nnn.nnn.nnn.nnn] format, with nnn<256
+      // returns 0,1,2 because status is ternary instead of boolean
+      var ipRegexp=/^\[(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})\]$/;
+      var ipArray=str.match(ipRegexp);
+      if(ipArray!=null){
+         for(var i=0;i<ipArray.length;++i){
+            if(ipArray[i]>255){
+               alert("Error: IP number "+ipArray[i]+" is invalid");
+               return 2; // valid IP pattern, numbers too high
+            }
+         }
+         return 1; // valid IP
+      }
+      return 0; // invalid IP pattern
+   }
+   function validateName(name){
+      var checkStatus=false;
+      if(validChars(name)){
+          checkStatus=true;
+      }else{
+          alert("Error: name "+name+" has invalid characters");
+      }
+      return checkStatus;
+   }
+   function validateDomain(dom){
+      var knownDomainsRegexp=/^(com|net|org|edu|int|mil|gov|arpa|biz|aero|name|coop|info|pro|museum)$/;
+      var matchDomains=dom.match(knownDomainsRegexp);
+      if(matchDomains!=null){
+         return true;
+      }else{
+         if(dom.length==2){ // country code
+            return true;
+         }else{
+            alert("Error: domain specifier "+dom+" is neither common nor two-country code");
+            return false;
+         }
+      }
+   }
+   function validateAddress(addr){
+      var checkStatus=false;
+      if(validChars(addr)){
+         var ipCheck=validIP(addr);
+         if(ipCheck==1){
+            checkStatus=true;
+         }else if(ipCheck==0){ // check final . extension
+            var dotPieces=addr.split(".");
+            var finalPiece=dotPieces.length-1;
+            checkStatus=validateDomain(dotPieces[finalPiece]);
+         }
+      }else{
+          alert("Error: addr "+addr+" has invalid characters");
+      }
+      return checkStatus;
+   }
+   function validateEmail(thisForm){
+      var eMail=thisForm.emailAddress.value;
+      var checkStatus=false;
+      if(eMail == ""){
+         alert("Error: empty email address");
+      }else{
+         var eParts=eMail.split("@");
+         if(eParts.length < 2 || eParts.length >2){
+            alert("Error: email address has zero or more than one @");
+         }else{
+            checkStatus=(validateName(eParts[0]) && validateAddress(eParts[1]));
+         }
+      }
+      if(checkStatus){
+         alert("Email is validated!");
+      }
+      return checkStatus;
+   }
+   //-->
+   </script>
+<body onload="document.emailForm.emailAddress.focus()">
+<div class="guidepost">
+   <ul>
+      <li><strong>You are here:</strong></li>
+      <li><a href="default.htm">Home &gt;&gt;</a></li>
+      <li><a href="homework.htm">Homework  &gt;&gt;</a></li>
+      <li>Email Address Validation</li>
+   </ul>
+</div>
+<h2>Email Validation Tool</h2>
+   <p>This form illustrates the validation of an email address.
+   </p>
+   <form name="emailForm" method="post" onSubmit="return validateEmail(this);">
+   <p>Email:<input type="text" name="emailAddress"/></p>
+   <input type="submit" value="Submit" name="submitButton"/>
+   </form>
+</body>
+</html>
+

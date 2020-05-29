@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!--This file represents the results of running a test suite-->
+<test-results name="h:\vault\learn\pcc\cis234n\Part7Assignment\Automobile\automobile.dll" total="1" failures="0" not-run="1" date="11/21/2005" time="9:47 PM">
+  <test-suite name="h:\vault\learn\pcc\cis234n\Part7Assignment\Automobile\automobile.dll" success="True" time="0.015625" asserts="0">
+    <results>
+      <test-suite name="Automobile" success="True" time="0.015625" asserts="0">
+        <results>
+          <test-suite name="Circuit" success="True" time="0.015625" asserts="0">
+            <results>
+              <test-case name="Automobile.Circuit.testDrive1" executed="False">
+                <reason>
+                  <message><![CDATA[Method testDrive1's signature is not correct: it must be an instance method.]]></message>
+                </reason>
+              </test-case>
+              <test-case name="Automobile.Circuit.FirstTest" executed="True" success="True" time="0.000" asserts="2" />
+            </results>
+          </test-suite>
+        </results>
+      </test-suite>
+    </results>
+  </test-suite>
+</test-results>

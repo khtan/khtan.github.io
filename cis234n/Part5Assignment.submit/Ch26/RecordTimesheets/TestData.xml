@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Timesheet xmlns="http://tempuri.org/Timesheet.xsd">
+    <EmployeeID>99</EmployeeID>
+    <EmployeeName>John Sharp</EmployeeName>
+    <TimesheetData>
+        <ActivityID>1</ActivityID>
+        <ActivityName>Writing Books</ActivityName>
+        <ActivityDuration>2.5</ActivityDuration>
+    </TimesheetData>
+    <TimesheetData>
+        <ActivityID>2</ActivityID>
+        <ActivityName>Programming</ActivityName>
+        <ActivityDuration>5</ActivityDuration>
+    </TimesheetData>
+</Timesheet>

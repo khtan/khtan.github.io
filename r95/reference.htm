@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<!-- $Id $ -->
+<head><title>CIS233S Demo Web Site for Kwee Tan</title></head>
+   <!-- add content for spiders -->
+   <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+   <link rel="stylesheet" href="defaultcss.css" type="text/css">
+   <link id="debug" rel="alternate stylesheet" href="debugcss.css" type="text/css" title="debugtitle">
+   <script type="text/javascript" src="javascript/default.js"></script>
+   <script type="text/javascript" src="javascript/cookie.js"></script>
+   <script type="text/javascript" language="Javascript"><!--
+      function initPage(cssFile){
+         // loginDeflect();
+         var browserValue=getBrowserAndVersion();
+         if(-1!=browserValue.indexOf("Opera")){ // bug in Opera, must switch one time
+            changeStyle(cssFile);
+         }
+      }
+   //-->
+   </script>
+<body onload="initPage('debugcss.css')">
+<div id="wrapperId">
+   <div id="headerId"></div><!--headerId-->
+   <div id="innerWrapperId">
+      <div id="leftNavId">
+                  <!-- start of left pane -->
+                  <dl>
+                     <dd><strong>Goto:</strong></dd>
+                     <dd><a href="default.htm">Home</a></dd>
+                     <dd><a href="homework.htm">Homework</a></dd>
+                     <dd><a href="blog.htm">Blog</a></dd>
+                  </dl>
+                  <dl>
+                     <dd><strong>Developer modes</strong></dd>
+                     <dd><a href="#" onclick="changeStyle('debugcss.css')">Show/hide layout</a></dd>
+                  </dl>
+                  <!-- end of left pane -->
+      </div><!--leftNavId-->
+      <div id="centerContentId">
+                     <!-- start of middle pane -->
+                     <h1><a name="ref-section"></a>References and Goodies</h1>
+                     <p>This section lists links to useful sites. Clicking on a link will open a new browser
+                        window on the reference site, ready to go.
+                     </p>
+                     <ul>
+                        <li><a href="http://www.unix.org.ua/orelly" target="_blank">O'Reilly Bookshelf</a></li>
+                        <li><a href="http://www.upsdell.com/BrowserNews/stat.htm" target="_blank">Browser Statistics</a></li>
+                        <li><a href="http://www.w3.org/QA/Tools/#validators" target="_blank">QA Toolbox : HTML Validators, etc</a></li>
+                        <li><a href="http://www.csszengarden.com" target="_blank">Css Zen Garden</a></li>
+                        <li><a href="http://www.utoronto.ca/ian/books/html4ed/appf/color1.html" target="_blank">Color map</a></li>
+                        <li><a href="http://developer.mozilla.org/en/docs/JavaScript" target="_blank">Javascript documentation</a></li>
+                        <li><a href="http://en.wikibooks.org/wiki/Javascript:content">Javascript Wikibook</a></li>
+                        <li><a href="http://www.howtocreate.co.uk/JSdocsMS.html">Fast version of Microsoft DHTML site</a></li>
+                        <li><a href="http://www.xml.org">O'Reilly's XML site</a></li>
+                        <li><a href="http://www.xml.com">XML Organization</a></li>
+                      </ul>
+                     <p>Below are some useful downloads, for your local reading pleasure.
+                     </p>
+                     <ul>
+                        <li><a href="upload/books.doc" target="_blank">Recommended Books</a></li>
+                     </ul>
+                     <!-- end of middle pane -->
+      </div><!--centerContentId-->
+      <div id="rightPicId">
+         <a id="justGiveId" href="http://www.justgive.org/html/guide/disaster.html">
+                     <img src="http://www.justgive.org/Images/affiliate/DisasterRelief120x90.gif" width="120" height="90" alt="justgive.org"></img>
+         </a>
+      </div><!--rightPicId-->
+      <div class="separatorInvisibleClass"><!-- x --></div>
+   </div>
+   <div id="footerId"></div><!--footerId-->
+</div>
+</body>
+</html>

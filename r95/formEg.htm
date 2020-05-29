@@ -1,0 +1,154 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<!-- $Id: formEg.htm 84 2005-11-19 01:17:22Z khtan $ -->
+<head><title>Towns</title>
+   <style type="text/css"><!--
+      @import url("defaultcss.css");
+   --></style>
+   <script type="text/javascript" src="javascript/debug.js"></script>
+</head>
+   <script type="text/javascript" language="Javascript"><!--
+         var debugWin;
+         function populateSelect(state){
+            debugOutput(debugWin,"populateSelect("+state+")");
+            var Cities;
+            var selectForm;
+            if(state=="or"){
+               Cities=new Array("Sisters","Bandon","Gold Beach","Jacksonville","Ashland");
+               selectForm=document.travelForm.orSelect;
+            }else if(state=="wa"){
+               Cities=new Array("Chemainus","Port Townsend","Port Gamble","Poulsbo","La Conner","Leavenworth","Winthrop");
+               selectForm=document.travelForm.waSelect;
+            }else if(state=="id"){
+               Cities=new Array("Sandpoint","Wallace","Stanley","Sun Valley","Lava Hot Springs");
+               selectForm=document.travelForm.idSelect;
+            }else if(state=="mo"){
+               Cities=new Array("Whitefish","Bigfork","Virginia City");
+               selectForm=document.travelForm.moSelect;
+            }else{
+               alert("Exceptional error!");
+            }
+            for(oneCity in Cities){
+                  debugOutput(debugWin,"&#133;"+Cities[oneCity]);
+                  selectForm.add(new Option(Cities[oneCity],Cities[oneCity].toLowerCase(),false,false));
+            }
+         }
+         function synchForm(state,form){
+            debugOutput(debugWin,"synchForm("+state+")");
+            if(state=="or"){
+                  debugOutput(debugWin,"&#133;or territory");
+                  if(document.travelForm.orSelect.options.length==0){
+                     populateSelect(state);
+                  }
+                  document.travelForm.orSelect.style.display="block";
+                  document.travelForm.waSelect.style.display="none";
+                  document.travelForm.idSelect.style.display="none";
+                  document.travelForm.moSelect.style.display="none";
+                  if(form=="select"){// list selected
+                    document.travelForm.stateRadio[0].checked=true;
+                  }else{// radio clicked
+                    document.travelForm.stateSelect.selectedIndex=0;
+                  }
+            }else if(state=="wa"){
+                  debugOutput(debugWin,"&#133;wa territory");
+                  if(document.travelForm.waSelect.options.length==0){
+                     populateSelect(state);
+                  }
+                  document.travelForm.orSelect.style.display="none";
+                  document.travelForm.waSelect.style.display="block";
+                  document.travelForm.idSelect.style.display="none";
+                  document.travelForm.moSelect.style.display="none";
+                  if(form=="select"){
+                    document.travelForm.stateRadio[1].checked=true;
+                  }else{
+                    document.travelForm.stateSelect.selectedIndex=1;
+                  }
+            }else if(state=="id"){
+                  debugOutput(debugWin,"&#133;id territory");
+                  if(document.travelForm.idSelect.options.length==0){
+                     populateSelect(state);
+                  }
+                  document.travelForm.orSelect.style.display="none";
+                  document.travelForm.waSelect.style.display="none";
+                  document.travelForm.idSelect.style.display="block";
+                  document.travelForm.moSelect.style.display="none";
+                  if(form=="select"){
+                    document.travelForm.stateRadio[2].checked=true;
+                  }else{
+                    document.travelForm.stateSelect.selectedIndex=2;
+                  }
+            }else if(state=="mo"){
+                  debugOutput(debugWin,"&#133;id territory");
+                  if(document.travelForm.moSelect.options.length==0){
+                     populateSelect(state);
+                  }
+                  document.travelForm.orSelect.style.display="none";
+                  document.travelForm.waSelect.style.display="none";
+                  document.travelForm.idSelect.style.display="none";
+                  document.travelForm.moSelect.style.display="block";
+                  if(form=="select"){
+                    document.travelForm.stateRadio[3].checked=true;
+                  }else{
+                    document.travelForm.stateSelect.selectedIndex=3;
+                  }
+            }
+         }
+      function openDebugWindow(){
+         debugWin=openDebug("formEg.htm");
+      }//openDebugWindow
+      function updateStateSelect(){
+         synchForm(document.travelForm.stateSelect.value,'select');
+      }
+      function initPage(){
+           synchForm('or','select');
+           document.travelForm.stateRadio[0].checked=true;
+//         debugOutput1(debugWin,walkChildNodes(document.travelForm));
+      }
+   //-->
+   </script>
+<body onload="initPage()">
+<div class="guidepost">
+   <ul>
+      <li><strong>You are here:</strong></li>
+      <li><a href="default.htm">Home &gt;&gt;</a></li>
+      <li><a href="homework.htm">Homework  &gt;&gt;</a></li>
+      <li>Forms Example</li>
+   </ul>
+</div>
+<h2>Towns</h2>
+   <p>This is an experimental page for forms.
+      The following features are implemented:
+      <ul>
+         <li>The select list and radio buttons are synchronized. Changing one will update the other.</li>
+         <li>The list of towns displayed depends on which state is selected. This list is generated
+             only when needed, and stored thereafter. So, if Idaho/ID is never selected/clicked, 
+             the memory and performance related to ID towns is never incurred.</li>
+         <li>A <a href="#" onclick="openDebugWindow()">debug window</a> can be opened to see the transcript of function calls.
+         </li>
+      </ul>
+   </p>
+   <form name="travelForm">
+      Selection list:
+      <select name="stateSelect" onchange="updateStateSelect()">
+         <option value="or">Oregon</option> // Opera8 has onClick for option, but not IE6
+         <option value="wa">Washington</option>
+         <option value="id">Idaho</option>
+         <option value="mo">Montana</option>
+      </select>
+      <br/>
+      <a href="http://www.gonorthwest.com"><img style="border-style:none" src="images/small_towns_map.gif" width="662" height="515" alt="smalltownsmap"></img></a>
+      <br/>Radio buttons:
+         <input type="radio" name="stateRadio" onclick="synchForm('or','radio')">OR</input>
+         <input type="radio" name="stateRadio" onclick="synchForm('wa','radio')">WA</input>
+         <input type="radio" name="stateRadio" onclick="synchForm('id','radio')">ID</input>
+         <input type="radio" name="stateRadio" onclick="synchForm('mo','radio')">MO</input>
+      <br/><br/>List of towns:
+         <select name="orSelect"></select>
+         <select name="waSelect"></select>
+         <select name="idSelect"></select>
+         <select name="moSelect"></select>
+      <br/>
+      <!-- <input type="submit"> IE6 does not reset debugWin -->
+   </form>
+</body>
+</html>

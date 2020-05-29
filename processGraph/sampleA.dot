@@ -1,0 +1,430 @@
+/*
+  <u>       | user identifier
+  <r>       | rls identifier
+  <p1>,<p2> | product identifier
+  <s>       | series identifier
+  pc        | purecov
+  pf        | purify
+  cv        | coverity
+  d<n>      | display head <n>
+mtabs:0=>d1 rt11:0=>d2 sable:0=> d3
+cscope
+abs-gx270 winxp-2
+
+us03mtwin2000-1 win2000-1
+us03mtrhamd03   rhamd03
+
+*/
+digraph g
+{   /* $Id: sampleA.dot,v 1.25 2008/07/30 02:28:26 khtan Exp $ */
+  /* graph attributes */
+  label = "File=regr-*.dot";
+  labelloc = "t";
+  rankdir=LR;
+  /* list of nodes */
+/* $Id: sampleA.dot,v 1.25 2008/07/30 02:28:26 khtan Exp $ */
+subgraph cluster1{ fontsize=60;label="Sync and Build <P2>";labeljust="l";color="blue";style="bold";
+  "sleepB1-5m" [shape="diamond",color="lightgray",label="sleepB1-5m\n[project=One]",style="filled"];
+  "sleepB2-5m" [shape="diamond",color="lightgray",label="sleepB2-5m\n[project=One]",style="filled"];
+  "sleepB3-30m" [shape="diamond",color="lightgray",label="sleepB3-30m\n[project=One]",style="filled"];
+  "<u>_<r>_<p2>-pb-cleanup" [color="lightgray",label="<u>_<r>_<p2>-pb-cleanup\n[arch=lin]",style="filled"];
+  "<u>_<r>_<p2>-pb-sync-buildclient" [color="lightgray",label="<u>_<r>_<p2>-pb-sync-buildclient\n[arch=lin]",style="filled"];
+  "<u>_<r>_<p2>_win-pb-cleanup" [color="lightgray",label="<u>_<r>_<p2>_win-pb-cleanup\n[h=winxp-2]",style="filled"];
+  "<u>_<r>_<p2>_win-pb-sync-buildclient" [color="lightgray",label="<u>_<r>_<p2>_win-pb-sync-buildclient\n[h=winxp-2]",style="filled"];
+  "<u>_<r>_<p2>-build-dbg-lin3a" [color="lightgray",label="<u>_<r>_<p2>-build-dbg-lin3a\n[arch=lin,ver=WS3.0]",style="filled"];
+  "<u>_<r>_<p2>-build-std-sol59" [color="lightgray",label="<u>_<r>_<p2>-build-std-sol59\n[arch=sol,ver=5.9]",style="filled"];
+  "<u>_<r>_<p2>-build-dbg-sol59" [color="lightgray",label="<u>_<r>_<p2>-build-dbg-sol59\n[arch=sol,ver=5.9]",style="filled"];
+  "<u>_<r>_<p2>-build-std-hp1100" [color="lightgray",label="<u>_<r>_<p2>-build-std-hp1100\n[qsc=v,arch=hpux,ver=11.00]",style="filled"];
+  "<u>_<r>_<p2>-build-std-ibm53" [color="lightgray",label="<u>_<r>_<p2>-build-std-ibm53\n[arch=aix,ver=5.3]",style="filled"];
+  "<u>_<r>_<p2>-build-std-lin3a" [color="lightgray",label="<u>_<r>_<p2>-build-std-lin3a\n[arch=lin,ver=WS3.0]",style="filled"];
+  "<u>_<r>_<p2>_win-pb-build-std-win" [color="lightgray",label="<u>_<r>_<p2>_win-pb-build-std-win\n[h=winxp-2]",style="filled"];
+}
+/* List of edges */
+  "<u>_<r>_<p2>-pb-cleanup" -> "<u>_<r>_<p2>-pb-sync-buildclient";
+  "<u>_<r>_<p2>-pb-sync-buildclient" -> "<u>_<r>_<p2>-build-std-lin3a";
+  "<u>_<r>_<p2>-build-std-lin3a" -> "<u>_<r>_<p2>-pb-atest-a.lst-std-d1-lin3a";
+  "<u>_<r>_<p2>-pb-sync-buildclient" -> "sleepB1-5m";
+  "sleepB1-5m" -> "<u>_<r>_<p2>-build-dbg-lin3a";
+  "<u>_<r>_<p2>-pb-sync-buildclient" -> "<u>_<r>_<p2>-build-std-sol59";
+  "<u>_<r>_<p2>-build-std-sol59" -> "<u>_<r>_<p2>-pb-atest-a.lst-std-d3-sol59";
+  "<u>_<r>_<p2>-pb-sync-buildclient" -> "sleepB2-5m";
+  "sleepB2-5m" -> "<u>_<r>_<p2>-build-dbg-sol59";
+  "<u>_<r>_<p2>-pb-sync-buildclient" -> "<u>_<r>_<p2>-build-std-hp1100";
+  "<u>_<r>_<p2>-build-std-hp1100" -> "<u>_<r>_<p2>-pb-atest-a.lst-std-d2-hp1100";
+  "<u>_<r>_<p2>-pb-sync-buildclient" -> "<u>_<r>_<p2>-build-std-ibm53";
+  "<u>_<r>_<p2>-build-std-ibm53" -> "<u>_<r>_<p2>-pb-atest-a.lst-std-d3-ibm53";
+  "<u>_<r>_<p2>_win-pb-cleanup" -> "<u>_<r>_<p2>_win-pb-sync-buildclient";
+  "<u>_<r>_<p2>_win-pb-sync-buildclient" -> "sleepB3-30m";
+  "sleepB3-30m" -> "<u>_<r>_<p2>_win-pb-build-std-win";
+  "<u>_<r>_<p2>_win-pb-build-std-win" -> "<u>_<r>_<p2>_win-pb-atest-a.lst-std-winxp";
+  "<u>_<r>_<p2>-build-std-lin3a" -> "<u>_<r>_<p2>-pb-rls-std-lin3a";
+  "<u>_<r>_<p2>-build-std-sol59" -> "<u>_<r>_<p2>-pb-rls-std-sol59";
+  "<u>_<r>_<p2>-pb-rls-std-lin3a" -> "<u>_<r>_<p2>-pb-rls-std-sol59";
+  "<u>_<r>_<p2>-build-std-hp1100" -> "<u>_<r>_<p2>-pb-rls-std-hp1100";
+  "<u>_<r>_<p2>-pb-rls-std-lin3a" -> "<u>_<r>_<p2>-pb-rls-std-hp1100";
+  "<u>_<r>_<p2>-build-std-ibm53" -> "<u>_<r>_<p2>-pb-rls-std-ibm53";
+  "<u>_<r>_<p2>-pb-rls-std-lin3a" -> "<u>_<r>_<p2>-pb-rls-std-ibm53";
+  "<u>_<r>_<p2>_win-pb-build-std-win" -> "<u>_<r>_<p2>_win-pb-rls-std-winxp";
+  "<u>_<r>_<p2>-pb-rls-std-lin3a" -> "<u>_<r>_<p2>_win-pb-rls-std-winxp";
+  "<u>_<r>_<p2>-pb-rls-std-sol59" -> "<u>_<r>_<p2>-pb-image-std-lin3a";
+  "<u>_<r>_<p2>-pb-rls-std-hp1100" -> "<u>_<r>_<p2>-pb-image-std-lin3a";
+  "<u>_<r>_<p2>-pb-rls-std-ibm53" -> "<u>_<r>_<p2>-pb-image-std-lin3a";
+  "<u>_<r>_<p2>_win-pb-rls-std-winxp" -> "<u>_<r>_<p2>-pb-image-std-lin3a";
+  "<u>_<r>_<p2>-build-std-lin3a" -> "<u>_<r>_<p2>-pb-<u>_stg-std-lin3a";
+  "<u>_<r>_<p2>-build-std-lin3a" -> "<u>_<r>_<p2>-pb-<u>_stg-std-sol59";
+  "<u>_<r>_<p2>-build-std-lin3a" -> "<u>_<r>_<p2>-pb-<u>_stg-std-hp1100";
+  "<u>_<r>_<p2>-build-std-lin3a" -> "<u>_<r>_<p2>_win-pb-<u>_stg-std-winxp";
+  "<u>_<r>_<p2>-build-std-lin3a" -> "<u>_<r>_<p2>-pb-<u>_stg-dbg-lin3a";
+  "<u>_<r>_<p2>-build-std-lin3a" -> "<u>_<r>_<p2>-pb-<u>_stg-dbg-sol59";
+  "<u>_<r>_<p2>-build-std-sol59" -> "<u>_<r>_<p2>-pb-<u>_stg-std-sol59";
+  "<u>_<r>_<p2>-build-std-hp1100" -> "<u>_<r>_<p2>-pb-<u>_stg-std-hp1100";
+  "<u>_<r>_<p2>-build-std-ibm53" -> "<u>_<r>_<p2>-pb-<u>_stg-std-ibm53";
+  "<u>_<r>_<p2>_win-pb-build-std-win" -> "<u>_<r>_<p2>_win-pb-<u>_stg-std-winxp";
+  "<u>_<r>_<p2>-build-dbg-lin3a" -> "<u>_<r>_<p2>-pb-<u>_stg-dbg-lin3a";
+  "<u>_<r>_<p2>-build-dbg-sol59" -> "<u>_<r>_<p2>-pb-<u>_stg-dbg-sol59";
+  "<u>_<r>_<p2>-pb-<u>_stg-std-lin3a" -> "<u>_<r>_<p2>-pb-<u>_updatestg-std-lin3a";
+  "<u>_<r>_<p2>-pb-<u>_stg-std-sol59" -> "<u>_<r>_<p2>-pb-<u>_updatestg-std-lin3a";
+  "<u>_<r>_<p2>-pb-<u>_stg-std-hp1100" -> "<u>_<r>_<p2>-pb-<u>_updatestg-std-lin3a";
+  "<u>_<r>_<p2>-pb-<u>_stg-std-ibm53" -> "<u>_<r>_<p2>-pb-<u>_updatestg-std-lin3a";
+  "<u>_<r>_<p2>-pb-<u>_stg-dbg-lin3a" -> "<u>_<r>_<p2>-pb-<u>_updatestg-std-lin3a";
+  "<u>_<r>_<p2>-pb-<u>_stg-dbg-sol59" -> "<u>_<r>_<p2>-pb-<u>_updatestg-std-lin3a";
+  "<u>_<r>_<p2>-pb-image-std-lin3a" -> "ftp-image-<p2>";
+/* $Id: sampleA.dot,v 1.25 2008/07/30 02:28:26 khtan Exp $ */
+subgraph cluster2{ fontsize=60;label="Sync and Build <P1>";labeljust="l";color="blue";style="bold";
+  "sleepC3-5m" [shape="diamond",color="lightgray",label="sleepC3-5m\n[project=One]",style="filled"];
+  "sleepC4-5m" [shape="diamond",color="lightgray",label="sleepC4-5m\n[project=One]",style="filled"];
+  "<u>_<r>_<p1>-pb-cleanup" [color="lightgray",label="<u>_<r>_<p1>-pb-cleanup\n[arch=lin]",style="filled"];
+  "<u>_<r>_<p1>-pb-sync-buildclient" [color="lightgray",label="<u>_<r>_<p1>-pb-sync-buildclient\n[arch=lin]",style="filled"];
+  "<u>_<r>_<p1>_win-pb-sync-buildclient" [color="lightgray",label="<u>_<r>_<p1>_win-pb-sync-buildclient\n[h=winxp-2]",style="filled"];
+  "<u>_<r>_<p1>-pb-build-std-lin3a" [color="lightgray",label="<u>_<r>_<p1>-pb-build-std-lin3a\n[arch=lin,ver=WS3.0]",style="filled"];
+  "<u>_<r>_<p1>-pb-build-dbg-lin3a" [color="lightgray",label="<u>_<r>_<p1>-pb-build-dbg-lin3a\n[arch=lin,ver=WS3.0]",style="filled"];
+  "<u>_<r>_<p1>-pb-build-std-sol59" [color="lightgray",label="<u>_<r>_<p1>-pb-build-std-sol59\n[arch=sol,ver=5.9]",style="filled"];
+  "<u>_<r>_<p1>-pb-build-dbg-sol59" [color="lightgray",label="<u>_<r>_<p1>-pb-build-dbg-sol59\n[arch=sol,ver=5.9]",style="filled"];
+  "<u>_<r>_<p1>_win-pb-cleanup" [color="lightgray",label="<u>_<r>_<p1>_win-pb-cleanup\n[h=winxp-2]",style="filled"];
+  "<u>_<r>_<p1>_win-pb-build-std-win" [color="lightgray",label="<u>_<r>_<p1>_win-pb-build-std-win\n[h=winxp-2]",style="filled"];
+}
+/* List of edges */
+  "<u>_<r>_<p1>_win-pb-cleanup" -> "<u>_<r>_<p1>_win-pb-sync-buildclient";
+  "<u>_<r>_<p1>_win-pb-sync-buildclient" -> "<u>_<r>_<p1>_win-pb-build-std-win";
+  "<u>_<r>_<p1>-pb-cleanup" -> "<u>_<r>_<p1>-pb-sync-buildclient";
+  "<u>_<r>_<p1>-pb-sync-buildclient" -> "<u>_<r>_<p1>-pb-build-std-lin3a"
+  "<u>_<r>_<p1>-pb-sync-buildclient" -> "sleepC3-5m";
+  "sleepC3-5m" -> "<u>_<r>_<p1>-pb-build-dbg-lin3a";
+  "<u>_<r>_<p1>-pb-sync-buildclient" -> "<u>_<r>_<p1>-pb-build-std-sol59";
+  "<u>_<r>_<p1>-pb-sync-buildclient" -> "sleepC4-5m";
+  "sleepC4-5m" -> "<u>_<r>_<p1>-pb-build-dbg-sol59";
+  "<u>_<r>_<p1>-pb-build-std-lin3a" -> "<u>_<r>_<p1>-pb-rls-std-lin3a";
+  "<u>_<r>_<p1>-pb-build-std-sol59" -> "<u>_<r>_<p1>-pb-rls-std-sol59";
+  "<u>_<r>_<p1>_win-pb-build-std-win" -> "<u>_<r>_<p1>_win-pb-rls-std-winxp";
+  "<u>_<r>_<p1>-pb-rls-std-lin3a" -> "<u>_<r>_<p1>-pb-rls-std-sol59";
+  "<u>_<r>_<p1>-pb-rls-std-lin3a" -> "<u>_<r>_<p1>_win-pb-rls-std-winxp";
+  "<u>_<r>_<p1>_win-pb-rls-std-winxp" -> "<u>_<r>_<p1>-pb-image-std-lin3a";
+  "<u>_<r>_<p1>-pb-rls-std-sol59" -> "<u>_<r>_<p1>-pb-image-std-lin3a";
+  "<u>_<r>_<p1>-pb-build-std-lin3a" -> "<u>_<r>_<p1>-pb-<u>_stg-std-lin3a";
+  "<u>_<r>_<p1>-pb-build-std-sol59" -> "<u>_<r>_<p1>-pb-<u>_stg-std-sol59";
+  "<u>_<r>_<p1>_win-pb-build-std-win" -> "<u>_<r>_<p1>_win-pb-<u>_stg-std-winxp";
+  "<u>_<r>_<p1>-pb-build-dbg-lin3a" -> "<u>_<r>_<p1>-pb-<u>_stg-dbg-lin3a";
+  "<u>_<r>_<p1>-pb-build-dbg-sol59" -> "<u>_<r>_<p1>-pb-<u>_stg-dbg-sol59";
+  "<u>_<r>_<p1>-pb-<u>_stg-std-lin3a" -> "<u>_<r>_<p1>-pb-<u>_updatestg-std-lin3a";
+  "<u>_<r>_<p1>-pb-<u>_stg-std-sol59" -> "<u>_<r>_<p1>-pb-<u>_updatestg-std-lin3a";
+  "<u>_<r>_<p1>-pb-<u>_stg-dbg-lin3a" -> "<u>_<r>_<p1>-pb-<u>_updatestg-std-lin3a";
+  "<u>_<r>_<p1>-pb-<u>_stg-dbg-sol59" -> "<u>_<r>_<p1>-pb-<u>_updatestg-std-lin3a";
+  "<u>_<r>_<p1>_win-pb-build-std-win" -> "<u>_<r>_<p1>_win-pb-unit_run-std-u.lst-winxp";
+  "<u>_<r>_<p1>-pb-build-std-lin3a" -> "<u>_<r>_<p1>-pb-unit_run-std-u.lst-lin3a";
+  "<u>_<r>_<p1>-pb-build-std-sol59" -> "<u>_<r>_<p1>-pb-unit_run-std-u.lst-sol59";
+  "<u>_<r>_<p1>-pb-unit_run-std-u.lst-lin3a" -> "rpt-unit-<p1>";
+  "<u>_<r>_<p1>-pb-unit_run-std-u.lst-sol59" -> "rpt-unit-<p1>";
+  "<u>_<r>_<p1>_win-pb-unit_run-std-u.lst-winxp" -> "rpt-unit-<p1>";
+  "<u>_<r>_<p1>-pb-image-std-lin3a" -> "ftp-image-<p1>";
+
+/* $Id: sampleA.dot,v 1.25 2008/07/30 02:28:26 khtan Exp $ */
+subgraph cluster3{ fontsize=60;label="Install";labeljust="l";color="blue";style="bold";
+  "install-cleanup-lin3a" [color="lightgray",label="install-cleanup-lin3a\n[project=One]",style="filled"];
+  "install-cleanup-win2k" [color="lightgray",label="install-cleanup-win2k\n[h=win2000-1]",style="filled"];
+  "install-cleanup-winxp" [color="lightgray",label="install-cleanup-winxp\n[h=winxp-1]",style="filled"];
+  "install-cleanup-winxp2" [color="lightgray",label="install-cleanup-winxp2\n[h=<p2>-test-2650]",style="filled"];
+  "install-<p2>-std-win2k" [color="lightgray",label="install-<p2>-std-win2k\n[h=win2000-1]",style="filled"];
+  "install-<p1>-std-win2k" [color="lightgray",label="install-<p1>-std-win2k\n[h=win2000-1]",style="filled"];
+  "install-<p2>-std-winxp" [color="lightgray",label="install-<p2>-std-winxp\n[h=winxp-1]",style="filled"];
+  "install-<p1>-std-winxp" [color="lightgray",label="install-<p1>-std-winxp\n[h=winxp-1]",style="filled"];
+  "install-<p2>-std-sol59" [color="lightgray",label="install-<p2>-std-sol59\n[arch=sol,ver=5.9]",style="filled"];
+  "install-<p1>-std-sol59" [color="lightgray",label="install-<p1>-std-sol59\n[arch=sol,ver=5.9]",style="filled"];
+  "install-<p2>-std-hp1100" [color="lightgray",label="install-<p2>-std-hp1100\n[qsc=v,arch=hpux,ver=11.00]",style="filled"];
+  "install-<p2>-std-lin3a" [color="lightgray",label="install-<p2>-std-lin3a\n[h=rhamd03]",style="filled"];
+  "install-<p1>-std-lin3a" [color="lightgray",label="install-<p1>-std-lin3a\n[h=rhamd03]",style="filled"];
+  "install-<p2>-std-ibm53" [color="lightgray",label="install-<p2>-std-ibm53\n[arch=aix,ver=5.3]",style="filled"];
+  "install-<p2>-std-winxp2" [color="lightgray",label="install-<p2>-std-winxp2\n[h=<p2>-test-2650]",style="filled"];
+  "install-<p1>-std-winxp2" [color="lightgray",label="install-<p1>-std-winxp2\n[h=<p2>-test-2650]",style="filled"];
+}
+/* List of edges */
+  "install-cleanup-win2k" -> "install-<p2>-std-win2k";
+  "install-<p2>-std-win2k" -> "install-<p1>-std-win2k";
+  "install-cleanup-winxp" -> "install-<p2>-std-winxp";
+  "install-<p2>-std-winxp" -> "install-<p1>-std-winxp";
+  "install-cleanup-winxp2" -> "install-<p2>-std-winxp2";
+  "install-<p2>-std-winxp2" -> "install-<p1>-std-winxp2";
+  "install-cleanup-lin3a" -> "install-<p2>-std-sol59";
+  "install-<p2>-std-sol59" -> "install-<p1>-std-sol59";
+  "install-cleanup-lin3a" -> "install-<p2>-std-hp1100";
+  "install-cleanup-lin3a" -> "install-<p2>-std-lin3a";
+  "install-<p2>-std-lin3a" -> "install-<p1>-std-lin3a";
+  "install-cleanup-lin3a" -> "install-<p2>-std-ibm53";
+/* $Id: sampleA.dot,v 1.25 2008/07/30 02:28:26 khtan Exp $ */
+subgraph cluster5 {fontsize=60;label="<P2>_Regression";labeljust="l";color="orange";style="bold";
+  "regr_win2k-ltest-run-<p2>-frw.lst" [color="lightgray",label="regr_win2k-ltest-run-<p2>-frw.lst\n[h=win2000-1]",style="filled"];
+  "regr_win2k-ltest-rerun-<p2>" [color="lightgray",label="regr_win2k-ltest-rerun-<p2>\n[parent=0]",style="filled"];
+  "regr_winxp-ltest-run-<p2>-frw.lst" [color="lightgray",label="regr_winxp-ltest-run-<p2>-frw.lst\n[h=winxp-1]",style="filled"];
+  "regr_winxp-ltest-rerun-<p2>" [color="lightgray",label="regr_winxp-ltest-rerun-<p2>\n[parent=0]",style="filled"];
+  "regr_sol59-ltest-run-<p2>-e-regress_sun.lst" [color="lightgray",label="regr_sol59-ltest-run-<p2>-e-regress_sun.lst\n[arch=sol,ver=5.9]",style="filled"];
+  "regr_sol59-ltest-rerun-<p2>-d1-rerun" [color="lightgray",label="regr_sol59-ltest-rerun-<p2>-d1-rerun\n[parent=1]",style="filled"];
+  "regr_sol510-ltest-run-<p2>-e-regress_sun.lst" [color="lightgray",label="regr_sol510-ltest-run-<p2>-e-regress_sun.lst\n[arch=sol,ver=5.10]",style="filled"];
+  "regr_sol510-ltest-rerun-<p2>-d2-rerun" [color="lightgray",label="regr_sol510-ltest-rerun-<p2>-d2-rerun\n[parent=1]",style="filled"];
+  "regr_lin3a-ltest-run-<p2>-e-regress_lin.lst" [color="lightgray",label="regr_lin3a-ltest-run-<p2>-e-regress_lin.lst\n[arch=lin,ver=WS3.0]",style="filled"];
+  "regr_lin3a-ltest-rerun-<p2>-d1-rerun" [color="lightgray",label="regr_lin3a-ltest-rerun-<p2>-d1-rerun\n[parent=0]",style="filled"];
+  "regr_lin4a-ltest-run-<p2>-e-regress_lin.lst" [color="lightgray",label="regr_lin4a-ltest-run-<p2>-e-regress_lin.lst\n[arch=lin,ver=WS4.0]",style="filled"];
+  "regr_lin4a-ltest-rerun-<p2>-d1-rerun" [color="lightgray",label="regr_lin4a-ltest-rerun-<p2>-d1-rerun\n[parent=1]",style="filled"];
+  "regr_lin3i-ltest-run-<p2>-e-regress_lin.lst" [color="lightgray",label="regr_lin3i-ltest-run-<p2>-e-regress_lin.lst\n[arch=lin,ver=WS3.0,cpu=ia32]",style="filled"];
+  "regr_lin3i-ltest-rerun-<p2>-d2-rerun" [color="lightgray",label="regr_lin3i-ltest-rerun-<p2>-d2-rerun\n[parent=0]",style="filled"];
+  "regr_lin4i-ltest-run-<p2>-e-regress_lin.lst" [color="lightgray",label="regr_lin4i-ltest-run-<p2>-e-regress_lin.lst\n[arch=lin,ver=WS4.0,cpu=ia32]",style="filled"];
+  "regr_lin4i-ltest-rerun-<p2>-d2-rerun" [color="lightgray",label="regr_lin4i-ltest-rerun-<p2>-d2-rerun\n[parent=1]",style="filled"];
+  "regr_hp1100-ltest-run-<p2>-e-regress_hp.lst" [color="lightgray",label="regr_hp1100-ltest-run-<p2>-e-regress_hp.lst\n[qsc=v,arch=hpux,ver=11.00]",style="filled"];
+  "regr_hp1100-ltest-rerun-<p2>-d3-rerun" [color="lightgray",label="regr_hp1100-ltest-rerun-<p2>-d3-rerun\n[parent=0]",style="filled"];
+  "regr_hp1111-ltest-run-<p2>-e-regress_hp.lst" [color="lightgray",label="regr_hp1111-ltest-run-<p2>-e-regress_hp.lst\n[arch=hpux,ver=11.11]",style="filled"];
+  "regr_hp1111-ltest-rerun-<p2>-d3-rerun" [color="lightgray",label="regr_hp1111-ltest-rerun-<p2>-d3-rerun\n[parent=0]",style="filled"];
+  "regr_ibm53-ltest-run-<p2>-d3-regress_ibm.lst" [color="lightgray",label="regr_ibm53-ltest-run-<p2>-d3-regress_ibm.lst\n[arch=aix,ver=5.3]",style="filled"];
+  "regr_ibm53-ltest-rerun-<p2>-d3-rerun" [color="lightgray",label="regr_ibm53-ltest-rerun-<p2>-d3-rerun\n[parent=2]",style="filled"];
+}
+/* List of edges */
+  "regr_win2k-ltest-run-<p2>-frw.lst" -> "regr_win2k-ltest-rerun-<p2>";
+  "regr_winxp-ltest-run-<p2>-frw.lst" -> "regr_winxp-ltest-rerun-<p2>";
+  "regr_lin3a-ltest-run-<p2>-e-regress_lin.lst" -> "regr_lin3a-ltest-rerun-<p2>-d1-rerun";
+  "regr_lin4a-ltest-run-<p2>-e-regress_lin.lst" -> "regr_lin3a-ltest-rerun-<p2>-d1-rerun";
+  "regr_sol59-ltest-run-<p2>-e-regress_sun.lst" -> "regr_lin3a-ltest-rerun-<p2>-d1-rerun";
+  "regr_lin3i-ltest-run-<p2>-e-regress_lin.lst" -> "regr_lin3i-ltest-rerun-<p2>-d2-rerun";
+  "regr_lin4i-ltest-run-<p2>-e-regress_lin.lst" -> "regr_lin3i-ltest-rerun-<p2>-d2-rerun";
+  "regr_sol510-ltest-run-<p2>-e-regress_sun.lst" -> "regr_lin3i-ltest-rerun-<p2>-d2-rerun";
+  "regr_ibm53-ltest-run-<p2>-d3-regress_ibm.lst" -> "regr_ibm53-ltest-rerun-<p2>-d3-rerun";
+  "regr_hp1100-ltest-run-<p2>-e-regress_hp.lst" -> "regr_ibm53-ltest-rerun-<p2>-d3-rerun";
+  "regr_hp1111-ltest-run-<p2>-e-regress_hp.lst" -> "regr_ibm53-ltest-rerun-<p2>-d3-rerun";
+  "regr_lin3a-ltest-rerun-<p2>-d1-rerun" -> "regr_lin4a-ltest-rerun-<p2>-d1-rerun";
+  "regr_lin4a-ltest-run-<p2>-e-regress_lin.lst" -> "regr_lin4a-ltest-rerun-<p2>-d1-rerun";
+  "regr_lin4a-ltest-rerun-<p2>-d1-rerun" -> "regr_sol59-ltest-rerun-<p2>-d1-rerun";
+  "regr_sol59-ltest-run-<p2>-e-regress_sun.lst" -> "regr_sol59-ltest-rerun-<p2>-d1-rerun";
+  "regr_lin3i-ltest-rerun-<p2>-d2-rerun" -> "regr_lin4i-ltest-rerun-<p2>-d2-rerun";
+  "regr_lin4i-ltest-run-<p2>-e-regress_lin.lst" -> "regr_lin4i-ltest-rerun-<p2>-d2-rerun";
+  "regr_lin4i-ltest-rerun-<p2>-d2-rerun" -> "regr_sol510-ltest-rerun-<p2>-d2-rerun";
+  "regr_sol510-ltest-run-<p2>-e-regress_sun.lst" -> "regr_sol510-ltest-rerun-<p2>-d2-rerun";
+  "regr_ibm53-ltest-rerun-<p2>-d3-rerun" -> "regr_hp1111-ltest-rerun-<p2>-d3-rerun";
+  "regr_hp1111-ltest-run-<p2>-e-regress_hp.lst" -> "regr_hp1111-ltest-rerun-<p2>-d3-rerun";
+  "regr_hp1111-ltest-rerun-<p2>-d3-rerun" -> "regr_hp1100-ltest-rerun-<p2>-d3-rerun";
+  "regr_hp1100-ltest-run-<p2>-e-regress_hp.lst" -> "regr_hp1100-ltest-rerun-<p2>-d3-rerun";
+  "regr_sol59-ltest-rerun-<p2>-d1-rerun" -> "rpt-regress-<p2>";
+  "regr_sol510-ltest-rerun-<p2>-d2-rerun" -> "rpt-regress-<p2>";
+  "regr_hp1100-ltest-rerun-<p2>-d3-rerun" -> "rpt-regress-<p2>";
+  "regr_win2k-ltest-rerun-<p2>" -> "rpt-regress-<p2>";
+  "regr_winxp-ltest-rerun-<p2>" -> "rpt-regress-<p2>";
+/* $Id: sampleA.dot,v 1.25 2008/07/30 02:28:26 khtan Exp $ */
+subgraph cluster6 {fontsize=60;label="<P1>_Regression";labeljust="l";color="orange";style="bold";
+  "regr_winxp-ltest-run-<p1>-full_<p1>_win.lst" [color="lightgray",label="regr_winxp-ltest-run-<p1>-full_<p1>_win.lst\n[h=<p2>-test-2650]",style="filled"];
+  "regr_winxp-ltest-rerun-<p1>" [color="lightgray",label="regr_winxp-ltest-rerun-<p1>\n[parent=0]",style="filled"];
+  "regr_lin3a-ltest-run-<p1>-e-full_<p1>_lin.lst" [color="lightgray",label="regr_lin3a-ltest-run-<p1>-e-full_<p1>_lin.lst\n[arch=lin,ver=WS3.0]",style="filled"];
+  "regr_lin3a-ltest-rerun-<p1>" [color="lightgray",label="regr_lin3a-ltest-rerun-<p1>\n[parent=0]",style="filled"];
+  "regr_lin3i-ltest-run-<p1>-e-full_<p1>_lin.lst" [color="lightgray",label="regr_lin3i-ltest-run-<p1>-e-full_<p1>_lin.lst\n[arch=lin,ver=WS3.0,cpu=ia32]",style="filled"];
+  "regr_lin3i-ltest-rerun-<p1>" [color="lightgray",label="regr_lin3i-ltest-rerun-<p1>\n[parent=0]",style="filled"];
+  "regr_lin4a-ltest-run-<p1>-e-full_<p1>_lin.lst" [color="lightgray",label="regr_lin4a-ltest-run-<p1>-e-full_<p1>_lin.lst\n[arch=lin,ver=WS4.0]",style="filled"];
+  "regr_lin4a-ltest-rerun-<p1>" [color="lightgray",label="regr_lin4a-ltest-rerun-<p1>\n[parent=0]",style="filled"];
+  "regr_lin4i-ltest-run-<p1>-e-full_<p1>_lin.lst" [color="lightgray",label="regr_lin4i-ltest-run-<p1>-e-full_<p1>_lin.lst\n[arch=lin,ver=WS4.0,cpu=ia32]",style="filled"];
+  "regr_lin4i-ltest-rerun-<p1>" [color="lightgray",label="regr_lin4i-ltest-rerun-<p1>\n[parent=0]",style="filled"];
+  "regr_sol59-ltest-run-<p1>-e-full_<p1>_sun.lst" [color="lightgray",label="regr_sol59-ltest-run-<p1>-e-full_<p1>_sun.lst\n[arch=sol,ver=5.9]",style="filled"];
+  "regr_sol59-ltest-rerun-<p1>" [color="lightgray",label="regr_sol59-ltest-rerun-<p1>\n[parent=0]",style="filled"];
+  "regr_sol510-ltest-run-<p1>-e-full_<p1>_sun.lst" [color="lightgray",label="regr_sol510-ltest-run-<p1>-e-full_<p1>_sun.lst\n[arch=sol,ver=5.10]",style="filled"];
+  "regr_sol510-ltest-rerun-<p1>" [color="lightgray",label="regr_sol510-ltest-rerun-<p1>\n[parent=0]",style="filled"];
+}
+/* List of edges */
+  "regr_winxp-ltest-run-<p1>-full_<p1>_win.lst" -> "regr_winxp-ltest-rerun-<p1>";
+  "regr_sol59-ltest-run-<p1>-e-full_<p1>_sun.lst" -> "regr_sol59-ltest-rerun-<p1>";
+  "regr_sol510-ltest-run-<p1>-e-full_<p1>_sun.lst" -> "regr_sol510-ltest-rerun-<p1>";
+  "regr_lin3a-ltest-run-<p1>-e-full_<p1>_lin.lst" -> "regr_lin3a-ltest-rerun-<p1>";
+  "regr_lin3i-ltest-run-<p1>-e-full_<p1>_lin.lst" -> "regr_lin3i-ltest-rerun-<p1>";
+  "regr_lin4a-ltest-run-<p1>-e-full_<p1>_lin.lst" -> "regr_lin4a-ltest-rerun-<p1>";
+  "regr_lin4i-ltest-run-<p1>-e-full_<p1>_lin.lst" -> "regr_lin4i-ltest-rerun-<p1>";
+  "regr_winxp-ltest-rerun-<p1>" -> "rpt-regress-<p1>";
+  "regr_sol59-ltest-rerun-<p1>" -> "rpt-regress-<p1>";
+  "regr_sol510-ltest-rerun-<p1>" -> "rpt-regress-<p1>";
+  "regr_lin3a-ltest-rerun-<p1>" -> "rpt-regress-<p1>";
+  "regr_lin3i-ltest-rerun-<p1>" -> "rpt-regress-<p1>";
+  "regr_lin4a-ltest-rerun-<p1>" -> "rpt-regress-<p1>";
+  "regr_lin4i-ltest-rerun-<p1>" -> "rpt-regress-<p1>";
+/* $Id: sampleA.dot,v 1.25 2008/07/30 02:28:26 khtan Exp $ */
+  /* list of nodes */
+
+
+
+subgraph cluster10{ fontsize=60;label="Coverity";labeljust="l";color="green";style="bold";
+  "sleepM-10m" [shape="diamond",color="lightgray",label="sleepM-10m\n[project=One]",style="filled"];
+  "<u>_<r>_cv<s>-pb-sync-metricsclient" [color="lightgray",label="<u>_<r>_cv<s>-pb-sync-metricsclient\n[arch=lin,ver=WS3.0]",style="filled"];
+     "<u>_<r>_cv<s>-generate-nmc" [label="<u>_<r>_cv<s>-generate-nmc\n[arch=lin,ver=WS3.0]",style="filled",color="lightgray"];
+     "<u>_<r>_cv<s>-std-cv-top" [color="lightgray",label="<u>_<r>_cv<s>-std-cv-top\n[arch=lin,ver=WS3.0,cpu=ia32]",style="filled"];
+}
+subgraph cluster11{ fontsize=60;label="Purify";labeljust="l";color="green";style="bold";
+
+  "sleepM1-5m" [shape="diamond",color="lightgray",label="sleepM1-5m\n[project=One]",style="filled"];
+  "sleepM2-5m" [shape="diamond",color="lightgray",label="sleepM2-5m\n[project=One]",style="filled"];
+  "<u>_<r>_pf<s>-pb-sync-metricsclient" [color="lightgray",label="<u>_<r>_pf<s>-pb-sync-metricsclient\n[arch=lin,ver=WS3.0]",style="filled"];
+     "<u>_<r>_pf<s>-std-pf1-top-sun" [color="lightgray",label="<u>_<r>_pf<s>-std-pf1-top-sun\n[arch=sol,ver=5.9]",style="filled"];
+     "<u>_<r>_pf<s>-dbg-pf1-top-sun" [color="lightgray",label="<u>_<r>_pf<s>-dbg-pf1-top-sun\n[arch=sol,ver=5.9]",style="filled"];
+     "<u>_<r>_pf<s>-test-pf2-std-m.lst-<p2>-sun" [color="lightgray",label="<u>_<r>_pf<s>-test-pf2-std-m.lst-<p2>-sun\n[parent]",style="filled"];
+     "<u>_<r>_pf<s>-test-sun" [color="lightgray",label="<u>_<r>_pf<s>-test-sun\n[parent]",style="filled"];
+     "<u>_<r>_pf<s>-std-pf1-top-lin" [color="lightgray",label="<u>_<r>_pf<s>-std-pf1-top-lin\n[arch=lin,ver=WS3.0]",style="filled"];
+     "<u>_<r>_pf<s>-dbg-pf1-top-lin" [color="lightgray",label="<u>_<r>_pf<s>-dbg-pf1-top-lin\n[arch=lin,ver=WS3.0]",style="filled"];
+     "<u>_<r>_pf<s>-test-pf2-std-m.lst-<p2>-lin" [color="lightgray",label="<u>_<r>_pf<s>-test-pf2-std-m.lst-<p2>-lin\n[parent]",style="filled"];
+     "<u>_<r>_pf<s>-test-lin" [color="lightgray",label="<u>_<r>_pf<s>-test-lin\n[parent]",style="filled"];
+}
+subgraph cluster12{ fontsize=60;label="Purecov";labeljust="l";color="green";style="bold";
+  "sleepM-5m" [shape="diamond",color="lightgray",label="sleepM-5m\n[project=One]",style="filled"];
+  "<u>_<r>_pc<s>-pb-sync-metricsclient" [color="lightgray",label="<u>_<r>_pc<s>-pb-sync-metricsclient\n[arch=lin,ver=WS3.0]",style="filled"];
+     "<u>_<r>_pc<s>-dbg-pf1-top-sun" [color="lightgray",label="<u>_<r>_pc<s>-dbg-pf1-top-sun\n[arch=sol,ver=5.9]",style="filled"];
+     "<u>_<r>_pc<s>-test-pc-dbg-m.lst-<p2>-sun" [color="lightgray",label="<u>_<r>_pc<s>-test-pc-dbg-m.lst-<p2>-sun\n[parent]",style="filled"];
+     "<u>_<r>_pc<s>-test-sun" [color="lightgray",label="<u>_<r>_pc<s>-test-sun\n[parent]",style="filled"];
+     "<u>_<r>_pc<s>-dbg-pf1-top-lin" [color="lightgray",label="<u>_<r>_pc<s>-dbg-pf1-top-lin\n[arch=lin,ver=WS3.0]",style="filled"];
+     "<u>_<r>_pc<s>-test-pc-dbg-m.lst-<p2>-lin" [color="lightgray",label="<u>_<r>_pc<s>-test-pc-dbg-m.lst-<p2>-lin\n[parent]",style="filled"];
+     "<u>_<r>_pc<s>-test-lin" [color="lightgray",label="<u>_<r>_pc<s>-test-lin\n[parent]",style="filled"];
+}
+  /* list of edges */
+  "start_metrics" -> "<u>_<r>_pf<s>-pb-sync-metricsclient";
+     "<u>_<r>_pf<s>-pb-sync-metricsclient" -> "<u>_<r>_pf<s>-std-pf1-top-sun";
+     "<u>_<r>_pf<s>-std-pf1-top-sun" -> "<u>_<r>_pf<s>-test-pf2-std-m.lst-<p2>-sun";
+     "<u>_<r>_pf<s>-pb-sync-metricsclient" -> "sleepM1-5m";
+     "sleepM1-5m" -> "<u>_<r>_pf<s>-dbg-pf1-top-sun";
+     "<u>_<r>_pf<s>-test-pf2-std-m.lst-<p2>-sun" -> "<u>_<r>_pf<s>-test-sun";
+     "<u>_<r>_pf<s>-test-sun" -> "rpt-pf-sun";
+     "<u>_<r>_pf<s>-pb-sync-metricsclient" -> "<u>_<r>_pf<s>-std-pf1-top-lin";
+     "<u>_<r>_pf<s>-std-pf1-top-lin" -> "<u>_<r>_pf<s>-test-pf2-std-m.lst-<p2>-lin";
+     "<u>_<r>_pf<s>-pb-sync-metricsclient" -> "sleepM2-5m";
+     "sleepM2-5m" -> "<u>_<r>_pf<s>-dbg-pf1-top-lin";
+     "<u>_<r>_pf<s>-test-pf2-std-m.lst-<p2>-lin" -> "<u>_<r>_pf<s>-test-lin";
+     "<u>_<r>_pf<s>-test-lin" -> "rpt-pf-lin";
+  "start_metrics" -> "sleepM-5m";
+  "sleepM-5m" -> "<u>_<r>_pc<s>-pb-sync-metricsclient";
+     "<u>_<r>_pc<s>-pb-sync-metricsclient" -> "<u>_<r>_pc<s>-dbg-pf1-top-sun";
+     "<u>_<r>_pc<s>-dbg-pf1-top-sun" -> "<u>_<r>_pc<s>-test-pc-dbg-m.lst-<p2>-sun";
+     "<u>_<r>_pc<s>-test-pc-dbg-m.lst-<p2>-sun" -> "<u>_<r>_pc<s>-test-sun";
+     "<u>_<r>_pc<s>-test-sun" -> "rpt-pc-sun";
+  "start_metrics" -> "sleepM-10m";
+  "sleepM-10m" -> "<u>_<r>_cv<s>-pb-sync-metricsclient";
+     "<u>_<r>_cv<s>-pb-sync-metricsclient" -> "<u>_<r>_cv<s>-std-cv-top";
+     "<u>_<r>_cv<s>-pb-sync-metricsclient" -> "<u>_<r>_cv<s>-generate-nmc";
+     "<u>_<r>_cv<s>-std-cv-top" -> "rpt-cv";
+     "<u>_<r>_pc<s>-pb-sync-metricsclient" -> "<u>_<r>_pc<s>-dbg-pf1-top-lin";
+     "<u>_<r>_pc<s>-dbg-pf1-top-lin" -> "<u>_<r>_pc<s>-test-pc-dbg-m.lst-<p2>-lin";
+     "<u>_<r>_pc<s>-test-pc-dbg-m.lst-<p2>-lin" -> "<u>_<r>_pc<s>-test-lin";
+     "<u>_<r>_pc<s>-test-lin" -> "rpt-pc-lin";
+
+subgraph cluster4 {fontsize=60;label="Testlab";labeljust="l";color="blue";style="bold";
+  "e-pb-sync-testlab" [color="lightgray",label="e-pb-sync-testlab\n[arch=lin]",style="filled"];
+  "e-pb-cleanup" [color="lightgray",label="e-pb-cleanup\n[arch=lin]",style="filled"];
+}
+  "start_build" [color="lightgray",label="start_build\n[project=One]",style="filled"];
+  "<u>_<r>_<p2>-pb-label_depot" [color="lightgray",label="<u>_<r>_<p2>-pb-label_depot\n[arch=lin]",style="filled"];
+/* list of edges */
+  "start_build" -> "<u>_<r>_<p2>-pb-label_depot";
+  "<u>_<r>_<p2>-pb-label_depot" -> "e-pb-cleanup";
+  "e-pb-cleanup" -> "e-pb-sync-testlab";
+  /* to <p2>-build.subgraph */
+  "<u>_<r>_<p2>-pb-label_depot" -> "<u>_<r>_<p2>-pb-cleanup";
+  "<u>_<r>_<p2>-pb-label_depot" -> "<u>_<r>_<p2>_win-pb-cleanup";
+  /* to <p1>-build.subgraph */
+  "<u>_<r>_<p2>-pb-label_depot" -> "<u>_<r>_<p1>_win-pb-cleanup";
+  "<u>_<r>_<p2>-pb-label_depot" -> "<u>_<r>_<p1>-pb-cleanup";
+  /* <p2>-build.subgraph to install.subgraph */
+  "<u>_<r>_<p2>-pb-image-std-lin3a" -> "install-cleanup-lin3a";
+  "<u>_<r>_<p2>-pb-image-std-lin3a" -> "install-cleanup-win2k";
+  "<u>_<r>_<p2>-pb-image-std-lin3a" -> "install-cleanup-winxp";
+  "<u>_<r>_<p2>-pb-image-std-lin3a" -> "install-cleanup-winxp2";
+  /* <p1>-build.subgraph to install.subgraph */
+  "<u>_<r>_<p1>-pb-image-std-lin3a" -> "install-cleanup-lin3a";
+  "<u>_<r>_<p1>-pb-image-std-lin3a" -> "install-cleanup-win2k";
+  "<u>_<r>_<p1>-pb-image-std-lin3a" -> "install-cleanup-winxp";
+  "<u>_<r>_<p1>-pb-image-std-lin3a" -> "install-cleanup-winxp2";
+  /* install.subgraph to <p2>-regression.subgraph */
+  "install-<p2>-std-hp1100" -> "regr_hp1100-ltest-run-<p2>-e-regress_hp.lst";
+  "install-<p2>-std-hp1100" -> "regr_hp1111-ltest-run-<p2>-e-regress_hp.lst";
+  "install-<p2>-std-ibm53" -> "regr_ibm53-ltest-run-<p2>-d3-regress_ibm.lst";
+  "install-<p1>-std-win2k" -> "regr_win2k-ltest-run-<p2>-frw.lst";
+  "install-<p1>-std-winxp" -> "regr_winxp-ltest-run-<p2>-frw.lst";
+  "install-<p1>-std-sol59" -> "regr_sol59-ltest-run-<p2>-e-regress_sun.lst";
+  "install-<p1>-std-sol59" -> "regr_sol510-ltest-run-<p2>-e-regress_sun.lst";
+  "install-<p1>-std-lin3a" -> "regr_lin3a-ltest-run-<p2>-e-regress_lin.lst";
+  "install-<p1>-std-lin3a" -> "regr_lin4a-ltest-run-<p2>-e-regress_lin.lst";
+  "install-<p1>-std-lin3a" -> "regr_lin3i-ltest-run-<p2>-e-regress_lin.lst";
+  "install-<p1>-std-lin3a" -> "regr_lin4i-ltest-run-<p2>-e-regress_lin.lst";
+  /* install.subgraph to <p1>-regression.subgraph */
+  "install-<p1>-std-winxp2" -> "regr_winxp-ltest-run-<p1>-full_<p1>_win.lst";
+  "install-<p1>-std-sol59" -> "regr_sol59-ltest-run-<p1>-e-full_<p1>_sun.lst";
+  "install-<p1>-std-sol59" -> "regr_sol510-ltest-run-<p1>-e-full_<p1>_sun.lst";
+  "install-<p1>-std-lin3a" -> "regr_lin3a-ltest-run-<p1>-e-full_<p1>_lin.lst";
+  "install-<p1>-std-lin3a" -> "regr_lin3i-ltest-run-<p1>-e-full_<p1>_lin.lst";
+  "install-<p1>-std-lin3a" -> "regr_lin4a-ltest-run-<p1>-e-full_<p1>_lin.lst";
+  "install-<p1>-std-lin3a" -> "regr_lin4i-ltest-run-<p1>-e-full_<p1>_lin.lst";
+  /* <p2>-build.subgraph to <p2>-metrics.subgraph */
+  "<u>_<r>_<p2>-pb-<u>_updatestg-std-lin3a"-> "start_metrics";
+  /* temporary between <p2> and <p1> windows bec 1 machine only */
+  "<u>_<r>_<p1>_win-pb-sync-buildclient" -> "sleepB3-30m";
+subgraph cluster7{ fontsize=60;label="Report";labeljust="l";color="blue";style="bold";
+  "rpt-unit-<p1>" [color="lightgray",label="rpt-unit-<p1>\n[arch=lin,ver=WS3.0]",style="filled"];
+  "rpt-regress-<p2>" [color="lightgray",label="rpt-regress-<p2>\n[arch=lin]",style="filled"];
+  "rpt-regress-<p1>" [color="lightgray",label="rpt-regress-<p1>\n[arch=lin]",style="filled"];
+  "rpt-pf-sun" [color="lightgray",label="rpt-pf-sun\n[arch=lin,ver=WS3.0]",style="filled"];
+  "rpt-pf-lin" [color="lightgray",label="rpt-pf-lin\n[arch=lin,ver=WS3.0]",style="filled"];
+  "rpt-pc-sun" [color="lightgray",label="rpt-pc-sun\n[parent]",style="filled"];
+  "rpt-pc-lin" [color="lightgray",label="rpt-pc-lin\n[parent]",style="filled"];
+  "rpt-cv" [label="rpt-cv\n[arch=lin,ver=WS3.0,cpu=ia32]",style="filled",color="lightgray"];
+}
+subgraph cluster71{ fontsize=60;label="Stage <P2>";labeljust="l";color="blue";style="bold";
+  "<u>_<r>_<p2>-pb-<u>_stg-std-lin3a" [color="lightgray",label="<u>_<r>_<p2>-pb-<u>_stg-std-lin3a\n[arch=lin,ver=WS3.0]",style="filled"];
+  "<u>_<r>_<p2>-pb-<u>_stg-std-sol59" [color="lightgray",label="<u>_<r>_<p2>-pb-<u>_stg-std-sol59\n[arch=sol,ver=5.9]",style="filled"];
+  "<u>_<r>_<p2>-pb-<u>_stg-std-ibm53" [color="lightgray",label="<u>_<r>_<p2>-pb-<u>_stg-std-ibm53\n[arch=aix,ver=5.3]",style="filled"];
+  "<u>_<r>_<p2>-pb-<u>_stg-std-hp1100" [color="lightgray",label="<u>_<r>_<p2>-pb-<u>_stg-std-hp1100\n[qsc=v,arch=hpux,ver=11.00]",style="filled"];
+  "<u>_<r>_<p2>_win-pb-<u>_stg-std-winxp" [color="lightgray",label="<u>_<r>_<p2>_win-pb-<u>_stg-std-winxp\n[h=winxp-2]",style="filled"];
+  "<u>_<r>_<p2>-pb-<u>_stg-dbg-lin3a" [color="lightgray",label="<u>_<r>_<p2>-pb-<u>_stg-dbg-lin3a\n[arch=lin,ver=WS3.0]",style="filled"];
+  "<u>_<r>_<p2>-pb-<u>_stg-dbg-sol59" [color="lightgray",label="<u>_<r>_<p2>-pb-<u>_stg-dbg-sol59\n[arch=sol,ver=5.9]",style="filled"];
+  "<u>_<r>_<p2>-pb-<u>_updatestg-std-lin3a" [color="lightgray",label="<u>_<r>_<p2>-pb-<u>_updatestg-std-lin3a\n[arch=lin,ver=WS3.0]",style="filled"];
+  "start_metrics" [color="lightgray",label="start_metrics\n[arch=lin,ver=WS3.0]",style="filled"];
+}
+subgraph cluster72{ fontsize=60;label="Stage <P1>";labeljust="l";color="blue";style="bold";
+  "<u>_<r>_<p1>-pb-<u>_stg-std-lin3a" [color="lightgray",label="<u>_<r>_<p1>-pb-<u>_stg-std-lin3a\n[arch=lin,ver=WS3.0]",style="filled"];
+  "<u>_<r>_<p1>-pb-<u>_stg-std-sol59" [color="lightgray",label="<u>_<r>_<p1>-pb-<u>_stg-std-sol59\n[arch=sol,ver=5.9]",style="filled"];
+  "<u>_<r>_<p1>_win-pb-<u>_stg-std-winxp" [color="lightgray",label="<u>_<r>_<p1>_win-pb-<u>_stg-std-winxp\n[h=winxp-2]",style="filled"];
+  "<u>_<r>_<p1>-pb-<u>_stg-dbg-lin3a" [color="lightgray",label="<u>_<r>_<p1>-pb-<u>_stg-dbg-lin3a\n[arch=lin,ver=WS3.0]",style="filled"];
+  "<u>_<r>_<p1>-pb-<u>_stg-dbg-sol59" [color="lightgray",label="<u>_<r>_<p1>-pb-<u>_stg-dbg-sol59\n[arch=sol,ver=5.9]",style="filled"];
+  "<u>_<r>_<p1>-pb-<u>_updatestg-std-lin3a" [color="lightgray",label="<u>_<r>_<p1>-pb-<u>_updatestg-std-lin3a\n[arch=lin,ver=WS3.0]",style="filled"];
+}
+subgraph cluster73{ fontsize=60;label="Release <P2>";labeljust="l";color="blue";style="bold";
+  "<u>_<r>_<p2>-pb-rls-std-lin3a" [color="lightgray",label="<u>_<r>_<p2>-pb-rls-std-lin3a\n[arch=lin,ver=WS3.0]",style="filled"];
+  "<u>_<r>_<p2>-pb-rls-std-sol59" [color="lightgray",label="<u>_<r>_<p2>-pb-rls-std-sol59\n[arch=sol,ver=5.9]",style="filled"];
+  "<u>_<r>_<p2>-pb-rls-std-hp1100" [color="lightgray",label="<u>_<r>_<p2>-pb-rls-std-hp1100\n[qsc=v,arch=hpux,ver=11.00]",style="filled"];
+  "<u>_<r>_<p2>-pb-rls-std-ibm53" [color="lightgray",label="<u>_<r>_<p2>-pb-rls-std-ibm53\n[arch=aix,ver=5.3]",style="filled"];
+  "<u>_<r>_<p2>_win-pb-rls-std-winxp" [color="lightgray",label="<u>_<r>_<p2>_win-pb-rls-std-winxp\n[h=winxp-2]",style="filled"];
+  "<u>_<r>_<p2>-pb-image-std-lin3a" [color="lightgray",label="<u>_<r>_<p2>-pb-image-std-lin3a\n[arch=lin,ver=WS3.0]",style="filled"];
+  "ftp-image-<p2>" [color="lightgray",label="ftp-image-<p2>\n[h=rhamd03]",style="filled"];
+}
+subgraph cluster74{ fontsize=60;label="Release <P1>";labeljust="l";color="blue";style="bold";
+  "ftp-image-<p1>" [color="lightgray",label="ftp-image-<p1>\n[h=rhamd04]",style="filled"];
+  "<u>_<r>_<p1>-pb-rls-std-lin3a" [color="lightgray",label="<u>_<r>_<p1>-pb-rls-std-lin3a\n[arch=lin,ver=WS3.0]",style="filled"];
+  "<u>_<r>_<p1>-pb-rls-std-sol59" [color="lightgray",label="<u>_<r>_<p1>-pb-rls-std-sol59\n[arch=sol,ver=5.9]",style="filled"];
+  "<u>_<r>_<p1>_win-pb-rls-std-winxp" [color="lightgray",label="<u>_<r>_<p1>_win-pb-rls-std-winxp\n[h=winxp-2]",style="filled"];
+  "<u>_<r>_<p1>-pb-image-std-lin3a" [color="lightgray",label="<u>_<r>_<p1>-pb-image-std-lin3a\n[arch=lin,ver=WS3.0]",style="filled"];
+}
+subgraph cluster75{ fontsize=60;label="Unit Test <P2>";labeljust="l";color="orange";style="bold";
+  "<u>_<r>_<p2>_win-pb-atest-a.lst-std-winxp" [color="lightgray",label="<u>_<r>_<p2>_win-pb-atest-a.lst-std-winxp\n[h=winxp-2]",style="filled"];
+  "<u>_<r>_<p2>-pb-atest-a.lst-std-d3-sol59" [color="lightgray",label="<u>_<r>_<p2>-pb-atest-a.lst-std-d3-sol59\n[arch=sol,ver=5.9]",style="filled"];
+  "<u>_<r>_<p2>-pb-atest-a.lst-std-d2-hp1100" [color="lightgray",label="<u>_<r>_<p2>-pb-atest-a.lst-std-d2-hp1100\n[qsc=v,arch=hpux,ver=11.00]",style="filled"];
+  "<u>_<r>_<p2>-pb-atest-a.lst-std-d1-lin3a" [color="lightgray",label="<u>_<r>_<p2>-pb-atest-a.lst-std-d1-lin3a\n[arch=lin,ver=WS3.0]",style="filled"];
+  "<u>_<r>_<p2>-pb-atest-a.lst-std-d3-ibm53" [color="lightgray",label="<u>_<r>_<p2>-pb-atest-a.lst-std-d3-ibm53\n[arch=aix,ver=5.3]",style="filled"];
+}
+subgraph cluster76{ fontsize=60;label="Unit Test <P1>";labeljust="l";color="orange";style="bold";
+  "<u>_<r>_<p1>-pb-unit_run-std-u.lst-lin3a" [color="lightgray",label="<u>_<r>_<p1>-pb-unit_run-std-u.lst-lin3a\n[arch=lin,ver=WS3.0]",style="filled"];
+  "<u>_<r>_<p1>-pb-unit_run-std-u.lst-sol59" [color="lightgray",label="<u>_<r>_<p1>-pb-unit_run-std-u.lst-sol59\n[arch=sol,ver=5.9]",style="filled"];
+  "<u>_<r>_<p1>_win-pb-unit_run-std-u.lst-winxp" [color="lightgray",label="<u>_<r>_<p1>_win-pb-unit_run-std-u.lst-winxp\n[h=winxp-2]",style="filled"];
+}
+}

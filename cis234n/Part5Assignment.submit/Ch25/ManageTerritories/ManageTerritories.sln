@@ -1,0 +1,21 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManageTerritories", "ManageTerritories.csproj", "{AADAC9A2-483B-4E34-9EA2-21A906A2315C}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{AADAC9A2-483B-4E34-9EA2-21A906A2315C}.Debug.ActiveCfg = Debug|.NET
+		{AADAC9A2-483B-4E34-9EA2-21A906A2315C}.Debug.Build.0 = Debug|.NET
+		{AADAC9A2-483B-4E34-9EA2-21A906A2315C}.Release.ActiveCfg = Release|.NET
+		{AADAC9A2-483B-4E34-9EA2-21A906A2315C}.Release.Build.0 = Release|.NET
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

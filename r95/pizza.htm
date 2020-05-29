@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<!-- $Id: pizza.htm 92 2005-11-27 05:42:43Z khtan $ -->
+<head><title>Pizza</title>
+   <style type="text/css"><!--
+      @import url("defaultcss.css");
+      #pizzaForm1Id{position:relative}
+      #leftId,#middleId,#rightId{float:left;
+         /*border-style:dotted;border-color:blue;/* debug */
+      }
+      #middleId{
+         /*border-style:dotted;border-color:red;/* debug */
+      }
+      #rightId{
+         /*border-style:dotted;border-color:lime;/* debug */
+      }
+   --></style>
+   <script type="text/javascript" src="javascript/debug.js"></script>
+</head>
+   <script type="text/javascript" language="Javascript"><!--
+         var debugWin;
+      function openDebugWindow(){
+         debugWin=openDebug("pizza.htm");
+      }//openDebugWindow
+      function createCheckBox(form,cbname){
+         var cbText=document.createTextNode(cbname);
+         var cb=document.createElement("input");
+         cb.type="checkbox";
+         cb.name=cbname.toLowerCase();
+         cb.value=cbname.toLowerCase();
+         form.appendChild(cb);
+         form.appendChild(cbText);
+      }
+      function populatePizzaForm(){
+         // Works but too tedious to replicate a better looking form like pizzaForm1
+         toppings=new Array("Cheese","Pepperoni","Sausage","Mushrooms","Olives","Onion","Green Pepper","Anchovies","Salami");
+         toppings.sort();
+         for(topping in toppings){
+            createCheckBox(document.pizzaForm,toppings[topping]);
+            if(topping%3==2){
+               brEle=document.createElement("br");
+               document.pizzaForm.appendChild(brEle);
+            }
+         }
+      }
+      function printOrder(formId,textId){
+         var textBox=document.getElementById(textId);
+         var form=document.getElementById(formId);
+         var textValue="";
+         var numChecked=0;
+         for(var i=0;i<form.elements.length;++i){
+            if(form.elements[i].type=='checkbox' && form.elements[i].checked){
+               // debugOutput(debugWin,form.elements[i].value);
+               textValue=textValue+form.elements[i].value+"\n";
+               ++numChecked;
+            }
+         }
+         textBox.rows=numChecked+1;
+         textBox.value=textValue;
+      }
+      function initPage(){
+//        openDebugWindow();
+//        debugOutput(debugWin,walkChildNodes(document.pizzaForm));
+//        populatePizzaForm();
+      }
+   //-->
+   </script>
+<body onload="initPage()">
+<div class="guidepost">
+   <ul>
+      <li><strong>You are here:</strong></li>
+      <li><a href="default.htm">Home &gt;&gt;</a></li>
+      <li><a href="homework.htm">Homework  &gt;&gt;</a></li>
+      <li>Pizza</li>
+   </ul>
+</div>
+<h2>Pizza</h2>
+   <p>This is a demo of checkboxes. The following features are implemented:
+      <ul>
+         <li>The order list automatically resized to show all the toppings selected.</li>
+         <li>The checkboxes are placed in a grid layout with css divs. Since this layout is local,
+             the style sheet settings specified locally to this page.</li>
+         <li>A <a href="#" onclick="openDebugWindow()">debug window</a> can be opened to see the transcript of function calls.
+         </li>
+      </ul>
+   </p>
+   <form name="pizzaForm"><!-- dynamically populated by populatePizzaForm() -->
+   </form>
+   <form name="pizzaForm1" id="pizzaForm1Id" title="Click to select topping choices">
+      Select toppings:
+      <div class="separatorInvisibleClass"><!-- x --></div>
+      <div id="leftId">
+         <input type="checkbox" name="anchovies" value="anchovies">Anchovies</input>
+         <br>
+         <input type="checkbox" name="mushrooms" value="mushrooms">Mushrooms</input>
+         <br>
+         <input type="checkbox" name="pepperoni" value="pepperoni">Pepperoni</input>
+         </div>
+      <div id="middleId">
+         <input type="checkbox" name="cheese" value="cheese">Cheese</input>
+         <br>
+         <input type="checkbox" name="olives" value="olives">Olives</input>
+         <br>
+         <input type="checkbox" name="salami" value="salami">Salami</input>
+      </div>
+      <div id="rightId">
+         <input type="checkbox" name="green pepper" value="green pepper">Green Pepper</input>
+         <br>
+         <input type="checkbox" name="onion" value="onion">Onion</input>
+         <br>
+         <input type="checkbox" name="sausage" value="sausage">Sausage</input>
+      </div>
+      <div class="separatorInvisibleClass"><!-- x --></div>
+      <br>
+      <input type="button" value="Order" title="Click to place order" onclick="printOrder('pizzaForm1Id','orderTextId')">
+      <br><br>
+      <textarea id="orderTextId" name="orderText" readonly="readonly" type="text" size="10" rows="1" title="List of toppings as selected">order list</textarea>
+   </form>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<!-- $Id $ -->
+<head><title>CIS233S Demo Web Site for Kwee Tan</title></head>
+   <!-- add content for spiders -->
+   <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+   <link rel="stylesheet" href="defaultcss.css" type="text/css">
+   <link id="debug" rel="alternate stylesheet" href="debugcss.css" type="text/css" title="debugtitle">
+   <script type="text/javascript" src="javascript/default.js"></script>
+   <script type="text/javascript" src="javascript/cookie.js"></script>
+   <script type="text/javascript" language="Javascript"><!--
+      function initPage(cssFile){
+         // loginDeflect();
+         var browserValue=getBrowserAndVersion();
+         if(-1!=browserValue.indexOf("Opera")){ // bug in Opera, must switch one time
+            changeStyle(cssFile);
+         }
+      }
+   //-->
+   </script>
+<body onload="initPage('debugcss.css')">
+<div id="wrapperId">
+   <div id="headerId"></div><!--headerId-->
+   <div id="innerWrapperId">
+      <div id="leftNavId">
+                  <!-- start of left pane -->
+                  <dl>
+                     <dd><strong>Goto:</strong></dd>
+                     <dd><a href="default.htm">Home</a></dd>
+                     <dd><a href="blog.htm">Blog</a></dd>
+                     <dd><a href="reference.htm">Reference</a></dd>
+                  </dl>
+                  <dl>
+                     <dd><strong>Developer modes</strong></dd>
+                     <dd><a href="#" onclick="changeStyle('debugcss.css')">Show/hide layout</a></dd>
+                  </dl>
+                  <!-- end of left pane -->
+      </div><!--leftNavId-->
+      <div id="centerContentId">
+                     <!-- start of middle pane -->
+                     <h1>Homework</h1>
+                     <p>This page is used to hold homework examples. Thus, the pages
+                        linked from here do not have the "commercial" display layout of the
+                        home page, with icons and menus. They tend to be vanilla pages
+                        just to illustrate a specific functionality.
+                     </p>
+                     <p>To underscore this difference, these homework pages will have "You are here" guideposts
+                        instead of the Goto: left navigation links.
+                     </p>
+                     <ul>
+                        <li><a href="temp.htm">Temperature Conversion (floating point processing)</a></li>
+                        <li><a href="email.htm">Email Address Validation (string processing)</a></li>
+                        <li><a href="formEg.htm">Towns (form - selection box)</a></li>
+                        <li><a href="factorial.htm">Factorial (integer processing)</a></li>
+                        <li><a href="pizza.htm">Pizza (form - checkbox)</a></li>
+                        <li><a href="cd_catalog.xml">CD Catalog (xml/xslt)</a></li>
+                     </ul>                     
+                     <!-- end of middle pane -->
+      </div><!--centerContentId-->
+      <div id="rightPicId">
+                  <blockquote><em>
+                  He who asks a question is a fool for five minutes; 
+                  he who does not ask a question remains a fool forever -- Confucius 
+                  </em></blockquote>
+      </div><!--rightPicId-->
+      <div class="separatorInvisibleClass"><!-- x --></div>
+   </div>
+   <div id="footerId"></div><!--footerId-->
+</div>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>DailyRate</name>
+    </assembly>
+    <members>
+        <member name="T:DailyRate.Class1">
+            <summary>
+            Functionally, this program calculates the commission fee by requesting
+            2 inputs from the user ( daily rate, number of days )
+            </summary>
+            <remarks>
+            This class also serves the following learning purposes:
+            1) Catching exceptions, anticipated and unanticipated
+            2) Use of comment tags
+            3) Use of fxcop ( //www.gotdotnet.com/team/fxcop ), a code analysis tool
+               Changes marked "fxcop" in the comments were motivated by the tool.
+               The advantage is that security and more advanced practices are caught and learnt
+               earlier
+            4) A simple test driver and test data files is used in runtest.bat
+            </remarks>
+        </member>
+        <member name="M:DailyRate.Class1.Main">
+            <summary>
+            Main entry point, serves to catch all unanticipated exceptions
+            </summary>
+        </member>
+        <member name="M:DailyRate.Class1.writeExceptionMessage(System.String)">
+            <summary>
+            Write exception message to console
+            </summary>
+            <param name="message">Message string to print out</param>
+        </member>
+        <member name="M:DailyRate.Class1.run">
+            <summary>
+            Called from Main, contains top most logic of program and handling all anticipated exceptions
+            </summary>
+        </member>
+        <member name="M:DailyRate.Class1.readDouble(System.String)">
+            <summary>
+            Read and validate a double from user
+            </summary>
+            <param name="prompt">Read a double value from console</param>
+            <returns>Valid double value</returns>
+        </member>
+        <member name="M:DailyRate.Class1.readInt(System.String)">
+            <summary>
+            Read and validate an integer from user
+            </summary>
+            <param name="prompt">read an integer from console</param>
+            <returns>Valid int value</returns>
+        </member>
+        <member name="M:DailyRate.Class1.calculateFee(System.Double,System.Int32)">
+            <summary>
+            Compute consulting fee
+            </summary>
+            <param name="dailyRate">The daily commission rate in double precision</param>
+            <param name="noOfDays">Whole number of days worked</param>
+            <returns>dailyRate*noOfDays double value</returns>
+        </member>
+        <member name="M:DailyRate.Class1.writeFee(System.Double)">
+            <summary>
+            Write consulting fee to console
+            </summary>
+            <param name="fee">Value of fee in double precision</param>
+        </member>
+    </members>
+</doc>

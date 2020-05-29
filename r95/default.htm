@@ -1,0 +1,206 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<!-- $Id: default.htm 95 2008-08-08 19:10:23Z khtan $ -->
+<head><title>CIS233S Demo Web Site for Kwee Tan</title></head>
+   <!-- add content for spiders -->
+      <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+      <meta name="keywords" content="student" />
+      <meta name="description" content="student" />
+   <style type="text/css"><!--
+      @import url("../style/common.css");
+      @import url("defaultcss.css");
+   --></style>
+   <link rel="icon" href="kht-favicon.ico" type="image/vnd.microsoft.com" />
+   <link rel="shortcut icon" href="kht-favicon.ico" type="image/vnd.microsoft.com" />
+   <link rel="stylesheet" href="defaultcss.css" type="text/css">
+   <link id="debug" rel="alternate stylesheet" href="debugcss.css" type="text/css" title="debugtitle">
+
+   <script type="text/javascript" src="javascript/cookie.js"></script>
+   <script type="text/javascript" src="javascript/default.js"></script>
+   <script type="text/javascript" src="javascript/debug.js"></script>
+   <script type="text/javascript" language="Javascript"><!--
+      var debugWin;
+      /* alert("Hello world - internal");*/
+      function ValidateMe(oFrm){
+            // Function copied from Greg Jackson's lecture 4. He must have given to us to
+            // save us time?
+            // Normally would lowercase the input, but here, we want to be exact
+            var divFail=document.getElementById('loginFail');
+            var divPass=document.getElementById('loginPass');
+            var cookieName="KHT_IsLoggedIn";
+            if((oFrm.login.value == "guest") && (oFrm.password.value == "password")){
+              // alert("Login succeeded");
+              divFail.style.display="none";              
+              divPass.style.display="block";
+              createCookie(cookieName,"empty");
+              return true;
+            }else{
+              // alert('Login failed');
+              divFail.style.display="block";              
+              divPass.style.display="none";              
+              return false;
+            }
+      }//function ValidateMe(oFrm)
+      function updateDateTime(){
+         var today=new Date().toString();
+         document.statusForm.dateText.size=today.length+1;
+         document.statusForm.dateText.value=today;
+      }//updateDateTime
+      function updateStatusForm(){
+         updateDateTime();
+         var cookieValue=navigator.cookieEnabled?"Cookie enabled":"Cookie disabled";
+         document.statusForm.cookieText.size=cookieValue.length;
+         document.statusForm.cookieText.value=cookieValue;
+         var browserValue=getBrowserAndVersion();
+         document.statusForm.browserText.size=getAdjustedLength(browserValue);
+         document.statusForm.browserText.value=browserValue;
+      }//updateStatusForm
+      function lab7(){
+         var cookieName="KHT_HasBeenSpammed";
+         if(!cookieExists(cookieName)){
+            openWin("http://www.sitepoint.com");
+            // createCookie(cookieName,"empty",1); // 1 min for testing
+            createCookie(cookieName,"empty",60*24*7); // 7 days for release
+         }else{
+            debugOutput(debugWin,"cookie detected");
+         }
+      }//lab7
+      // Global variable for deleteSpamCookies and spamWindows
+         var allSpamWindows=[
+         //       popup?  | cookie name          |   cookie url 
+                ["popup"  ,"KHT_sitepoint",       "http://www.sitepoint.com",],
+                ["popback","KHT_wikipediea_regex","http://en.wikipedia.org/wiki/Regular_expression"],
+                ["popup"  ,"KHT_regex_library",   "http://www.regexlib.com"],
+                ["popup"  ,"KHT_browser_sniffer", "http://www.webreference.com/tools/browser/javascript.html"],
+                ["popup"  ,"KHT_css_properties",  "http://www.devx.com/tips/Tip/13638"]
+                            ];
+      function deleteSpamCookies(){
+         for( var winNo in allSpamWindows){
+            cookieName=allSpamWindows[winNo][1];
+            if(cookieExists(cookieName)){
+               deleteCookie(cookieName);
+            }
+         }
+      }//deleteSpamCookies
+      function spamWindows(){
+         var avaiSpamIndices=new Array(); // array of indices into allSpamWindows
+         var cookieName;
+         for( var winNo in allSpamWindows){
+            cookieName=allSpamWindows[winNo][1];
+            if(!cookieExists(cookieName)){
+               debugOutput(debugWin,"not exists: "+cookieName);
+               avaiSpamIndices.push(winNo);
+            }else{
+               debugOutput(debugWin,"    exists: "+cookieName);
+            }
+         }
+         if(avaiSpamIndices.length>0){
+            var spamSelected=Math.floor(Math.random()*(avaiSpamIndices.length)); // random index into avaiSpamIndices
+            var spamIndex=avaiSpamIndices[spamSelected]; // get index into allSpamWindows
+            var winState=allSpamWindows[spamIndex][0];
+            cookieName=allSpamWindows[spamIndex][1];
+            var cookieURL=allSpamWindows[spamIndex][2];
+            debugOutput(debugWin,"selected: "+spamIndex+" - "+winState+"<>"+cookieName+"<>"+cookieURL);
+            openWinName(cookieURL,cookieName);
+            createCookie(cookieName,"empty",60*24*7);
+            if(winState=="popback") focus();
+         }
+      }//spamWindows
+      function lab9(){
+         spamWindows();
+      }//lab9
+      function openDebugWindow(){
+         debugWin=openDebug("default.htm");
+      }//openDebugWindow
+      function initPage(cssFile){
+         // Initialize the page, set focus, etc
+         // openDebugWindow();
+         // document.loginForm.login.focus();
+         updateStatusForm();
+         var browserValue=getBrowserAndVersion();
+         if(-1!=browserValue.indexOf("Opera")){ // bug in Opera, must switch one time
+            changeStyle(cssFile);
+         }
+         // lab9();
+      }
+   //-->
+   </script>
+<body onload="initPage('debugcss.css')">
+<div id="wrapperId">
+   <div id="headerId">
+         <form id="statusFormId" name="statusForm">
+           <input class="statusFormClass" id="browserTextId" name="browserText" readonly type="text" value="browserStatus" size="10"></input>
+           <input class="statusFormClass" id="cookieTextId" name="cookieText" readonly type="text" value="cookieStatus" size="10" align="right"></input>
+           <input class="statusFormClass" id="dateTextId" name="dateText" value="dateTime" readonly type="text" size="10"></input>
+         </form>
+   </div><!--headerId-->
+      <div class="separatorInvisibleClass"><!-- x --></div>
+   <div id="innerWrapperId">
+      <div id="leftNavId">
+                  <!-- start of left pane -->
+                  <dl>
+                     <dd><strong>Goto:</strong></dd>
+                     <dd><a href="../index.htm">Top</a></dd>
+                     <dd><a href="homework.htm">Homework</a></dd>
+                     <dd><a href="blog.htm">Blog</a></dd>
+                     <dd><a href="reference.htm">Reference</a></dd>
+                  </dl>
+                  <dl>
+                     <dd><strong>Developer modes</strong></dd>
+                     <dd><a href="#" onclick="changeStyle('debugcss.css')">Show/hide layout</a></dd>
+                     <dd><a href="#" onclick="updateDateTime()">Refresh date/time</a></dd>
+                     <dd><a href="#" onclick="openDebugWindow()">Open debug window</a></dd>
+                  </dl>
+                  <!-- end of left pane -->
+      </div><!--leftNavId-->
+      <div id="centerContentId">
+                  <!-- start of middle pane -->
+                  <h1>Welcome!</h1>
+                 <p>
+This is a demo web site created for an Advanced DHTML/CSS/Javascript class I took.
+Use the left navigation links to visit see some of the features implemented, such as:
+                 </p>
+                  <table frame="hsides">
+<tr bgcolor="silver"><td width="45%" align="center">Features</td><td align="center">Click on</td></tr>
+<tr><td>Pure CSS-based 3 column layout</td><td><strong>Developer modes</strong>:Show/hide layout</td></tr>
+<tr><td>CSS-based outlining for blog content</td><td><strong>Goto:</strong>Blog</td></tr>
+<tr><td>Pages to illustrate Javascript features</td><td><strong>Goto:</strong>Homework</td></tr>
+<tr><td>Javascript output window for debugging</td><td><strong>Developer modes:</strong>Open debug window in Homework/Factorial page<br><strong>Developer modes:</strong>Open debug window in Homework/Pizza page</td></tr>
+                  </table>
+                  <!-- BLOG -->
+                  <h1>This Week's Blog</h1>
+                        <h2>Week 11</h2>
+                        <h3>Week 3Dec-9Dec</h3>
+                           <blockquote><em>
+                           A Chinese walks into a bar in America late one night and he saw Steven 
+                           Spielberg. As he was a great fan of his movies, he rushes over to him, and 
+                           asks for his autograph. Instead, Spielberg gives him a slap and says, "You 
+                           Chinese people bombed our Pearl Habour, get outta here." The astonished 
+                           Chinese man replied, "It was not the Chinese who bombed your Pearl Harbour, 
+                           it was the Japanese". "Chinese, Japanese, Taiwanese, you're all the same," replied Spielberg. 
+                           In return, the Chinese gives Spielberg a slap and says, "You sank the 
+                           Titanic, my forefathers were on that ship." Shocked, Spielberg replies, "It 
+                           was the iceberg that sank the ship, not me." The Chinese replies, "Iceberg, 
+                           Spielberg, Carlsberg, you're all the same." 
+                           </em><br>-- Source :  Not exactly sure but was told this joke won an award for the best joke in a competition 
+                           organized in Britain.
+                           </blockquote>
+                           <p>
+                           This week's assignment is short and sweet - it is an introduction
+                           to XML and XSLT. In my copious free time, I'll take some time to learn
+                           more, but to meet tonight's deadline, I'll just complete and submit the assignment.
+                           This can be seen in the Homework page, under the "CD Catalog" link.
+                           </p>
+                     <!-- end of middle pane -->
+      </div><!--centerContentId-->
+      <div id="rightPicId">
+         <a id="justGiveId" href="http://www.justgive.org/html/guide/disaster.html">
+                     <img src="http://www.justgive.org/Images/affiliate/DisasterRelief120x90.gif" width="120" height="90" alt="justgive.org"></img>
+         </a>
+      </div><!--rightPicId-->
+      <div class="separatorInvisibleClass"><!-- x --></div>
+   </div>
+   <div id="footerId"></div><!--footerId-->
+</div>
+</body>
+</html>

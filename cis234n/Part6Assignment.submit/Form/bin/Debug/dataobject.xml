@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<a4DataObject xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <LastName>tan</LastName>
+  <AccountNumber>56</AccountNumber>
+  <ValidAccountNumber>true</ValidAccountNumber>
+</a4DataObject>

@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<!-- $Id: temp.htm 84 2005-11-19 01:17:22Z khtan $ -->
+<head><title>Temperature Conversion</title>
+   <style type="text/css"><!--
+      @import url("defaultcss.css");
+   --></style>
+</head>
+   <script type="text/javascript" language="Javascript"><!--
+         function convertCtoF(cValue){
+             return(cValue*9/5+32).toFixed(2);
+         }//function convertCtoF
+         function convertFtoC(fValue){
+             return( ((5/9)*(fValue-32)).toFixed(2));
+         }//functino convertFtoC
+         function updateF(){
+             // long step by step
+             var cValue=document.temperatureForm.centigrade.value;
+             if(isNaN(cValue)){
+                alert("Error! Centigrade value is not numeric");
+                return false;
+             }else{
+                var fValue=convertCtoF(cValue);
+                document.temperatureForm.fahrenheit.value=fValue;
+                return true;
+             }
+         }
+         function updateC(){
+             // direct call
+             //    even shorter call would be to use eval
+             var fValue=document.temperatureForm.fahrenheit.value;
+             if(isNaN(fValue)){
+                alert("Error! Fahrenheit value is not numeric");
+                return false;
+             }else{
+                document.temperatureForm.centigrade.value=convertFtoC(fValue);
+                return true;
+             }
+         }
+   //-->
+   </script>
+<body onload="document.temperatureForm.centigrade.focus();">
+<div class="guidepost">
+   <ul>
+      <li><strong>You are here:</strong></li>
+      <li><a href="default.htm">Home &gt;&gt;</a></li>
+      <li><a href="homework.htm">Homework  &gt;&gt;</a></li>
+      <li>Temperature Conversion Tool</li>
+   </ul>
+</div>
+<h2>Temperature Conversion Tool</h2>
+   <p>This is a bidirectional converter. Enter value in one of the boxes, and click appropriate direction of conversion.
+   </p>
+   <form name="temperatureForm">
+      <table>
+         <tr>
+            <td rowspan="2"> &deg;Centigrade <input type="text" size="10" name="centigrade"></td>
+            <td><input type="button" value="C->F" onclick="updateF()"></td>
+            <td rowspan="2"><input type="text" size="10" name="fahrenheit"> &deg;Fahrenheit</td>
+         </tr>
+         <tr>
+            <td><input type="button" value="C<-F" onclick="updateC()"></td>
+         </tr>
+      </table>
+      <!-- Alternate use with buttons
+      <button type="button" value="C2F" onclick="updateF()">C->F</button>
+      <button type="button" value="F2C" onclick="updateC()">F->C</button>
+      -->
+   </form>
+</body>
+</html>
+

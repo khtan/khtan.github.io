@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema id="Timesheet" targetNamespace="http://tempuri.org/Timesheet.xsd" elementFormDefault="qualified"
+    xmlns="http://tempuri.org/Timesheet.xsd" xmlns:mstns="http://tempuri.org/Timesheet.xsd"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:simpleType name="IDType">
+        <xs:restriction base="xs:nonNegativeInteger" />
+    </xs:simpleType>
+    <xs:complexType name="TimesheetRecords">
+        <xs:sequence>
+            <xs:sequence>
+                <xs:element name="ActivityID" type="IDType" />
+                <xs:element name="ActivityName" type="xs:string" />
+                <xs:element name="ActivityDuration" type="xs:decimal" />
+            </xs:sequence>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="DailyTimesheetInfo">
+        <xs:sequence>
+            <xs:element name="EmployeeID" type="IDType" />
+            <xs:element name="EmployeeName" type="xs:string" />
+            <xs:element name="TimesheetData" type="TimesheetRecords" minOccurs="1" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="Timesheet" type="DailyTimesheetInfo"></xs:element>
+</xs:schema>

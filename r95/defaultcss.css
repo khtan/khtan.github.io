@@ -1,0 +1,67 @@
+/* $Id: defaultcss.css 70 2005-11-15 05:25:54Z khtan $ */
+body{
+   background-color:#FFFFFF;
+}
+blockquote{
+   color:#505050;
+   /*border-style:dotted;border-color:black;*/
+   margin:0;
+}
+hr{color:#0000FF} /* Opera8 cannot render color for hr, blockquote OK */
+div.blogtoggle{display:none} /* on first load, turn off all blog divs */
+/* Guidepost */
+.guidepost ul{position:relative;left:-40px}
+.guidepost li{display:inline;list-style-type:none;color:#0000FF}
+/* Status */
+.statusFormClass{border-color:#0000ff;}
+#browserTextId{float:left;}
+#dateTextId{float:right;}
+#cookieTextId{float:right;}
+
+#innerWrapperId{
+   position:relative;width:100%;
+}
+#headerId{
+   position:relative;
+}
+#footerId{
+   width:100%;
+   float:right;
+   position:absolute;
+}
+#leftNavId{
+/*   position:absolute;/* IE disappears */
+   float:left;
+   left:0%;width:18%;
+}
+#leftNavId dd{
+   position:relative;left:-40px;
+/*   border-style:dotted;border-color:blue;/* debug */
+}
+#leftNavId a:hover {color:#CCCCCC;background-color:#333333}
+#centerContentId{
+/*   position:absolute;/* IE disappears */
+   float:left;
+   left:20%;width:58%;
+}
+#rightPicId{
+   float:right;
+/*   position:relative; -- IE disappears */
+/*   position:absolute;/* -- IE disappears */
+   bottom:0;
+   right:0;
+   padding:0;
+   left:80%;width:18%;
+}
+/* Separators */
+.separatorInvisibleClass{
+   display:block;
+/*   position:absolute;*/
+   width:100%;
+   height:1;clear:both;
+}
+#justGiveId{
+   position:absolute;
+   bottom:0px;
+   right:0px; 
+}

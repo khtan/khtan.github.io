@@ -1,0 +1,38 @@
+head	1.1;
+access;
+symbols;
+locks
+	khtan:1.1; strict;
+comment	@:: @;
+
+
+1.1
+date	2005.09.29.16.36.59;	author khtan;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@rem $Id$
+@@echo off
+echo "Test: badrate.input"
+bin\debug\dailyrate.exe < badrate.input
+echo "-------------------------------------"
+echo "Test: baddays.input"
+bin\debug\dailyrate.exe < baddays.input
+echo "-------------------------------------"
+echo "Test: controlchars.input"
+bin\debug\dailyrate.exe < controlchars.input
+echo "-------------------------------------"
+echo "Test: good.input"
+bin\debug\dailyrate.exe < good.input
+echo "-------------------------------------"
+@

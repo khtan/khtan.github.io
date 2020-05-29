@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<!-- $Id: factorial.htm 92 2005-11-27 05:42:43Z khtan $ -->
+<head><title>Factorial</title>
+   <style type="text/css"><!--
+      @import url("defaultcss.css");
+   --></style>
+   <script type="text/javascript" src="javascript/debug.js"></script>
+</head>
+   <script type="text/javascript" language="Javascript"><!--
+         var debugWin;
+      function openDebugWindow(){
+         debugWin=openDebug("factorial.htm");
+         document.factorialForm.input.focus();
+      }//openDebugWindow
+      function calcFactorial(mode){
+         var numString=document.factorialForm.input.value;
+         var result=0;
+         if(mode=='recursive'){
+            result=rfactorial(parseInt(numString));
+         }else if(mode=='loop'){
+            result=factorial(parseInt(numString));
+         }
+         alert("Factorial result="+result);
+         document.factorialForm.input.focus();
+      }
+      function factorial(num){
+         debugOutput(debugWin,"factorial("+num+")");
+         var result=num;
+         for(var i=num;i>1;--i){
+            debugOutput(debugWin,i);
+            result=result*(i-1);
+         }
+         return result;
+      }
+      function rfactorial(num){
+         debugOutput(debugWin,"rfactorial("+num+")");
+         if(num==1){
+            return 1;
+         }else{
+            return num*rfactorial(num-1);
+         }
+      }
+      function numeralsOnly(evt){
+      // Function copied from Javascript&DHTML Cookbook pp211
+      // Comments added to explain operation
+         evt=(evt)? evt:event; // use global event if not passed in
+         var charCode=(evt.charCode)? evt.charCode:((evt.keyCode)? evt.keyCode:((evt.which)? evt.which:0));
+         // if evt.charCode exists, use it, else use evt.keyCode, else use evt.which
+         if (charCode>31 && (charCode<48||charCode>57)){ // charCode<32 are non numeric but for cursor movement, etc
+            // numbers have charCode between 48 and 57
+            alert("Enter numerals only in this field.");
+            return false;
+         }
+         return true;
+      }
+      function initPage(){
+         document.factorialForm.input.focus();
+      }
+   //-->
+   </script>
+<body onload="initPage()">
+<div class="guidepost">
+   <ul>
+      <li><strong>You are here:</strong></li>
+      <li><a href="default.htm">Home &gt;&gt;</a></li>
+      <li><a href="homework.htm">Homework  &gt;&gt;</a></li>
+      <li>Factorial</li>
+   </ul>
+</div>
+<h2>Factorial</h2>
+   <p>Enter an integer, then select to calculate the factorial by looping or recursively.</p>
+   <p>The following features are implemented:
+      <ul>
+         <li>Only digits are allowed in the input.</li>
+         <li>Output is in the form of an alert.</li>
+         <li>Focus returns to input field on load, after operation and when debugWindow clicked.</li>
+         <li>A <a href="#" onclick="openDebugWindow()">debug window</a> can be opened to see the transcript of function calls.
+         </li>
+      </ul>
+   </p>
+   <form name="factorialForm">
+      Input integer: <input type="text" size="10" name="input" title="just numbers, please" onkeypress="numeralsOnly(event)"></input>
+      <br/>
+      <br/>
+      <input type="button" value="Loop factorial" title="calculate by looping" onclick="calcFactorial('loop')">
+      <input type="button" value="Recursive factorial" title="calculate recursively" onclick="calcFactorial('recursive')">
+   </form>
+</body>
+</html>

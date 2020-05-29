@@ -1,0 +1,39 @@
+/*  $Id: common.css 68 2005-11-15 04:59:51Z khtan $
+    This is the top level .css for all pages
+    - also color:"#808080" does not work
+For debugging the table layout
+   table{border-style:dotted;border-width:1px}
+   td {border-style:solid;border-width:1px}
+*/
+body{color:#000000;background-color:#C0C0C0} /* silver background as reminder */
+td.nav {
+   width:20%;
+   vertical-align:top;
+}
+td.nav a:hover {color:#CCCCCC;background-color:#333333}
+td.top {color:$C0COC0}
+td.pic{width:10%;vertical-align:bottom}
+td.pic a:hover {color:#CCCCCC;background-color:#333333}
+blockquote{
+   color:#808080;
+   /*border-style:dotted;border-color:black;*/
+   margin:0;
+}
+hr{color:#0000FF} /* Opera8 cannot render color for hr, blockquote OK */
+div.blogtoggle{display:none} /* on first load, turn off all blog divs */
+/* Guidepost */
+.guidepost ul{position:relative;left:-40px}
+.guidepost li{display:inline;list-style-type:none;color:#0000FF}
+/* Status */
+.statusFormClass{border-color:#0000ff;}
+#browserTextId{float:left;}
+#dateTextId{float:right;}
+#cookieTextId{float:right;}
+/* Nav */
+.nav dd{position:relative;left:-40px}
+/*
+#leftNavId dd, .nav dd{
+   position:relative;left:-40px;
+}
+*/
+

@@ -1,0 +1,70 @@
+digraph g
+{   /* $Id$ */
+  /* graph attributes */
+  label = "Guide to process Step colors";
+  labelloc = "t";
+
+  /* list of nodes */
+subgraph cluster0{ fontsize=22;label="Normal Process Flow";color="blue";
+  "notStarted" [fontsize=22,color="lightgray",label="notStarted",style="filled"];
+  "inProgressQueued" [fontsize=22,color="olivedrab",label="inProgressQueued",style="filled"];
+  "inProgressRun" [fontsize=22,color="palegreen",label="inProgressRun",style="filled"];
+  "Done" [fontsize=22,color="lightblue",label="Done",style="filled"];
+  "Failed" [fontsize=22,color="red",label="Failed",style="filled"];
+}
+subgraph cluster1{ fontsize=22;label="Manual Adjustments";color="blue";
+  "ByPass" [fontsize=22,color="pink",label="ByPass",style="filled"];
+  "Halt" [fontsize=22,color="plum",label="Halt",style="filled"];
+}
+subgraph cluster2{ fontsize=22;label="Exceptions";color="blue";
+  "FailedSubmit" [fontsize=22,color="orange",label="FailedSubmit",style="filled"];
+
+}
+subgraph cluster{
+  "normal" [shape=box,label="The job is then submitted either to\lthe grid or via rsh for execution."];
+  "queued"  [shape=box,label="Grid jobs first get queued ..."]; 
+  "qsubrun"   [shape=box,label="... then run some machine."];
+  "rshrun"   [shape=box,label="For rsh jobs, the job\lgoes straight to inProgressRun."];
+  "runpass" [shape=box,label="If the run was successful,\lthe step becomes Done"];
+  "runfail" [shape=box,label="If the job failed to complete\ldue to errors, it becomes Failed."];
+  "submitOK" [shape=box,label="Successsful job submission."];
+}
+  "begin" [shape=box,label="At the beginning,steps\lare considered notStarted"];
+  "adj"   [shape=box,label="For finer control, a step can\lbe set to ByPass or Halt"];
+  "halt"   [shape=box,label="Halt stops at the step\land the subtree is no\llonger processed."];
+  "bypass" [shape=box,label="Bypass skips the step\lbut continues onward\lwith the graph, as if\lthe step succeeded."];
+  "failedsubmit" [shape=box,label="If the rsh or qsub failed for some\lreason, and the job submission did not\lsucceed, the node becomes FailedSubmit"];
+  /* list of edges */
+  /* colored states */
+  "notStarted" -> "ByPass";
+  "notStarted" -> "Halt";
+/*  "notStarted" -> "FailedSubmit"; */
+  "notStarted" -> "inProgressQueued";
+  "notStarted" -> "inProgressRun";
+  "inProgressQueued" -> "inProgressRun";
+  "inProgressRun" ->"Done";
+  "inProgressRun" ->"Failed";
+  /* text to colored states */
+  "begin"->"notStarted" [style=dotted];
+  "bypass"->"ByPass" [style=dotted];
+  "halt"->"Halt" [style=dotted];
+  "queued"->"inProgressQueued" [style=dotted];
+  "qsubrun"->"inProgressRun" [style=dotted];
+  "rshrun"->"inProgressRun" [style=dotted];
+  "runpass"->"Done" [style=dotted];
+  "runfail"->"Failed" [style=dotted];
+  /* explanatory text */
+  "begin"->"adj" [style=dashed];
+  "adj"->"bypass" [style=dashed];
+  "adj"->"halt" [style=dashed];
+  "begin"->"normal" [style=dashed];
+  "normal"->"queued" [style=dashed];
+  "normal"->"failedsubmit" [style=dashed];
+  "queued"->"qsubrun" [style=dashed];
+  "normal"->"rshrun" [style=dashed];
+  "failedsubmit"->"FailedSubmit" [style=dotted];
+  "qsubrun"->"submitOK" [style=dashed];
+  "rshrun"->"submitOK" [style=dashed];
+  "submitOK"->"runpass" [style=dashed];
+  "submitOK"->"runfail" [style=dashed];
+}
