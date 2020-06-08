@@ -1,10 +1,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
-<!-- $Id$ -->
+<!-- index.htm -->
 <head><title>Protractor Regression Tests</title>
    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
    <style type="text/css"><!--
-      @import url("common.css");
+      @import url("../style/common.css");
    --></style>
 </head>
 <body>
@@ -16,19 +16,53 @@
                <td class="nav">
                <!-- This is the left nav pane : use text only for resizability -->
                   <!-- start of left pane -->
-                  <dl>
-                      <dd><strong>Goto:</strong></dd>
-                      <dd><a href="../index.htm">Top</a></dd>
-                      <dd><a href="x.htm">X</a></dd>
-                     <dd><a href="y.htm">Y</a></dd>
+                   <dl>
+                       <dd><strong>Goto:</strong></dd>
+                       <dd><a href="../index.htm">Top</a></dd>
+                   </dl><dl>
+                       <dd><strong>Document:</strong></dd>
+                       <dd><a href="#intro">Introduction</a></dd>
+                       <dd><a href="#github">Github</a></dd>
+                       <dd><a href="#circleci">CircleCi</a></dd>
+                       <dd><a href="#linux">Linux</a></dd>
+                       <dd><a href="#windows">Windows</a></dd>
+                       <dd><a href="#conclusion">Conclusion</a></dd>
+                       <dd><a href="#references">References</a></dd>
                   </dl>
                   <!-- end of left pane -->
                </td>
                <td class="main">
-               <!-- This is the middle pane : use text only for resizability -->
-                     <!-- start of middle pane -->
-                     <p>This is the middle pane</p>
-                     <!-- start of middle pane -->
+                   <!-- This is the middle pane : use text only for resizability -->
+                   <!-- start of middle pane -->
+					         <h3 id="intro">Introduction</h3>
+                   <p>For test automation for Angular applications, the book <a href="#book">"Testing Angular Applications"</a> by Jesse Palmer et al is a godsend. It covers the test environments of choice for Angular : the unit testing environment with Jasmine and Karma, and its end to end testing environment (e2e) called Protractor.</p>
+					         <h3 id="github">Github</h3>
+                   <p>This project started two years after the book was published. Consequently the Github had lacked maintainance, and the Circleci code for Chapter 11 failed. Below is a quick view of the forked Github repository. Note there is a live link to the corresponding CircleCI page</p>
+                   <img border="2" src="images/github.png"</img>
+					         <h3 id="circleci">CircleCi</h3>
+                   <p>Instead of just fixing the config.yml that ran a few selected tests, I rewrote it to run all the unit and e2e tests on Linux so as to provide a regression base. This came in handy when failures in my production project allowed me to check that nothing in Protractor had changed or regressed. The main "build_all_platform" pipeline consists of two sequential jobs, "buildtest_linux" and "build_test_windows". My free CircleCi account does not permit parallel execution, so I deliberately made them sequential to avoid running into account issues.</p>
+                   <img border="2" src="images/circleci.png"</img>
+					         <h3 id="linux">Linux Build and Test</h3>
+                   <p>The CircleCi Linux Docker job is named "buildtest_linux". Below is the build part of the "buildtest_linux" job, under the Steps tab. It lists each of the steps needed to build and run the tests. Note there are several "Uploading test results" to harvests the test results from each chapter.
+                   </p>
+                   <img border="2" src="images/buildtest_linux.png"</img>
+                   <p>The Test tab shows the results of running all the unit and e2e tests.
+                   </p>
+                   <img border="2" src="images/buildtest_linux_test.png"</img>
+					         <h3 id="windows">Windows Build and Test</h3>
+                   <p>The corresponding Windows VM job, named "buildtest_windows" is a placeholder. Unfortunately the Windows VM did not have Chrome installed, so only the test structural template is working, but the unit and e2e tests have been disabled. With a view towards maintanability, the steps of the Windows machine are exactly the same as Linux, and use bash instead of cmd or Powershell.</p>
+					         <h3 id="conclusion">Conclusion</h3>
+                   <p>Currently, I develop and run the tests locally on my Windows 10 PC. When my fixes are checked into Github, the CircleCi tests on Linux to ensure they still pass. In the future, when there is better support for Windows on CircleCi, the "buildtest_windows" will be updated to run the tests in Windows.</p>
+                   <img border="2" src="images/buildtest_windows.png"</img>
+					         <h3 id="references">References</h3>
+                   <p>
+                       <ul>
+                           <li><b id="book">Book:</b>  <a href="https://www.manning.com/books/testing-angular-applications">https://www.manning.com/books/testing-angular-applications</a></li>
+                           <li><b>Live Github:</b>  <a href="https://github.com/khtan/ci-testing-angular-apps">https://github.com/khtan/ci-testing-angular-apps</a></li>
+                           <li><b>Live CircleCi:</b>  <a href="https://circleci.com/gh/khtan/ci-testing-angular-apps">https://circleci.com/gh/khtan/ci-testing-angular-apps</a></li>
+                       </ul>
+                   </p>
+                   <!-- end of middle pane -->
                </td>
             </tr>
          </table>
