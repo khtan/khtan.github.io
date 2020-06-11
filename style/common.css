@@ -7,7 +7,7 @@ For debugging the table layout
 */
 body{color:#000000;background-color:#C0C0C0} /* silver background as reminder */
 td.nav {
-   width:20%;
+   width:10%;
    vertical-align:top;
 }
 td.nav a:hover {color:#CCCCCC;background-color:#333333}
