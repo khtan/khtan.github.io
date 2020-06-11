@@ -28,7 +28,7 @@
                      <dd><a href="#synopsis">Synopsis</a></dd>
                      <dd><a href="#expertise">Expertise</a></dd>
                      <ul>
-                        <li><a href="#pa">Software Configuration and Process Automation</a></li>
+                        <li><a href="#pa">Software QA and Test Automation</a></li>
                         <li><a href="#sd">Software Development and Maintenance</a></li>
                         <li><a href="#eda">Electronic Design Automation</a></li>
                      </ul>
@@ -52,7 +52,7 @@
 </p>
 <p id="expertise"><b>Expertise</b>
    <ul>
-   <li id="pa">Software Configuration and Process Automation</li>
+   <li id="pa">Software QA and Test Automation</li>
       <ul>
           <li>Bridged the DevOps gap by delivering <a href="https://www.protractortest.org">Protractor</a> tests on <a href="https://www.jenkins.io">Jenkins</a> and <a href="https://circleci.com">CircleCi</a>, using virtual and <a href="https://www.docker.com">Docker</a> machines</li>
           <li><a id="pg" href="../processGraph/index.htm">Design and implementation of a Perl-based comprehensive, flexible, scalable production system</a> that encompass Build, Test, Install, Reporting and Analysis, with the following capabilities :</li>
@@ -98,60 +98,96 @@
 </p>
 <p id="history"><b>History</b>
 <ul>
+    <li><a href="http://ww1.jeppesen.com">EagleCap Software</a>
+        ( Sherwood, OR :
+        Oct17 -
+        present
+        )
+        <i>senior software engineer in test</i>
+    </li>
+    <ul>
+       <li>Employee #17 in Aviation-based startup company</li>
+       <li>Team was contracted to work with a large airline company to create their next generation operations and control application. This Angular app is designed to replace 10 legacy software and miscellaneous Excel spreadsheets to give the user a 360 degree view leading to improved planning and decision making.</li>
+       <li>Part of 3 pronged test strategy covering manual testing, middleware API testing and e2e GUI testing.</li>
+       <li>Guiding principle of making automation progress, in spite of roadblocks, shifting requirements, under-integrated test machines and other aspects of a high pressure, high delivery system. Strategies include tiptoeing around unstable functionality, data-agnostic tests first and data-specific tests later. Persisted in repeated overtures to IT over an 8 month period to find the right person/group to open up download access for Protractor webdriver updates to work inside client's IT environment. This is a Day-one problem and the first impediment to integrating with the client's IT system.</li>
+       <li>Implemented a GUI e2e test automation system based on Protractor ( Angular, Typescript )</li>
+       <ul>
+           <li>Single configuration setting to support multiple usage scenarios</li>
+           <ol>
+               <li>Automation: Chrome and Firefox in full GUI</li>
+               <li>Development : Headless Chrome</li>
+               <li>Continuous Delivery : Headless Firefox ( only platform provisioned from IT )</li>
+           </ol>
+           <li>Simple automated coding style assistant with Tslint and Prettier</li>
+           <li>Common and functional-based libraries to support reuse in production test, loop tests and stress tests.</li>
+           <li>Readme of coding tips and best practices for Angular developers working with Protractor</li>
+           <li>Extended end-to-end  tests by coupling basic API to end point GUI verification</li>
+           <li>Tests provide a base to drive service virtualization using Mountebank</li>
+           <li>Want to know how the 201th browser behaves? Implemented N+1 browser testing using Protractor, Mountebank and Gatling.</li>
+       </ul>
+       <li>Achieved unusual practice of running e2e tests as part of Bamboo CICD process. This made use of multicapabilites of Protractor to half the runtime of the e2e tests with 4 browsers.</li>
+       <li>Improved e2e test reliability with layers of test promotion from single execution to looped runs to random stress runs and also testing on a slow machine.</li>
+       <li>On an internal project, designed and implemented a C# GUI testing framework based on Windows Application Driver and xUnit.net.</li>
+       <ul>
+           <li>Integrated build and GUI testing into Jenkins process running Windows 2013 Server virtual machines</li>
+           <li>Introduced failure snapshots and extended incubation testing for improved reliability</li>
+       </ul>
+    </ul>
+</ul>
+<ul>
    <li><a href="http://ww1.jeppesen.com">Jeppesen ( Aviation )</a>
-                  ( Wilsonville, OR : 
-                    Jun13 - 
-                    present
+                  ( Wilsonville, OR :
+                    Jun13 -
+                    Sep17
                   )
                   <i>senior software engineer in test</i>
    </li>
    <ul>
-<li>One of two C# test automation engineers, supporting four manual test engineers on suite of flight planning product.</li>
+      <li>One of two C# test automation engineers, supporting four manual test engineers on suite of flight planning product.</li>
+      <ul>
+        <li>Product architecture is client-server, with WPF-based GUI and legacy MFC-based GUI.</li>
+        <li>Combination of automated and manual testing allows team to effectively apply automation and manual testing as needed</li>
+      </ul>
+      <li>Implemented automated round-trip tests with Microsoft Unit Test Framework, to validate backend server functionality</li>
+      <li>Implemented viewmodel unit tests of Gui components</li>
+      <li>Designed and implemented CodedUi/Telerik Testing Framework (Ttf) Gui testing framework</li>
+      <ul>
+        <li>Leveraged programmatic Gui test technologies of CodedUi and free Telerik Testing Framework (Ttf)</li>
+        <li>The use of two technologies provide the opportunity to check reliability and implementation differences. The primary technology for all tests is CodedUi.</li>
+        <li>Designed and implemented task and Gui oriented interfaces to abstract test functionality from the CodedUi or Ttf technology.</li>
+        <li>This results in testcases that can run with either technology, and worst case, read and performed manually, to avoid technology obsolescence</li>
+     </ul>
+   <li>Implemented, deployed and maintain regression test system with live server and dependencies</li>
    <ul>
-     <li>Product architecture is client-server, with WPF-based GUI and legacy MFC-based GUI.</li>
-     <li>Combination of automated and manual testing allows team to effectively apply automation and manual testing as needed</li>
-   </ul>  
-<li>Implemented automated round-trip tests with Microsoft Unit Test Framework, to validate backend server functionality</li>
-<li>Implemented viewmodel unit tests of Gui components</li>
-<li>Designed and implemented CodedUi/Telerik Testing Framework (Ttf) Gui testing framework</li>
-  <ul>
-     <li>Leveraged programmatic Gui test technologies of CodedUi and free Telerik Testing Framework (Ttf)</li>
-     <li>The use of two technologies provide the opportunity to check reliability and implementation differences. The primary technology for all tests is CodedUi.</li>
-     <li>Designed and implemented task and Gui oriented interfaces to abstract test functionality from the CodedUi or Ttf technology.</li>
-     <li>This results in testcases that can run with either technology, and worst case, read and performed manually, to avoid technology obsolescence</li>
-  </ul>
-<li>Implemented, deployed and maintain regression test system with live server and dependencies</li>
-<ul>
-  <li>Created a ruby-based tool for automatic updates and incremental installs of product and its dependencies</li>
-  <li>Created a ruby-based test runner on top of vstest.console.exe that worked with and without Bamboo. Added ability to rerun only failed tests.</li>
-  <li>Used dotTrace to track down massive slowdown ( 25x ) of CodedUi tests due to Bamboo agent running as a service</li>
-  <ul>
-    <li>Confirmed with Tanuki Software that Bamboo's wrapper functionality has inherent flaw</li>
-    <li>Found solution by running Bamboo agent in user mode</li>
-  </ul>
-  <li>Transition build environment from VS 2012 Professional to MSBuild Tools 2015, saving a developer MSDN license</li>
+      <li>Created a ruby-based tool for automatic updates and incremental installs of product and its dependencies</li>
+      <li>Created a ruby-based test runner on top of vstest.console.exe that worked with and without Bamboo. Added ability to rerun only failed tests.</li>
+      <li>Used dotTrace to track down massive slowdown ( 25x ) of CodedUi tests due to Bamboo agent running as a service</li>
+      <ul>
+         <li>Confirmed with Tanuki Software that Bamboo's wrapper functionality has inherent flaw</li>
+         <li>Found solution by running Bamboo agent in user mode</li>
+      </ul>
+      <li>Transition build environment from VS 2012 Professional to MSBuild Tools 2015, saving a developer MSDN license</li>
+   </ul>
+   <li>Implemented and maintain stress and concurrent testing environment</li>
+      <ul>
+        <li>This is our best representation of a large customer, with 80 concurrent users, 90 days of activity representing 1.2 million flight plans</li>
+        <li>System is available for ad hoc and targeted testing by Test and Dev</li>
+        <li>Created flexible automation tools for generating massive offline base load or daily live injected mock data</li>
+        <li>Used test environment to determine performance characteristics and weaknesses of current implementation</li>
+        <li>Concurrent regression level testing uncovered issues not found in concurrent unit tests</li>
+      </ul>
+   <li>Spearhead and led training for manual testers on C# and automation testing</li>
+       <ul>
+         <li>Use of Visual Studio, Perforce, Git and other development tools</li>
+         <li>Building, running and debugging client and server</li>
+         <li>Basic functional programming in C#</li>
+         <li>Improved cross training with subject matter manual testers</li>
+      </ul>
+   <li>Used DotCover to analyze and report code coverage of automated tests</li>
 </ul>
-<li>Implemented and maintain stress and concurrent testing environment</li>
-   <ul>
-     <li>This is our best representation of a large customer, with 80 concurrent users, 90 days of activity representing 1.2 million flight plans</li>
-     <li>System is available for ad hoc and targeted testing by Test and Dev</li>
-     <li>Created flexible automation tools for generating massive offline base load or daily live injected mock data</li>
-     <li>Used test environment to determine performance characteristics and weaknesses of current implementation</li>
-     <li>Concurrent regression level testing uncovered issues not found in concurrent unit tests</li>
-   </ul>
-<li>Spearhead and led training for manual testers on C# and automation testing</li>
-    <ul>
-      <li>Use of Visual Studio, Perforce, Git and other development tools</li>
-      <li>Building, running and debugging client and server</li>
-      <li>Basic functional programming in C#</li>
-      <li>Improved cross training with subject matter manual testers</li>
-   </ul>
-<li>Used DotCover to analyze and report code coverage of automated tests</li>
-     
-   </ul>     
    <li><a href="http://ww1.jeppesen.com">Jeppesen ( Marine )</a>
-                  ( Wilsonville, OR : 
-                    Jun11 - 
+                  ( Wilsonville, OR :
+                    Jun11 -
                     Jun13
                   )
                   <i>senior software QA engineer</i>
@@ -166,8 +202,8 @@
      <li>Learned C#, Linq, IronPython, NUnit and MSTest to leverage use of .NET technology used by the products</li>
    </ul>
    <li><a href="http://www.anpc.com">Advanced Navigation and Positioning</a>
-                  ( Hood River, OR : 
-                    Jan09 - 
+                  ( Hood River, OR :
+                    Jan09 -
                     Jun11
                   )
                   <i>senior software engineer in test</i>
