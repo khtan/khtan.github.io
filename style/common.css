@@ -5,7 +5,7 @@ For debugging the table layout
    table{border-style:dotted;border-width:1px}
    td {border-style:solid;border-width:1px}
 */
-body{color:#000000;background-color:#C0C0C0} /* silver background as reminder */
+body{color:#000000;background-color:#E7E7E7} /* silver background as reminder */
 td.nav {
    width:10%;
    vertical-align:top;
