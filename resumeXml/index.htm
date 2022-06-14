@@ -109,6 +109,53 @@
 <p id="history"><b>History</b>
 <!-- start history -->
 <ul>
+   <li><a href="https://www.zapproved.com">Zapproved</a>
+            ( Portland, OR :
+            Jul21 -
+            current
+            )
+            <i>senior software engineer in test</i>
+        </li>
+   <ul>
+            <li>Zdiscovery is a portal based SaaS product that complies with Soc 2 Type 2 reporting. It is based on a .NET microservices (23)  architecture, with a single Angular front end, and a single Postgres database server. There are also iframed-windows to access two key legacy applications until such time as they are integrated into the portal.</li>
+            <li>Initial assignment of gap analysis identified the key areas and shortcomings to concentrate QE (quality engineering ) efforts</li>
+            <ul>
+                <li>The key testing gap is in Integration testing, where after deployment, all microservices and portal are up and running. This is also the environment of the customer.</li>
+                <li>Protractor tool is being end of life-d at the end of 2022.</li>
+                <li>Lack of resource and maintenance led to 50% of Protractor tests turned off</li>
+                <li>Repeated and spurious failures let to the engineering team losing faith in Gui test results</li>
+            </ul>
+            <li>Selected Playwright as the successor to Protractor for Gui tests after conducting a series of proof of viability tests.
+                <ul>
+                    <li>Small set of key tests to ensure that key functionality of navigation, parallelization and reliability are met.</li>
+                    <li>Separation of pure Playwright and Playwright + Internal infrastructure tests to distinguish these two key software contributors.</li>
+                    <li>Use of inner ( functional ) loops and outer ( invoke Playwright ) loops to coax out timing issues.</li>
+                    <li>Loops are slowed down so that global test environment is not unduly disturbed and long, overnight runs become practical</li>
+                </ul>
+            </li>
+            <li>Reliability of Gui Tests
+                <ul>
+                    <li>Replace emphasis on counting number of Gui tests added with better reliability metrics such as:</li>
+                    <ol>
+                        <li>Improved precision of flakiness -- network, environmental, timing related, missing error handling, intentional Gui change etc</li>
+                        <li>New reliability metric called "Number to Fail" based on loop tests to help determine readiness of Gui tests</li>
+                        <li>Require all new tests to cleanup after themselves</li>
+                    </ol>
+                    <li>Created two sets of production Gui tests for flexibility ( 'fast' and 'many' )</li>
+                    <li>Added allowance for next integration API testing framework</li>
+                    <li>Working on a supportability metric : time to fix, % flakiness due to different categories</li>
+                </ul>
+            </li>
+            <li>Release Process Automation
+                <ul>
+                    <li>Despite flaky Protractor tests, retain the nightly Protractor process as a working implementation reference</li>
+                    <li>Automate Release testing by adding fast Gui test set into CiCd</li>
+                    <li>Incorporate slow Gui tests later as needed</li>
+                    <li>Added a shadow test process for QE to get earlier look at failures. The shadow process is run on demand with the expectation of many failures and not for general consumption.</li>
+                </ul>
+            </li>
+            <li>Participate in team rotation for Release and On-call Support</li>
+        </ul>
    <li>Independent projects and training
             ( Tualatin, OR :
             Oct19 -
