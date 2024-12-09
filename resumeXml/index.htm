@@ -109,13 +109,50 @@
 <p id="history"><b>History</b>
 <!-- start history -->
 <ul>
-   <li><a href="https://www.zapproved.com">Zapproved</a>
-            ( Portland, OR :
-            Jul21 -
-            current
+<!-- first am -->
+   <li><a href="https://www.firstam.com">First American Title</a>
+            ( Remote for Santa Ana, CA :
+            Jun23 -
+            Nov24
             )
             <i>senior software engineer in test</i>
-        </li>
+   </li>
+   <ul>
+            <li>Situational and gap analysis: comprehensive review on State of Testing
+            <ul>
+                <li>Integration tests taking too long for CI feedback</li>
+                <li>Integration tsets failing differently and unreliably on different release environments</li>
+            </ul>
+            </li>
+            <li>Tool for better appraisal of integration tests
+                <ul>
+                    <li>Dev write integration tests that pass on the development environment, and the tests are expected to continue to pass on later environments like Staging, QA and Production. While the software binaries are the same, the databases and infrastructure are sufficiently different to expose new issues.</li>
+                    <li>Designed and implemented a Python-based VstestTools to save time in running and comparing tests including large scale comparisons. This functionality can be extended to compare old and refactored functions to determine reliability and fit before replacing.</li>
+                </ul>
+            </li>
+            <li>Improving test code reliability
+                <ul>
+                    <li>There are several useful coding practices that will help improve the reliability and fast diagnostics of integration tests. Improvements range from simple advisory code examples to a more comprehensive way of using Result<T> for error handling vs the misuse of try-catch.</li>
+                    <li>This effort also necessitated the application of LanguageExt C# functional programming library to the Technical Governance Board.</li>
+                </ul>
+            </li>
+            <li>Crossing the silos
+                <ul>Silos are meant to compartmentalize responsibilites and roles for efficiency and security reasons. Integration tests do not respect these boundaries, and their resolution require Dev and Ops to work cooperatively.
+                    <li>Worked with the Database team to figure out how to generate special “archived” data consistently in all release environments, that can be reused by tests in a reliable way</li>
+                    <li>Worked with Operations team to figure out tests that fail in Production only. Turns out that test dependencies were referenced with relative paths but the Production environment did not realize this requirement and moved the dependencies without preserving the relative nature.</li>
+                    <li>Operation team generate and report test results manually and differently from Engineering.  Worked with Operations to “standardize” the protocols so that others can access and add their contribution and analysis.</li>
+                    <li>Early adopter of company effort Universal Visibility Platform that provides network and usage tracking across services</li>
+                </ul>
+            </li>
+   </ul>
+   <!-- first am -->
+    <li><a href="https://www.zapproved.com">Zapproved</a>
+            ( Remote for Portland, OR :
+            Jul21 -
+            Feb23
+            )
+            <i>senior software engineer in test</i>
+   </li>
    <ul>
             <li>Zdiscovery is a portal based SaaS product that complies with Soc 2 Type 2 reporting. It is based on a .NET microservices (23)  architecture, with a single Angular front end, and a single Postgres database server. There are also iframed-windows to access two key legacy applications until such time as they are integrated into the portal.</li>
             <li>Initial assignment of gap analysis identified the key areas and shortcomings to concentrate QE (quality engineering ) efforts</li>
@@ -156,7 +193,7 @@
                 </ul>
             </li>
             <li>Participate in team rotation for Release and On-call Support</li>
-        </ul>
+   </ul>
    <li>Independent projects and training
             ( Tualatin, OR :
             Oct19 -
